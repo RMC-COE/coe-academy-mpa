@@ -17,7 +17,19 @@ export const CoverPage = ({ resetSignal }: SectionProps) => {
   });
 
   return (
-    <div className="relative h-screen bg-gradient-to-br from-purple-900 via-purple-800 to-purple-900 overflow-hidden">
+    <div className="relative h-screen bg-gradient-to-br from-slate-950 via-indigo-950 to-purple-950 overflow-hidden">
+      {/* Static background */}
+      <div className="absolute inset-0">
+        <div className="absolute inset-0 bg-gradient-to-br from-purple-600/20 via-indigo-600/20 to-pink-600/20"></div>
+        <svg className="absolute inset-0 w-full h-full opacity-20">
+          <defs>
+            <pattern id="grid-cover" width="60" height="60" patternUnits="userSpaceOnUse">
+              <circle cx="30" cy="30" r="1" fill="currentColor" className="text-white/30" />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#grid-cover)" />
+        </svg>
+      </div>
       {/* Step 1: Branding and Confidential - Fixed positions */}
       <StepReveal step={0} isVisible={stepController.isStepVisible(0)} direction="fade">
         <div className="absolute left-6 top-6 z-10">

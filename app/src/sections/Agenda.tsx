@@ -28,7 +28,19 @@ export const Agenda = ({ resetSignal }: SectionProps) => {
 
 
   return (
-    <div className="relative h-screen bg-gradient-to-br from-purple-900 via-purple-800 to-purple-900 overflow-hidden flex items-center justify-center">
+    <div className="relative h-screen bg-gradient-to-br from-slate-950 via-indigo-950 to-purple-950 overflow-hidden flex items-center justify-center">
+      {/* Static background */}
+      <div className="absolute inset-0">
+        <div className="absolute inset-0 bg-gradient-to-br from-purple-600/20 via-indigo-600/20 to-pink-600/20"></div>
+        <svg className="absolute inset-0 w-full h-full opacity-20">
+          <defs>
+            <pattern id="grid-agenda" width="60" height="60" patternUnits="userSpaceOnUse">
+              <circle cx="30" cy="30" r="1" fill="currentColor" className="text-white/30" />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#grid-agenda)" />
+        </svg>
+      </div>
       {/* COE branding top left */}
       <div className="absolute left-6 top-6 z-10">
         <img 
