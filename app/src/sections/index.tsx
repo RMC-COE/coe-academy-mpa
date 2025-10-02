@@ -6,7 +6,7 @@ const AgendaSection = lazy(() => import('./Agenda').then((module) => ({ default:
 const RealitySection = lazy(() => import('./TheDailyReality').then((module) => ({ default: module.TheDailyReality })));
 const MomentumSection = lazy(() => import('./AutomationMomentum').then((module) => ({ default: module.AutomationMomentum })));
 const IntroSection = lazy(() => import('./PowerAutomateIntroNew').then((module) => ({ default: module.PowerAutomateIntroNew })));
-const ConnectorsSection = lazy(() => import('./ConnectorEcosystem').then((module) => ({ default: module.ConnectorEcosystem })));
+const FlowBuilderSection = lazy(() => import('./FlowBuilder').then((module) => ({ default: module.FlowBuilder })));
 const RoiSection = lazy(() => import('./RoiAndSuccess').then((module) => ({ default: module.RoiAndSuccess })));
 const JourneySection = lazy(() => import('./YourJourney').then((module) => ({ default: module.YourJourney })));
 
@@ -78,17 +78,18 @@ export const sections: SectionConfig[] = [
     component: IntroSection
   },
   {
-    id: 'connectors',
-    title: 'The Connector Ecosystem',
-    subtitle: 'Explore how to connect Excel, SAP and more in minutes.',
+    id: 'flowbuilder',
+    title: 'Building Your First Flow',
+    subtitle: 'Step by step - From idea to automation',
     durationMinutes: 15,
     presenterNotes: [
-      'Highlight certified connectors and corporate support.',
-      'Ask audience to suggest a scenario for Connector Match.',
-      'Remember that everything works within Microsoft security framework.'
+      'Show the simplified AUTTP flow blueprint for educational purposes.',
+      'Demonstrate connector selection process and highlight popular ones.',
+      'Walk through the flow building process step by step.',
+      'Emphasize the testing and deployment phase for confidence.'
     ],
-    analyticsKey: 'section_connectors',
-    component: ConnectorsSection
+    analyticsKey: 'section_flowbuilder',
+    component: FlowBuilderSection
   },
   {
     id: 'roi',

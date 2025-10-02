@@ -3,6 +3,7 @@ import { usePresentation } from '@/context/PresentationContext';
 import { useStepController } from '@/hooks/useStepController';
 import { StepReveal } from '@/components/common/StepReveal';
 import { Clock, Play } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export const Agenda = ({ resetSignal }: SectionProps) => {
   const { sections, stepMode, stepSignal, setIsLastStep } = usePresentation();
@@ -26,6 +27,7 @@ export const Agenda = ({ resetSignal }: SectionProps) => {
     onLastStepChange: setIsLastStep
   });
 
+  const currentStep = stepController.currentStep;
 
   return (
     <div className="relative h-screen bg-gradient-to-br from-slate-950 via-indigo-950 to-purple-950 overflow-hidden flex items-center justify-center">
@@ -41,6 +43,24 @@ export const Agenda = ({ resetSignal }: SectionProps) => {
           <rect width="100%" height="100%" fill="url(#grid-agenda)" />
         </svg>
       </div>
+
+      {/* Step Progress Indicator */}
+      <div className="absolute top-6 left-1/2 transform -translate-x-1/2 z-20">
+        <div className="flex items-center gap-2">
+          {[...Array(totalSteps)].map((_, index) => (
+            <motion.div
+              key={index}
+              animate={{
+                width: currentStep === index ? 40 : 8,
+                backgroundColor: currentStep >= index ? '#8b5cf6' : '#ffffff30'
+              }}
+              transition={{ duration: 0.3 }}
+              className="h-2 rounded-full"
+            />
+          ))}
+        </div>
+      </div>
+
       {/* COE branding top left */}
       <div className="absolute left-6 top-6 z-10">
         <img 

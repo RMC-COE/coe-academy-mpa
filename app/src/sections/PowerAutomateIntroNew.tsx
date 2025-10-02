@@ -2,31 +2,37 @@ import { SectionProps } from '@/types';
 import { usePresentation } from '@/context/PresentationContext';
 import { useStepController } from '@/hooks/useStepController';
 import { motion } from 'framer-motion';
-import { useState, useEffect } from 'react';
-import { Zap, Sparkles, ArrowRight, Play, Pause, RefreshCw, Users, Clock, Shield, Cpu } from 'lucide-react';
+import React from 'react';
+import {
+  Zap,
+  Sparkles,
+  ArrowRight,
+  RefreshCw,
+  Users,
+  Clock,
+  Shield,
+  Cpu,
+  Mail,
+  FileSpreadsheet,
+  Database,
+  Target,
+  Send,
+  Code,
+  MousePointer,
+  MessageCircle
+} from 'lucide-react';
 
-export const PowerAutomateIntroNew = ({ resetSignal, isPaused }: SectionProps) => {
+export const PowerAutomateIntroNew = ({ resetSignal }: SectionProps) => {
   const { stepMode, stepSignal, setIsLastStep } = usePresentation();
-  const [activeFlow, setActiveFlow] = useState(0);
-  const [isFlowAnimating, setIsFlowAnimating] = useState(true);
   
   const stepController = useStepController({
-    totalSteps: 7,
+    totalSteps: 8,
     resetSignal,
     stepSignal,
     autoAdvance: !stepMode,
     stepDuration: 5000,
     onLastStepChange: setIsLastStep
   });
-
-  // Animate flow visualization
-  useEffect(() => {
-    if (!isFlowAnimating || isPaused) return;
-    const interval = setInterval(() => {
-      setActiveFlow((prev) => (prev + 1) % 4);
-    }, 1500);
-    return () => clearInterval(interval);
-  }, [isFlowAnimating, isPaused]);
 
   const capabilities = [
     {
@@ -59,13 +65,6 @@ export const PowerAutomateIntroNew = ({ resetSignal, isPaused }: SectionProps) =
     }
   ];
 
-  const flowSteps = [
-    { name: "Trigger", icon: "📧", description: "Email arrives" },
-    { name: "Extract", icon: "📊", description: "Get data" },
-    { name: "Process", icon: "⚙️", description: "Apply rules" },
-    { name: "Action", icon: "✅", description: "Update systems" }
-  ];
-
   const currentStep = stepController.currentStep;
 
   return (
@@ -86,7 +85,7 @@ export const PowerAutomateIntroNew = ({ resetSignal, isPaused }: SectionProps) =
       {/* Step Progress Indicator */}
       <div className="absolute top-6 left-1/2 transform -translate-x-1/2 z-20">
         <div className="flex items-center gap-2">
-          {[...Array(7)].map((_, index) => (
+          {[...Array(8)].map((_, index) => (
             <motion.div
               key={index}
               animate={{
@@ -102,10 +101,10 @@ export const PowerAutomateIntroNew = ({ resetSignal, isPaused }: SectionProps) =
 
       {/* COE branding */}
       <div className="absolute left-6 top-6 z-10">
-        <img 
-          src="/images/coe_white_logo.png" 
-          alt="Center of Excellence" 
-          className="h-12 w-auto"
+        <img
+          src="/images/coe_white_logo.png"
+          alt="Center of Excellence"
+          className="h-16 w-auto"
         />
       </div>
 
@@ -236,103 +235,489 @@ export const PowerAutomateIntroNew = ({ resetSignal, isPaused }: SectionProps) =
             exit={{ opacity: 0 }}
             className="flex flex-col items-center justify-center h-full px-12"
           >
-            <div className="text-center max-w-5xl">
-              <h2 className="font-amadeus text-5xl font-bold text-white mb-8">
-                What is Power Automate?
-              </h2>
-              <h3 className="font-amadeus text-2xl text-purple-400 mb-16">Understanding Power Automate</h3>
-              
+            <h2 className="font-amadeus text-5xl font-bold text-white text-center mb-16">
+              What is Power Automate?
+            </h2>
+
+            <div className="max-w-6xl mx-auto">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2, duration: 0.6 }}
+                className="relative mb-12"
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20 blur-3xl"></div>
+                <div className="relative bg-white/5 backdrop-blur-md rounded-3xl p-12 border border-white/10 text-center">
+                  <p className="font-amadeus text-2xl text-white/90 leading-relaxed mb-6">
+                    Power Automate is an <span className="text-blue-400 font-bold">online workflow service</span> that
+                    <span className="text-purple-400 font-bold"> automates actions across the most common apps and services</span>.
+                  </p>
+                  <p className="font-amadeus text-lg text-white/70">
+                    Connect to hundreds of services and manage data in the cloud or on-premises
+                  </p>
+                </div>
+              </motion.div>
+
+              <div className="grid grid-cols-2 gap-8">
+                <motion.div
+                  initial={{ opacity: 0, x: -50 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.4, duration: 0.6 }}
+                  className="relative"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-br from-green-600/20 to-teal-600/20 blur-2xl"></div>
+                  <div className="relative bg-white/5 backdrop-blur-md rounded-2xl p-8 border border-white/10">
+                    <div className="flex items-center gap-4 mb-6">
+                      <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-teal-600 rounded-2xl flex items-center justify-center">
+                        <MessageCircle size={28} className="text-white" />
+                      </div>
+                      <div>
+                        <h3 className="font-amadeus text-xl font-bold text-white">Teams Integration</h3>
+                        <p className="font-amadeus text-sm text-white/60">Jira → Teams notifications</p>
+                      </div>
+                    </div>
+                    <p className="font-amadeus text-sm text-white/70">
+                      Create a flow that posts a message on Microsoft Teams whenever an issue is created in Jira
+                    </p>
+                  </div>
+                </motion.div>
+
+                <motion.div
+                  initial={{ opacity: 0, x: 50 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.6, duration: 0.6 }}
+                  className="relative"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-br from-orange-600/20 to-red-600/20 blur-2xl"></div>
+                  <div className="relative bg-white/5 backdrop-blur-md rounded-2xl p-8 border border-white/10">
+                    <div className="flex items-center gap-4 mb-6">
+                      <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-600 rounded-2xl flex items-center justify-center">
+                        <Database size={28} className="text-white" />
+                      </div>
+                      <div>
+                        <h3 className="font-amadeus text-xl font-bold text-white">File Sync</h3>
+                        <p className="font-amadeus text-sm text-white/60">Dropbox → SharePoint</p>
+                      </div>
+                    </div>
+                    <p className="font-amadeus text-sm text-white/70">
+                      Ensure any file added to Dropbox is automatically copied to SharePoint for your team
+                    </p>
+                  </div>
+                </motion.div>
+              </div>
+
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3, duration: 0.6 }}
-                className="relative"
+                transition={{ delay: 0.8, duration: 0.6 }}
+                className="mt-12 text-center bg-white/5 backdrop-blur-md rounded-2xl p-6 border border-white/10"
               >
-                <div className="absolute inset-0 bg-gradient-to-r from-purple-600/20 to-blue-600/20 blur-3xl"></div>
-                <div className="relative bg-white/5 backdrop-blur-md rounded-3xl p-16 border border-white/10">
-                  <p className="font-amadeus text-2xl text-white/90 leading-relaxed">
-                    Power Automate is a <span className="text-purple-400 font-bold">low-code automation platform</span> that 
-                    enables you to create automated workflows between your apps and services to 
-                    <span className="text-blue-400 font-bold"> synchronize files</span>, 
-                    <span className="text-green-400 font-bold"> get notifications</span>, 
-                    <span className="text-yellow-400 font-bold"> collect data</span>, and more.
-                  </p>
-                </div>
+                <p className="font-amadeus text-lg text-white/90 mb-2">
+                  🔗 The list of applications you can use with Power Automate <span className="text-blue-400 font-bold">grows constantly</span>
+                </p>
+                <p className="font-amadeus text-sm text-white/70">
+                  SharePoint, SQL Server, Dynamics 365, Salesforce, and hundreds more
+                </p>
               </motion.div>
             </div>
           </motion.div>
         )}
 
-        {/* Step 4: Live flow visualization */}
+        {/* Step 4: What can you do with Power Automate? */}
         {stepController.currentStep === 4 && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="flex flex-col h-full px-12 py-16"
+          >
+            <h2 className="font-amadeus text-5xl font-bold text-white text-center mb-8">
+              What can you do with Power Automate?
+            </h2>
+
+            <div className="max-w-6xl mx-auto flex-1 flex flex-col">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+                className="text-center mb-16"
+              >
+                <p className="font-amadeus text-lg text-white/80 max-w-4xl mx-auto leading-relaxed">
+                  Automate workflows between your favorite applications and services, sync files, get notifications, collect data, and much more.
+                </p>
+              </motion.div>
+
+              <div className="grid grid-cols-2 gap-12 mb-16 flex-1">
+                <motion.div
+                  initial={{ opacity: 0, x: -30 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.3 }}
+                  className="relative"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-br from-red-600/20 to-pink-600/20 blur-2xl"></div>
+                  <div className="relative bg-white/5 backdrop-blur-md rounded-2xl p-10 border border-white/10 h-full flex flex-col">
+                    <div className="flex items-center gap-4 mb-8">
+                      <div className="w-16 h-16 bg-gradient-to-br from-red-500 to-pink-600 rounded-2xl flex items-center justify-center">
+                        <Zap size={28} className="text-white" />
+                      </div>
+                      <div>
+                        <h3 className="font-amadeus text-xl font-bold text-white">Instant Notifications</h3>
+                        <p className="font-amadeus text-sm text-white/60">High-priority alerts</p>
+                      </div>
+                    </div>
+                    <p className="font-amadeus text-base text-white/80 mb-6 leading-relaxed flex-1">
+                      Instantly respond to high-priority notifications or emails. Get push notifications when sales leads are added to Dynamics 365.
+                    </p>
+                    <div className="bg-white/5 rounded-lg p-4">
+                      <p className="font-amadeus text-sm text-white/70">Example: Email → Mobile notification</p>
+                    </div>
+                  </div>
+                </motion.div>
+
+                <motion.div
+                  initial={{ opacity: 0, x: 30 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.4 }}
+                  className="relative"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 to-indigo-600/20 blur-2xl"></div>
+                  <div className="relative bg-white/5 backdrop-blur-md rounded-2xl p-10 border border-white/10 h-full flex flex-col">
+                    <div className="flex items-center gap-4 mb-8">
+                      <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center">
+                        <FileSpreadsheet size={28} className="text-white" />
+                      </div>
+                      <div>
+                        <h3 className="font-amadeus text-xl font-bold text-white">File Management</h3>
+                        <p className="font-amadeus text-sm text-white/60">Sync & organize</p>
+                      </div>
+                    </div>
+                    <p className="font-amadeus text-base text-white/80 mb-6 leading-relaxed flex-1">
+                      Copy all email attachments to your OneDrive. Ensure files from Dropbox are automatically copied to SharePoint.
+                    </p>
+                    <div className="bg-white/5 rounded-lg p-4">
+                      <p className="font-amadeus text-sm text-white/70">Example: Email attachments → OneDrive</p>
+                    </div>
+                  </div>
+                </motion.div>
+
+                <motion.div
+                  initial={{ opacity: 0, x: -30 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.5 }}
+                  className="relative"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-br from-green-600/20 to-emerald-600/20 blur-2xl"></div>
+                  <div className="relative bg-white/5 backdrop-blur-md rounded-2xl p-10 border border-white/10 h-full flex flex-col">
+                    <div className="flex items-center gap-4 mb-8">
+                      <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center">
+                        <Database size={28} className="text-white" />
+                      </div>
+                      <div>
+                        <h3 className="font-amadeus text-xl font-bold text-white">Data Collection</h3>
+                        <p className="font-amadeus text-sm text-white/60">Track & analyze</p>
+                      </div>
+                    </div>
+                    <p className="font-amadeus text-base text-white/80 mb-6 leading-relaxed flex-1">
+                      Collect data about your business and share with your team. Monitor social media mentions and save to Excel.
+                    </p>
+                    <div className="bg-white/5 rounded-lg p-4">
+                      <p className="font-amadeus text-sm text-white/70">Example: Twitter mentions → Excel spreadsheet</p>
+                    </div>
+                  </div>
+                </motion.div>
+
+                <motion.div
+                  initial={{ opacity: 0, x: 30 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.6 }}
+                  className="relative"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-br from-purple-600/20 to-violet-600/20 blur-2xl"></div>
+                  <div className="relative bg-white/5 backdrop-blur-md rounded-2xl p-10 border border-white/10 h-full flex flex-col">
+                    <div className="flex items-center gap-4 mb-8">
+                      <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-violet-600 rounded-2xl flex items-center justify-center">
+                        <Users size={28} className="text-white" />
+                      </div>
+                      <div>
+                        <h3 className="font-amadeus text-xl font-bold text-white">Approval Workflows</h3>
+                        <p className="font-amadeus text-sm text-white/60">Streamline decisions</p>
+                      </div>
+                    </div>
+                    <p className="font-amadeus text-base text-white/80 mb-6 leading-relaxed flex-1">
+                      Automate approval workflows for vacation requests, expense reports, and business processes.
+                    </p>
+                    <div className="bg-white/5 rounded-lg p-4">
+                      <p className="font-amadeus text-sm text-white/70">Example: Vacation request → Manager approval</p>
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.8 }}
+                className="text-center bg-white/5 backdrop-blur-md rounded-2xl p-8 border border-white/10 mt-auto"
+              >
+                <p className="font-amadeus text-lg text-white/90 mb-3">
+                  💡 A common use of Power Automate is to <span className="text-blue-400 font-bold">receive notifications</span>
+                </p>
+                <p className="font-amadeus text-base text-white/70 leading-relaxed">
+                  Instantly get email or push notifications when important events happen in your business apps
+                </p>
+              </motion.div>
+            </div>
+          </motion.div>
+        )}
+
+        {/* Step 5: Triggers and Actions */}
+        {stepController.currentStep === 5 && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="flex flex-col items-center justify-center h-full px-12"
           >
-            <h2 className="font-amadeus text-5xl font-bold text-white text-center mb-16">
-              See It In Action
+            <h2 className="font-amadeus text-5xl font-bold text-white text-center mb-20">
+              Every Flow has Two Parts
             </h2>
-            <div className="relative max-w-6xl w-full">
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 to-purple-600/10 blur-3xl"></div>
-              <div className="relative bg-white/5 backdrop-blur-lg rounded-3xl p-12 border border-white/10">
-                <div className="flex items-center justify-between mb-12">
-                  <h3 className="font-amadeus text-2xl text-white/80">Invoice Processing Flow</h3>
-                  <button
-                    onClick={() => setIsFlowAnimating(!isFlowAnimating)}
-                    className="flex items-center gap-3 bg-white/10 hover:bg-white/20 px-6 py-3 rounded-xl transition-all duration-300"
-                  >
-                    {isFlowAnimating ? <Pause size={20} /> : <Play size={20} />}
-                    <span className="font-amadeus text-lg text-white">
-                      {isFlowAnimating ? 'Pause' : 'Play'}
-                    </span>
-                  </button>
-                </div>
-                
-                <div className="flex items-center justify-between">
-                  {flowSteps.map((step, index) => (
-                    <div key={step.name} className="flex items-center flex-1">
-                      <motion.div
-                        animate={{
-                          scale: activeFlow === index ? 1.15 : 1,
-                          opacity: activeFlow >= index ? 1 : 0.4
-                        }}
-                        transition={{ duration: 0.5 }}
-                        className="text-center"
-                      >
-                        <div className={`w-24 h-24 rounded-3xl flex items-center justify-center text-4xl mx-auto
-                          ${activeFlow === index ? 'bg-gradient-to-br from-blue-500 to-purple-600 shadow-2xl shadow-purple-500/50' : 'bg-white/10'}
-                          transition-all duration-500`}
-                        >
-                          {step.icon}
-                        </div>
-                        <p className="font-amadeus text-lg font-bold text-white/90 mt-4">{step.name}</p>
-                        <p className="font-amadeus text-sm text-white/60">{step.description}</p>
-                      </motion.div>
-                      
-                      {index < flowSteps.length - 1 && (
-                        <div className="flex-1 h-1 mx-6 relative">
-                          <div className="absolute inset-0 bg-white/10 rounded-full"></div>
-                          <motion.div
-                            className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full"
-                            initial={{ scaleX: 0 }}
-                            animate={{ scaleX: activeFlow > index ? 1 : 0 }}
-                            transition={{ duration: 0.5 }}
-                            style={{ transformOrigin: 'left' }}
-                          ></motion.div>
-                        </div>
-                      )}
+
+            <div className="grid grid-cols-2 gap-16 max-w-6xl w-full">
+              {/* Triggers Section */}
+              <motion.div
+                initial={{ opacity: 0, x: -50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8 }}
+                className="relative"
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 to-indigo-600/20 blur-3xl"></div>
+                <div className="relative bg-white/5 backdrop-blur-lg rounded-3xl p-12 border border-white/10 h-full">
+                  <div className="text-center mb-8">
+                    <div className="w-24 h-24 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-3xl flex items-center justify-center mx-auto mb-6">
+                      <Zap size={48} className="text-white" />
                     </div>
-                  ))}
+                    <h3 className="font-amadeus text-3xl font-bold text-white mb-4">Triggers</h3>
+                    <p className="font-amadeus text-lg text-white/70">The starting action for your flow</p>
+                  </div>
+
+                  <div className="space-y-4">
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.3 }}
+                      className="bg-white/5 rounded-xl p-4 border border-white/20"
+                    >
+                      <div className="flex items-center gap-3 mb-2">
+                        <Mail size={20} className="text-blue-400" />
+                        <span className="font-amadeus font-bold text-white">When email arrives</span>
+                      </div>
+                      <p className="font-amadeus text-sm text-white/60">New message with specific subject</p>
+                    </motion.div>
+
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.5 }}
+                      className="bg-white/5 rounded-xl p-4 border border-white/20"
+                    >
+                      <div className="flex items-center gap-3 mb-2">
+                        <FileSpreadsheet size={20} className="text-green-400" />
+                        <span className="font-amadeus font-bold text-white">When file is created</span>
+                      </div>
+                      <p className="font-amadeus text-sm text-white/60">New item added to SharePoint</p>
+                    </motion.div>
+
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.7 }}
+                      className="bg-white/5 rounded-xl p-4 border border-white/20"
+                    >
+                      <div className="flex items-center gap-3 mb-2">
+                        <Clock size={20} className="text-purple-400" />
+                        <span className="font-amadeus font-bold text-white">On a schedule</span>
+                      </div>
+                      <p className="font-amadeus text-sm text-white/60">Daily, weekly, or monthly</p>
+                    </motion.div>
+                  </div>
                 </div>
-              </div>
+              </motion.div>
+
+              {/* Actions Section */}
+              <motion.div
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="relative"
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-purple-600/20 to-pink-600/20 blur-3xl"></div>
+                <div className="relative bg-white/5 backdrop-blur-lg rounded-3xl p-12 border border-white/10 h-full">
+                  <div className="text-center mb-8">
+                    <div className="w-24 h-24 bg-gradient-to-br from-purple-500 to-pink-600 rounded-3xl flex items-center justify-center mx-auto mb-6">
+                      <Target size={48} className="text-white" />
+                    </div>
+                    <h3 className="font-amadeus text-3xl font-bold text-white mb-4">Actions</h3>
+                    <p className="font-amadeus text-lg text-white/70">What happens when triggered</p>
+                  </div>
+
+                  <div className="space-y-4">
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.5 }}
+                      className="bg-white/5 rounded-xl p-4 border border-white/20"
+                    >
+                      <div className="flex items-center gap-3 mb-2">
+                        <Send size={20} className="text-blue-400" />
+                        <span className="font-amadeus font-bold text-white">Send notification</span>
+                      </div>
+                      <p className="font-amadeus text-sm text-white/60">Email, Teams, or mobile alert</p>
+                    </motion.div>
+
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.7 }}
+                      className="bg-white/5 rounded-xl p-4 border border-white/20"
+                    >
+                      <div className="flex items-center gap-3 mb-2">
+                        <Database size={20} className="text-orange-400" />
+                        <span className="font-amadeus font-bold text-white">Create file</span>
+                      </div>
+                      <p className="font-amadeus text-sm text-white/60">Save to OneDrive or SharePoint</p>
+                    </motion.div>
+
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.9 }}
+                      className="bg-white/5 rounded-xl p-4 border border-white/20"
+                    >
+                      <div className="flex items-center gap-3 mb-2">
+                        <Users size={20} className="text-green-400" />
+                        <span className="font-amadeus font-bold text-white">Start approval</span>
+                      </div>
+                      <p className="font-amadeus text-sm text-white/60">Request manager approval</p>
+                    </motion.div>
+                  </div>
+                </div>
+              </motion.div>
             </div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.2 }}
+              className="mt-12 text-center bg-white/5 backdrop-blur-md rounded-2xl p-6 border border-white/10 max-w-4xl"
+            >
+              <p className="font-amadeus text-lg text-white/90 mb-2">
+                ⚡ Every flow has <span className="text-blue-400 font-bold">one trigger</span> and <span className="text-purple-400 font-bold">one or more actions</span>
+              </p>
+              <p className="font-amadeus text-sm text-white/70">
+                Connect any trigger to any action across 500+ services
+              </p>
+            </motion.div>
           </motion.div>
         )}
 
-        {/* Step 5: Impact metrics */}
-        {stepController.currentStep === 5 && (
+        {/* Step 6: Where to Create Flows */}
+        {stepController.currentStep === 6 && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="flex flex-col items-center justify-center h-full px-12"
+          >
+            <h2 className="font-amadeus text-5xl font-bold text-white text-center mb-20">
+              Where to Create Flows
+            </h2>
+
+            <div className="grid grid-cols-3 gap-8 max-w-6xl w-full">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 }}
+                whileHover={{ scale: 1.05 }}
+                className="relative"
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-600/30 to-indigo-600/30 blur-2xl"></div>
+                <div className="relative bg-white/5 backdrop-blur-md rounded-3xl p-8 border border-white/10 text-center h-full">
+                  <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                    <Code size={32} className="text-white" />
+                  </div>
+                  <h3 className="font-amadeus text-xl font-bold text-white mb-4">Power Automate Portal</h3>
+                  <p className="font-amadeus text-sm text-white/70 mb-4">
+                    Full-featured web interface with templates and advanced options
+                  </p>
+                  <div className="bg-white/10 rounded-lg p-3">
+                    <p className="font-amadeus text-xs text-white/80">powerautomate.microsoft.com</p>
+                  </div>
+                </div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+                whileHover={{ scale: 1.05 }}
+                className="relative"
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-purple-600/30 to-pink-600/30 blur-2xl"></div>
+                <div className="relative bg-white/5 backdrop-blur-md rounded-3xl p-8 border border-white/10 text-center h-full">
+                  <div className="w-20 h-20 bg-gradient-to-br from-purple-500 to-pink-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                    <FileSpreadsheet size={32} className="text-white" />
+                  </div>
+                  <h3 className="font-amadeus text-xl font-bold text-white mb-4">From Your Apps</h3>
+                  <p className="font-amadeus text-sm text-white/70 mb-4">
+                    Create flows directly from Excel, SharePoint, Teams, and more
+                  </p>
+                  <div className="bg-white/10 rounded-lg p-3">
+                    <p className="font-amadeus text-xs text-white/80">Automate → Create flow</p>
+                  </div>
+                </div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5 }}
+                whileHover={{ scale: 1.05 }}
+                className="relative"
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-green-600/30 to-emerald-600/30 blur-2xl"></div>
+                <div className="relative bg-white/5 backdrop-blur-md rounded-3xl p-8 border border-white/10 text-center h-full">
+                  <div className="w-20 h-20 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                    <MousePointer size={32} className="text-white" />
+                  </div>
+                  <h3 className="font-amadeus text-xl font-bold text-white mb-4">Templates</h3>
+                  <p className="font-amadeus text-sm text-white/70 mb-4">
+                    Start with pre-built templates for common scenarios
+                  </p>
+                  <div className="bg-white/10 rounded-lg p-3">
+                    <p className="font-amadeus text-xs text-white/80">Browse → Templates</p>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.8 }}
+              className="mt-12 text-center bg-white/5 backdrop-blur-md rounded-2xl p-6 border border-white/10 max-w-4xl"
+            >
+              <p className="font-amadeus text-lg text-white/90 mb-2">
+                🚀 Start where you're most comfortable
+              </p>
+              <p className="font-amadeus text-sm text-white/70">
+                All paths lead to the same powerful automation capabilities
+              </p>
+            </motion.div>
+          </motion.div>
+        )}
+
+        {/* Step 7: The Power of Automation */}
+        {stepController.currentStep === 7 && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -364,7 +749,7 @@ export const PowerAutomateIntroNew = ({ resetSignal, isPaused }: SectionProps) =
                   <div className="font-amadeus text-base text-white/50 mt-3">SAP, Excel, Teams...</div>
                 </div>
               </motion.div>
-              
+
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -382,7 +767,7 @@ export const PowerAutomateIntroNew = ({ resetSignal, isPaused }: SectionProps) =
                   <div className="font-amadeus text-base text-white/50 mt-3">Cloud reliability</div>
                 </div>
               </motion.div>
-              
+
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -404,8 +789,8 @@ export const PowerAutomateIntroNew = ({ resetSignal, isPaused }: SectionProps) =
           </motion.div>
         )}
 
-        {/* Step 6: Call to action */}
-        {stepController.currentStep === 6 && (
+        {/* Step 8: Call to action */}
+        {stepController.currentStep === 8 && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}

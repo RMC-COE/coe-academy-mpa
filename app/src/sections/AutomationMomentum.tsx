@@ -4,6 +4,7 @@ import { useStepController } from '@/hooks/useStepController';
 import { StepReveal } from '@/components/common/StepReveal';
 import { CheckCircle, Zap, TrendingUp, ArrowRight, X, ExternalLink, AlertTriangle } from 'lucide-react';
 import { useState } from 'react';
+import { motion } from 'framer-motion';
 
 export const AutomationMomentum = ({ resetSignal, isPaused }: SectionProps) => {
   const { stepMode, stepSignal, setIsLastStep } = usePresentation();
@@ -17,6 +18,8 @@ export const AutomationMomentum = ({ resetSignal, isPaused }: SectionProps) => {
     stepDuration: 4000,
     onLastStepChange: setIsLastStep
   });
+
+  const currentStep = stepController.currentStep;
 
 
   const automationWins = [
@@ -92,17 +95,34 @@ export const AutomationMomentum = ({ resetSignal, isPaused }: SectionProps) => {
 
   return (
     <div className="relative h-screen bg-gradient-to-br from-indigo-100 via-purple-50 to-purple-100 dark:from-slate-950 dark:via-indigo-950 dark:to-slate-900 overflow-hidden">
+      {/* Step Progress Indicator */}
+      <div className="absolute top-6 left-1/2 transform -translate-x-1/2 z-20">
+        <div className="flex items-center gap-2">
+          {[...Array(6)].map((_, index) => (
+            <motion.div
+              key={index}
+              animate={{
+                width: currentStep === index ? 40 : 8,
+                backgroundColor: currentStep >= index ? '#8b5cf6' : '#ffffff30'
+              }}
+              transition={{ duration: 0.3 }}
+              className="h-2 rounded-full"
+            />
+          ))}
+        </div>
+      </div>
+
       {/* COE branding top left */}
       <div className="absolute left-6 top-6 z-10">
-        <img 
-          src="/images/coe_color_logo.png" 
-          alt="Center of Excellence" 
-          className="h-12 w-auto dark:hidden"
+        <img
+          src="/images/coe_color_logo.png"
+          alt="Center of Excellence"
+          className="h-16 w-auto dark:hidden"
         />
-        <img 
-          src="/images/coe_white_logo.png" 
-          alt="Center of Excellence" 
-          className="h-12 w-auto hidden dark:block"
+        <img
+          src="/images/coe_white_logo.png"
+          alt="Center of Excellence"
+          className="h-16 w-auto hidden dark:block"
         />
       </div>
 

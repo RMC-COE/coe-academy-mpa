@@ -1,6 +1,6 @@
 import { ComponentType } from 'react';
 
-export type SectionId = 'cover' | 'agenda' | 'reality' | 'momentum' | 'intro' | 'connectors' | 'roi' | 'journey';
+export type SectionId = 'cover' | 'agenda' | 'reality' | 'momentum' | 'intro' | 'flowbuilder' | 'roi' | 'journey';
 
 export interface SectionProps {
   resetSignal: number;
