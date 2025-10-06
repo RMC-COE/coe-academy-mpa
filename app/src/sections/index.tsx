@@ -7,8 +7,7 @@ const RealitySection = lazy(() => import('./TheDailyReality').then((module) => (
 const MomentumSection = lazy(() => import('./AutomationMomentum').then((module) => ({ default: module.AutomationMomentum })));
 const IntroSection = lazy(() => import('./PowerAutomateIntroNew').then((module) => ({ default: module.PowerAutomateIntroNew })));
 const FlowBuilderSection = lazy(() => import('./FlowBuilder').then((module) => ({ default: module.FlowBuilder })));
-const RoiSection = lazy(() => import('./RoiAndSuccess').then((module) => ({ default: module.RoiAndSuccess })));
-const JourneySection = lazy(() => import('./YourJourney').then((module) => ({ default: module.YourJourney })));
+const AdvancedSection = lazy(() => import('./AdvancedPowerAutomate').then((module) => ({ default: module.AdvancedPowerAutomate })));
 
 export const sections: SectionConfig[] = [
   {
@@ -92,29 +91,17 @@ export const sections: SectionConfig[] = [
     component: FlowBuilderSection
   },
   {
-    id: 'roi',
-    title: 'ROI Calculator & Success Stories',
-    subtitle: 'From insight to business case in minutes.',
-    durationMinutes: 10,
+    id: 'advanced',
+    title: 'Advanced Power Automate',
+    subtitle: 'Copilot, Best Practices, and Troubleshooting',
+    durationMinutes: 15,
     presenterNotes: [
-      'Ask someone to share their numbers to personalize ROI.',
-      'Explain real metrics from CoE projects.',
-      'Connect adoption curve with internal roadmap.'
+      'Show how Copilot can accelerate flow creation with natural language.',
+      'Emphasize best practices for production-ready flows.',
+      'Demonstrate troubleshooting techniques and Power Automate Desktop basics.',
+      'Connect with real-world scenarios and enterprise considerations.'
     ],
-    analyticsKey: 'section_roi',
-    component: RoiSection
-  },
-  {
-    id: 'journey',
-    title: 'Your Journey Starts Now',
-    subtitle: 'From idea to tangible automation in 60 minutes.',
-    durationMinutes: 5,
-    presenterNotes: [
-      'Remember next steps and CoE support.',
-      'Emphasize concrete results from practical session.',
-      'Invite to connect and request accompaniment.'
-    ],
-    analyticsKey: 'section_journey',
-    component: JourneySection
+    analyticsKey: 'section_advanced',
+    component: AdvancedSection
   }
 ];

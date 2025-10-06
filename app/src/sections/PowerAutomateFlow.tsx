@@ -18,45 +18,137 @@ export const PowerAutomateFlow = ({ resetSignal }: SectionProps) => {
   const { stepMode, stepSignal, setIsLastStep } = usePresentation();
   const [currentScreenshot, setCurrentScreenshot] = useState(0);
 
-  // Placeholder screenshots - will be replaced with actual images
-  const screenshots = [
-    {
-      id: 'step1',
-      title: 'Accediendo a Power Automate',
-      description: 'Navegamos a make.powerautomate.com para comenzar a crear nuestro flujo',
-      url: 'placeholder1.png',
-      tips: [
-        'Utiliza tu cuenta corporativa de Microsoft',
-        'Asegúrate de tener permisos para crear flujos',
-        'La interfaz puede variar según la región'
-      ]
-    },
-    {
-      id: 'step2',
-      title: 'Creando un nuevo flujo',
-      description: 'Seleccionamos la opción "Crear" para iniciar un nuevo flujo automatizado',
-      url: 'placeholder2.png',
-      tips: [
-        'Elige "Flujo automatizado" para trigger por email',
-        'Da un nombre descriptivo al flujo',
-        'Considera la frecuencia de ejecución'
-      ]
-    },
-    {
-      id: 'step3',
-      title: 'Configurando el trigger de email',
-      description: 'Establecemos las condiciones que dispararán nuestro flujo automáticamente',
-      url: 'placeholder3.png',
-      tips: [
-        'Filtra por asunto que contenga "AUTTP"',
-        'Verifica que tenga archivos adjuntos',
-        'Configura la carpeta de origen correcta'
-      ]
+  // Auto-generate screenshots based on available images
+  const generateScreenshots = () => {
+    const screenshots = [
+      {
+        id: 'step1',
+        title: 'Accediendo a Power Automate',
+        description: 'Navegamos a make.powerautomate.com para comenzar a crear nuestro flujo',
+        tips: [
+          'Utiliza tu cuenta corporativa de Microsoft',
+          'Asegúrate de tener permisos para crear flujos',
+          'La interfaz puede variar según la región'
+        ]
+      },
+      {
+        id: 'step2',
+        title: 'Seleccionando tipo de flujo',
+        description: 'Elegimos "Automated cloud flow" para crear un flujo que se ejecute automáticamente',
+        tips: [
+          'Automated cloud flow para triggers automáticos',
+          'Instant cloud flow para ejecución manual',
+          'Scheduled cloud flow para ejecución programada'
+        ]
+      },
+      {
+        id: 'step3',
+        title: 'Configurando el trigger inicial',
+        description: 'Establecemos qué evento disparará nuestro flujo automáticamente',
+        tips: [
+          'Busca "When a new email arrives" para email triggers',
+          'Define condiciones específicas del trigger',
+          'Considera la frecuencia de ejecución esperada'
+        ]
+      },
+      {
+        id: 'step4',
+        title: 'Configuración del trigger de email',
+        description: 'Definimos los parámetros específicos para el trigger de correo electrónico',
+        tips: [
+          'Especifica la carpeta de correo a monitorear',
+          'Configura filtros por remitente si es necesario',
+          'Define si incluir archivos adjuntos'
+        ]
+      },
+      {
+        id: 'step5',
+        title: 'Filtros avanzados de email',
+        description: 'Aplicamos filtros específicos como el asunto que contenga "AUTTP"',
+        tips: [
+          'Usa "Subject Filter" para filtrar por asunto',
+          'Aplica "Has Attachments" para emails con adjuntos',
+          'Considera filtros adicionales según necesidades'
+        ]
+      },
+      {
+        id: 'step6',
+        title: 'Añadiendo la primera acción',
+        description: 'Agregamos la primera acción que se ejecutará cuando se dispare el trigger',
+        tips: [
+          'Haz clic en "New step" para añadir acciones',
+          'Busca conectores por nombre o categoría',
+          'Las acciones se ejecutan secuencialmente'
+        ]
+      },
+      {
+        id: 'step7',
+        title: 'Seleccionando conector',
+        description: 'Elegimos el conector apropiado para nuestra automatización',
+        tips: [
+          'Usa la búsqueda para encontrar conectores específicos',
+          'Revisa las acciones disponibles del conector',
+          'Verifica los permisos necesarios'
+        ]
+      },
+      {
+        id: 'step8',
+        title: 'Configurando la acción',
+        description: 'Definimos los parámetros específicos de la acción seleccionada',
+        tips: [
+          'Usa contenido dinámico del trigger anterior',
+          'Configura campos obligatorios primero',
+          'Valida la configuración antes de continuar'
+        ]
+      },
+      {
+        id: 'step9',
+        title: 'Añadiendo lógica condicional',
+        description: 'Implementamos condiciones para controlar el flujo de ejecución',
+        tips: [
+          'Usa "Condition" para lógica if/else',
+          'Define expresiones con contenido dinámico',
+          'Considera casos de error y excepciones'
+        ]
+      },
+      {
+        id: 'step10',
+        title: 'Guardando y probando el flujo',
+        description: 'Finalizamos la configuración y probamos nuestro flujo automatizado',
+        tips: [
+          'Guarda el flujo antes de probarlo',
+          'Usa "Test" para validar funcionamiento',
+          'Revisa el historial de ejecuciones'
+        ]
+      }
+    ];
+
+    // Generate 10 screenshots with proper URLs
+    const allScreenshots = [];
+
+    for (let i = 0; i < 10; i++) {
+      const stepNumber = i + 1;
+      const baseScreenshot = screenshots[Math.min(i, screenshots.length - 1)];
+
+      allScreenshots.push({
+        ...baseScreenshot,
+        id: `step${stepNumber}`,
+        url: `/assets/screenshots/flow-steps/${stepNumber}.png`,
+        hasImage: true
+      });
     }
-  ];
+
+    return allScreenshots;
+  };
+
+  const screenshots = generateScreenshots();
+
+  // Debug: Log screenshot count
+  console.log('PowerAutomateFlow: Generated screenshots count:', screenshots.length);
+  console.log('PowerAutomateFlow: Screenshot URLs:', screenshots.map(s => s.url));
 
   const stepController = useStepController({
-    totalSteps: 1,
+    totalSteps: screenshots.length,
     resetSignal,
     stepSignal,
     autoAdvance: false,
@@ -147,20 +239,45 @@ export const PowerAutomateFlow = ({ resetSignal }: SectionProps) => {
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -50 }}
                   transition={{ duration: 0.5 }}
-                  className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100"
+                  className="absolute inset-0"
                 >
-                  <div className="text-center p-8">
-                    <div className="w-40 h-40 bg-gradient-to-br from-blue-200 to-purple-200 rounded-2xl mx-auto mb-6 flex items-center justify-center shadow-lg">
-                      <span className="text-6xl">📸</span>
+                  <div className="w-full h-full relative">
+                    <img
+                      src={currentStep.url}
+                      alt={currentStep.title}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        // Fallback to placeholder if image fails to load
+                        const target = e.target as HTMLImageElement;
+                        target.style.display = 'none';
+                        const placeholder = target.nextElementSibling as HTMLElement;
+                        if (placeholder) placeholder.style.display = 'flex';
+                      }}
+                    />
+                    {/* Fallback placeholder (hidden by default) */}
+                    <div style={{ display: 'none' }} className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100">
+                      <div className="text-center p-8">
+                        <div className="w-40 h-40 bg-gradient-to-br from-blue-200 to-purple-200 rounded-2xl mx-auto mb-6 flex items-center justify-center shadow-lg">
+                          <span className="text-6xl">📸</span>
+                        </div>
+                        <h3 className="text-2xl font-bold mb-3 text-gray-800">{currentStep.title}</h3>
+                        <p className="text-gray-600 mb-6 max-w-lg">{currentStep.description}</p>
+                        <div className="inline-flex items-center bg-blue-100 px-4 py-2 rounded-full">
+                          <span className="text-blue-600 font-semibold">
+                            Paso {currentScreenshot + 1} de {screenshots.length}
+                          </span>
+                        </div>
+                      </div>
                     </div>
-                    <h3 className="text-2xl font-bold mb-3 text-gray-800">{currentStep.title}</h3>
-                    <p className="text-gray-600 mb-6 max-w-lg">{currentStep.description}</p>
-
-                    {/* Step indicator */}
-                    <div className="inline-flex items-center bg-blue-100 px-4 py-2 rounded-full">
-                      <span className="text-blue-600 font-semibold">
-                        Paso {currentScreenshot + 1} de {screenshots.length}
-                      </span>
+                    {/* Overlay with step info - only shown when image loads */}
+                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-6">
+                      <h3 className="text-2xl font-bold mb-2 text-white">{currentStep.title}</h3>
+                      <p className="text-gray-200 mb-4">{currentStep.description}</p>
+                      <div className="inline-flex items-center bg-blue-600/80 px-4 py-2 rounded-full">
+                        <span className="text-white font-semibold">
+                          Paso {currentScreenshot + 1} de {screenshots.length}
+                        </span>
+                      </div>
                     </div>
                   </div>
                 </motion.div>

@@ -9,7 +9,6 @@ import {
   Database,
   MessageCircle,
   Play,
-  CheckCircle2,
   ArrowRight,
   Zap,
   Download,
@@ -186,27 +185,43 @@ export const FlowBuilder = ({ resetSignal }: SectionProps) => {
     }
   ];
 
-  // Screenshots for step 3
-  const screenshots = [
-    {
-      id: 'step1',
-      title: 'Power Automate Home',
-      description: 'Navigate to make.powerautomate.com and start creating your automation',
-      url: '/images/screenshots/power-automate-1.png'
-    },
-    {
-      id: 'step2',
-      title: 'Creating a New Flow',
-      description: 'Select "Create" to start a new automated flow',
-      url: '/images/screenshots/power-automate-2.png'
-    },
-    {
-      id: 'step3',
-      title: 'Setting up Email Trigger',
-      description: 'Configure the conditions that will trigger your flow automatically',
-      url: '/images/screenshots/power-automate-3.png'
-    }
-  ];
+  // Screenshots for step 3 - Generate all 10 automatically
+  const generateScreenshots = () => {
+    const stepTitles = [
+      'Accessing Power Automate',
+      'Choosing flow creation method',
+      'Setting up the initial trigger',
+      'Configuring email trigger settings',
+      'Applying advanced email filters',
+      'Adding the first action',
+      'Selecting the right connector',
+      'Configuring action parameters',
+      'Adding conditional logic',
+      'Saving and testing the flow'
+    ];
+
+    const stepDescriptions = [
+      'Navigate to make.powerautomate.com to start creating your automated flow',
+      'Choose "Automated cloud flow" from the available flow creation options',
+      'Set up the event that will automatically trigger your flow execution',
+      'Define specific parameters for the email trigger including mailbox and conditions',
+      'Apply specific filters such as subject containing "AUTTP" and attachment requirements',
+      'Add the first action that will execute when the trigger fires',
+      'Choose the appropriate connector for your automation needs',
+      'Configure the specific parameters and settings for the selected action',
+      'Implement conditional logic to control the flow execution path',
+      'Save your configuration and test the automated flow before deployment'
+    ];
+
+    return Array.from({ length: 10 }, (_, index) => ({
+      id: `step${index + 1}`,
+      title: stepTitles[index],
+      description: stepDescriptions[index],
+      url: `/images/screenshots/power-automate-${index + 1}.png`
+    }));
+  };
+
+  const screenshots = generateScreenshots();
 
   // Reset states when step changes
   useEffect(() => {
@@ -673,7 +688,29 @@ export const FlowBuilder = ({ resetSignal }: SectionProps) => {
                         src={screenshots[currentScreenshot].url}
                         alt={screenshots[currentScreenshot].title}
                         className="w-full h-auto max-h-[70vh] object-contain"
+                        onError={(e) => {
+                          // Fallback to placeholder if image fails to load
+                          const target = e.target as HTMLImageElement;
+                          target.style.display = 'none';
+                          const placeholder = target.nextElementSibling as HTMLElement;
+                          if (placeholder) placeholder.style.display = 'flex';
+                        }}
                       />
+                      {/* Fallback placeholder (hidden by default) */}
+                      <div style={{ display: 'none' }} className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100">
+                        <div className="text-center p-8">
+                          <div className="w-40 h-40 bg-gradient-to-br from-blue-200 to-purple-200 rounded-2xl mx-auto mb-6 flex items-center justify-center shadow-lg">
+                            <span className="text-6xl">📸</span>
+                          </div>
+                          <h3 className="text-xl font-bold mb-3 text-gray-800">{screenshots[currentScreenshot].title}</h3>
+                          <p className="text-gray-600 mb-4 max-w-lg text-sm">{screenshots[currentScreenshot].description}</p>
+                        </div>
+                      </div>
+                      {/* Overlay with step info - less intrusive */}
+                      <div className="absolute bottom-4 left-4 right-4 bg-black/70 backdrop-blur-sm rounded-lg p-4 max-w-2xl">
+                        <h3 className="text-lg font-bold mb-2 text-white">{screenshots[currentScreenshot].title}</h3>
+                        <p className="text-gray-200 text-sm leading-relaxed">{screenshots[currentScreenshot].description}</p>
+                      </div>
                     </motion.div>
                   </AnimatePresence>
                 </div>
@@ -729,6 +766,7 @@ export const FlowBuilder = ({ resetSignal }: SectionProps) => {
             </div>
           </motion.div>
         )}
+
 
       </AnimatePresence>
     </div>
