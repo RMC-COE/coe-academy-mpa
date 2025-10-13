@@ -207,6 +207,13 @@ nav a:hover {
 .card .icon {
     font-size: 48px;
     margin-bottom: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card .icon img {
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
 }
 
 .card h3 {
