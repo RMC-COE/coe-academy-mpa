@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amadeus | COE Academy Sessions: Microsoft Power Automate</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        header {
+            background-color: white;
+            padding: 1.5rem 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #0B3D91;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #666;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #0B3D91;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .sessions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .session-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .session-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 12px rgba(0,0,0,0.15);
+        }
+
+        .session-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+
+        .session-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #0B3D91;
+        }
+
+        .session-badge {
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: white;
+        }
+
+        .badge-fundamentals {
+            background-color: #10B981;
+        }
+
+        .badge-hands-on {
+            background-color: #1E3A8A;
+        }
+
+        .session-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #1a1a1a;
+        }
+
+        .session-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .session-content {
+            background: #f9fafb;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .session-content h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #1a1a1a;
+        }
+
+        .session-content ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .session-content li {
+            padding: 0.5rem 0;
+            color: #666;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .session-content li:before {
+            content: "✓";
+            color: #10B981;
+            font-weight: bold;
+            margin-right: 0.75rem;
+            flex-shrink: 0;
+        }
+
+        .session-highlight {
+            background: #FEF3C7;
+            border-left: 4px solid #F59E0B;
+            padding: 1rem 1.25rem;
+            margin-bottom: 1.5rem;
+            border-radius: 4px;
+        }
+
+        .session-highlight strong {
+            color: #92400E;
+        }
+
+        .session-meta {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .session-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background-color: #0B3D91;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #082d6b;
+            transform: translateX(2px);
+        }
+
+        .btn-secondary {
+            background-color: #f3f4f6;
+            color: #4b5563;
+        }
+
+        .btn-secondary:hover {
+            background-color: #e5e7eb;
+        }
+
+        .footer-tag {
+            font-size: 0.875rem;
+            color: #9ca3af;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">amaDeus</div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#sessions">Sessions</a></li>
+                <li><a href="#resources">Resources</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="sessions-grid">
+            <!-- Session 01 -->
+            <div class="session-card">
+                <div class="session-header">
+                    <div class="session-number">01</div>
+                    <div class="session-badge badge-fundamentals">Fundamentals</div>
+                </div>
+
+                <h2 class="session-title">Introduction to Power Automate</h2>
+                <p class="session-description">
+                    Learn the fundamentals of workflow automation and build your first cloud flow
+                </p>
+
+                <div class="session-content">
+                    <h4>What You'll Learn:</h4>
+                    <ul>
+                        <li>Power Automate basics and terminology</li>
+                        <li>Triggers, actions, and connectors</li>
+                        <li>Building simple automation flows</li>
+                        <li>SharePoint integration essentials</li>
+                        <li>Testing and debugging workflows</li>
+                    </ul>
+                </div>
+
+                <div class="session-meta">
+                    <div class="meta-item">
+                        <span>⏱️</span>
+                        <span>Duration: 60 minutes</span>
+                    </div>
+                    <div class="meta-item">
+                        <span>👥</span>
+                        <span>Level: Beginner</span>
+                    </div>
+                </div>
+
+                <div class="session-footer">
+                    <a href="session-1/" class="btn btn-primary">
+                        View Presentation
+                        <span>→</span>
+                    </a>
+                    <span class="footer-tag">Interactive Slides</span>
+                </div>
+            </div>
+
+            <!-- Session 02 -->
+            <div class="session-card">
+                <div class="session-header">
+                    <div class="session-number">02</div>
+                    <div class="session-badge badge-hands-on">Hands-On</div>
+                </div>
+
+                <h2 class="session-title">Building Approval Workflows</h2>
+                <p class="session-description">
+                    Build a complete approval system for RMC rebate requests with email notifications
+                </p>
+
+                <div class="session-content">
+                    <h4>What You'll Build:</h4>
+                    <ul>
+                        <li>Variables and data management</li>
+                        <li>Conditional logic (if/then/else)</li>
+                        <li>Approval workflows with Adaptive Cards</li>
+                        <li>Dynamic email notifications</li>
+                        <li>SharePoint list updates and tracking</li>
+                    </ul>
+                </div>
+
+                <div class="session-highlight">
+                    <strong>Real Case Study:</strong> Automate rebate approvals that currently take 2+ hours per week
+                </div>
+
+                <div class="session-meta">
+                    <div class="meta-item">
+                        <span>⏱️</span>
+                        <span>Duration: 60 minutes</span>
+                    </div>
+                    <div class="meta-item">
+                        <span>👥</span>
+                        <span>Level: Intermediate</span>
+                    </div>
+                </div>
+
+                <div class="session-footer">
+                    <a href="session-2/" class="btn btn-primary">
+                        Start Workshop
+                        <span>→</span>
+                    </a>
+                    <span class="footer-tag">Step-by-Step Guide</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

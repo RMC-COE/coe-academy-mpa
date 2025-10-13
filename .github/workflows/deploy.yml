@@ -34,7 +34,7 @@ jobs:
           cd app
           npm ci
 
-      - name: Build
+      - name: Build Session 1 Presentation
         run: |
           cd app
           npm run build
@@ -45,7 +45,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './app/dist'
+          path: './docs'
 
   deploy:
     environment:

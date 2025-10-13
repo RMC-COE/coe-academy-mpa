@@ -1,4 +1,5 @@
 node_modules
 app/dist
+docs/session-1
 app/*.tsbuildinfo
 .DS_Store

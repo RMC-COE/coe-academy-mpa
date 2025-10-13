@@ -3,7 +3,11 @@ import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
 
 export default defineConfig({
-  base: '/coe-academy-mpa/',
+  base: '/coe-academy-mpa/session-1/',
+  build: {
+    outDir: '../docs/session-1',
+    emptyOutDir: true
+  },
   plugins: [
     react(),
     VitePWA({
