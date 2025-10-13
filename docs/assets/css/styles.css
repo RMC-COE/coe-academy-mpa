@@ -6,9 +6,12 @@
 }
 
 :root {
-    --primary-color: #0078D4;
-    --primary-dark: #005A9E;
-    --primary-light: #50B8FF;
+    /* Amadeus Corporate Colors */
+    --amadeus-blue: #000835;
+    --amadeus-blue-light: #001854;
+    --primary-color: #000835;
+    --primary-dark: #000520;
+    --primary-light: #001854;
     --secondary-color: #F3F2F1;
     --text-primary: #201F1E;
     --text-secondary: #605E5C;
@@ -76,7 +79,7 @@ nav a:hover {
 
 /* Hero Section */
 .hero-content {
-    background: linear-gradient(135deg, #0078D4 0%, #005A9E 100%);
+    background: linear-gradient(135deg, #000835 0%, #1e1b4b 50%, #5b21b6 100%);
     color: white;
     padding: 80px 0;
     text-align: center;
@@ -405,7 +408,7 @@ nav a:hover {
 
 /* CTA Section */
 .cta-section {
-    background: linear-gradient(135deg, #0078D4 0%, #005A9E 100%);
+    background: linear-gradient(135deg, #000835 0%, #1e1b4b 50%, #5b21b6 100%);
     color: white;
     text-align: center;
 }
