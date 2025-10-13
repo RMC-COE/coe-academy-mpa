@@ -1,4 +1,4 @@
-/* Table of Contents Sidebar */
+/* Table of Contents Sidebar - Floating Overlay */
 .toc-sidebar {
     position: fixed;
     left: 20px;
@@ -6,12 +6,13 @@
     width: 220px;
     max-height: calc(100vh - 120px);
     overflow-y: auto;
-    background: white;
-    border: 1px solid #e0e0e0;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 8, 53, 0.15);
     border-radius: 8px;
     padding: 1.5rem;
-    z-index: 100;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .toc-content {
@@ -617,13 +618,6 @@
     font-family: 'Courier New', monospace;
     font-size: 11px;
     display: inline-block;
-}
-
-/* Main content adjustment when TOC is visible */
-@media (min-width: 1024px) {
-    body {
-        margin-left: 260px;
-    }
 }
 
 /* Responsive */
