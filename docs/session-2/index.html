@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Session 2: Building Approval Workflows | Power Automate Academy</title>
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="assets/cheatsheet.css">
+</head>
+<body>
+    <header class="hero">
+        <div class="container">
+            <div class="logo">
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="40" height="40" rx="8" fill="#0078D4"/>
+                    <path d="M12 20L18 26L28 14" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span>CoE Academy</span>
+            </div>
+            <nav>
+                <a href="../">← Back to Home</a>
+                <a href="#prerequisites">Prerequisites</a>
+                <a href="#overview">Overview</a>
+                <a href="#steps">Steps</a>
+                <a href="#troubleshooting">Troubleshooting</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero-content session-hero">
+        <div class="container">
+            <div class="session-badge">Session 02</div>
+            <h1>Building Approval Workflows</h1>
+            <p class="subtitle">RMC Rebate Approval System - Step by Step Guide</p>
+            <div class="session-info">
+                <span>⏱ Duration: 60 minutes</span>
+                <span>📊 Level: Intermediate</span>
+                <span>🔧 Hands-On Workshop</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="prerequisites" class="section">
+        <div class="container">
+            <h2>Prerequisites</h2>
+            <div class="checklist">
+                <label class="checklist-item">
+                    <input type="checkbox">
+                    <span>Access to Power Automate (make.powerautomate.com)</span>
+                </label>
+                <label class="checklist-item">
+                    <input type="checkbox">
+                    <span>Access to SharePoint list: <code>COE_Academy_PA_Workshop</code></span>
+                </label>
+                <label class="checklist-item">
+                    <input type="checkbox">
+                    <span>Test naming convention: <code>[YOUR_NAME]-001</code>, <code>[YOUR_NAME]-002</code>, etc.</span>
+                </label>
+            </div>
+        </div>
+    </section>
+
+    <section id="overview" class="section overview-section">
+        <div class="container">
+            <h2>Workflow Overview</h2>
+            <p class="section-subtitle">This is what we'll build together</p>
+            <div class="workflow-diagram">
+                <div class="workflow-step">
+                    <div class="step-icon trigger">▶️</div>
+                    <div class="step-content">
+                        <h3>Trigger</h3>
+                        <p>New item in SharePoint</p>
+                    </div>
+                </div>
+                <div class="workflow-arrow">↓</div>
+                <div class="workflow-step">
+                    <div class="step-icon">📦</div>
+                    <div class="step-content">
+                        <h3>Initialize Variables</h3>
+                        <p>Amount, Partner, Email, ID</p>
+                    </div>
+                </div>
+                <div class="workflow-arrow">↓</div>
+                <div class="workflow-step">
+                    <div class="step-icon">🔀</div>
+                    <div class="step-content">
+                        <h3>Condition</h3>
+                        <p>Amount > €5,000?</p>
+                    </div>
+                </div>
+                <div class="workflow-branches">
+                    <div class="branch branch-yes">
+                        <div class="branch-label">YES</div>
+                        <div class="workflow-arrow">↓</div>
+                        <div class="workflow-step">
+                            <div class="step-icon">✋</div>
+                            <div class="step-content">
+                                <h3>Approval Required</h3>
+                                <p>Send approval request</p>
+                            </div>
+                        </div>
+                        <div class="workflow-arrow">↓</div>
+                        <div class="workflow-step">
+                            <div class="step-icon">📧</div>
+                            <div class="step-content">
+                                <h3>Update & Notify</h3>
+                                <p>SharePoint + Email</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="branch branch-no">
+                        <div class="branch-label">NO</div>
+                        <div class="workflow-arrow">↓</div>
+                        <div class="workflow-step">
+                            <div class="step-icon">✅</div>
+                            <div class="step-content">
+                                <h3>Auto-Approve</h3>
+                                <p>Under threshold</p>
+                            </div>
+                        </div>
+                        <div class="workflow-arrow">↓</div>
+                        <div class="workflow-step">
+                            <div class="step-icon">📧</div>
+                            <div class="step-content">
+                                <h3>Update & Notify</h3>
+                                <p>SharePoint + Email</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="steps" class="section steps-section">
+        <div class="container">
+            <h2>Step-by-Step Instructions</h2>
+            <div class="progress-tracker">
+                <div class="progress-step" data-step="1">Part 1</div>
+                <div class="progress-step" data-step="2">Part 2</div>
+                <div class="progress-step" data-step="3">Part 3</div>
+                <div class="progress-step" data-step="4">Part 4</div>
+                <div class="progress-step" data-step="5">Part 5</div>
+                <div class="progress-step" data-step="6">Part 6</div>
+                <div class="progress-step" data-step="7">Part 7</div>
+                <div class="progress-step" data-step="8">Part 8</div>
+            </div>
+
+            <!-- Part 1 -->
+            <div class="step-part" id="part-1">
+                <div class="part-header">
+                    <span class="part-number">01</span>
+                    <div class="part-title">
+                        <h3>Create New Flow</h3>
+                        <span class="part-duration">⏱ 5 minutes</span>
+                    </div>
+                </div>
+
+                <div class="substep">
+                    <h4>Step 1.1: Navigate to Power Automate</h4>
+                    <ol>
+                        <li>Go to <a href="https://make.powerautomate.com" target="_blank">make.powerautomate.com</a></li>
+                        <li>Click <strong>"Create"</strong> in left sidebar</li>
+                        <li>Select <strong>"Automated cloud flow"</strong></li>
+                    </ol>
+                </div>
+
+                <div class="substep">
+                    <h4>Step 1.2: Configure Trigger</h4>
+                    <ol>
+                        <li><strong>Flow name:</strong> <code>RMC Rebate Approval System - [YOUR_NAME]</code></li>
+                        <li><strong>Trigger:</strong> Search for "SharePoint"</li>
+                        <li>Select <strong>"When an item is created"</strong></li>
+                        <li>Click <strong>"Create"</strong></li>
+                    </ol>
+                </div>
+
+                <div class="substep">
+                    <h4>Step 1.3: Set up Trigger</h4>
+                    <ul>
+                        <li><strong>Site Address:</strong> [Select your SharePoint site]</li>
+                        <li><strong>List Name:</strong> <code>COE_Academy_PA_Workshop</code></li>
+                        <li>Click <strong>"New step"</strong></li>
+                    </ul>
+                </div>
+
+                <div class="checkpoint">
+                    <strong>✅ Checkpoint:</strong> Trigger shows "When an item is created" with correct SharePoint list
+                </div>
+            </div>
+
+            <!-- Part 2 -->
+            <div class="step-part" id="part-2">
+                <div class="part-header">
+                    <span class="part-number">02</span>
+                    <div class="part-title">
+                        <h3>Initialize Variables</h3>
+                        <span class="part-duration">⏱ 10 minutes</span>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <strong>💡 Why Variables?</strong>
+                    <p>Variables store data we'll use multiple times in the flow. This avoids repeating complex expressions.</p>
+                </div>
+
+                <div class="substep">
+                    <h4>Step 2.1: Initialize Rebate Amount</h4>
+                    <ol>
+                        <li>Search for <strong>"Initialize variable"</strong></li>
+                        <li>Click on action</li>
+                        <li>Configure:
+                            <ul>
+                                <li><strong>Name:</strong> <code>varRebateAmount</code></li>
+                                <li><strong>Type:</strong> Float</li>
+                                <li><strong>Value:</strong> Click in field → Select <strong>"Rebate Amount"</strong> from Dynamic Content picker</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+
+                <div class="substep">
+                    <h4>Step 2.2: Initialize Partner Name</h4>
+                    <ol>
+                        <li>Click <strong>"New step"</strong></li>
+                        <li>Search for <strong>"Initialize variable"</strong></li>
+                        <li>Configure:
+                            <ul>
+                                <li><strong>Name:</strong> <code>varPartnerName</code></li>
+                                <li><strong>Type:</strong> String</li>
+                                <li><strong>Value:</strong> Click in field → Select <strong>"Partner Name"</strong> from Dynamic Content picker</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+
+                <div class="substep">
+                    <h4>Step 2.3: Initialize Analyst Email</h4>
+                    <ol>
+                        <li>Click <strong>"New step"</strong></li>
+                        <li>Search for <strong>"Initialize variable"</strong></li>
+                        <li>Configure:
+                            <ul>
+                                <li><strong>Name:</strong> <code>varAnalystEmail</code></li>
+                                <li><strong>Type:</strong> String</li>
+                                <li><strong>Value:</strong> Click in field → Select <strong>"Analyst Email"</strong> from Dynamic Content picker</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+
+                <div class="warning-box">
+                    <strong>⚠️ IMPORTANT:</strong> Use the Dynamic Content picker (lightning bolt icon), NOT manual typing!
+                </div>
+
+                <div class="substep">
+                    <h4>Step 2.4: Initialize Request ID</h4>
+                    <ol>
+                        <li>Click <strong>"New step"</strong></li>
+                        <li>Search for <strong>"Initialize variable"</strong></li>
+                        <li>Configure:
+                            <ul>
+                                <li><strong>Name:</strong> <code>varRequestID</code></li>
+                                <li><strong>Type:</strong> String</li>
+                                <li><strong>Value:</strong> Click in field → Select <strong>"Rebate Request ID"</strong> from Dynamic Content picker</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+
+                <div class="checkpoint">
+                    <strong>✅ Checkpoint:</strong> You should have 4 "Initialize variable" actions in sequence
+                </div>
+            </div>
+
+            <!-- Continue with remaining parts... -->
+            <div class="download-section">
+                <h3>📥 Download Complete Guide</h3>
+                <p>Want the full step-by-step guide with all 8 parts, troubleshooting, and examples?</p>
+                <a href="../../CHEAT_SHEET_Workshop_Session_2.md" class="btn btn-primary" download>Download Full Cheat Sheet (Markdown)</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="troubleshooting" class="section troubleshooting-section">
+        <div class="container">
+            <h2>Troubleshooting Guide</h2>
+            <div class="troubleshooting-grid">
+                <div class="trouble-item">
+                    <h4>❌ Variables show error "Unable to process template"</h4>
+                    <p><strong>Solution:</strong> Use Dynamic Content picker instead of typing field names manually</p>
+                </div>
+                <div class="trouble-item">
+                    <h4>❌ Link to item doesn't work</h4>
+                    <p><strong>Solution:</strong> Use <code>triggerBody()?['Link']</code> NOT <code>triggerBody()?['Link'].Value</code></p>
+                </div>
+                <div class="trouble-item">
+                    <h4>❌ SharePoint field names look weird</h4>
+                    <p><strong>Solution:</strong> Always use Dynamic Content picker - it handles encoding automatically (e.g., <code>Analyst_x0020_Email</code>)</p>
+                </div>
+                <div class="trouble-item">
+                    <h4>❌ Flow doesn't trigger</h4>
+                    <p><strong>Solution:</strong> Check that you created item in correct SharePoint list, verify flow is ON, check "Run history" for errors</p>
+                </div>
+                <div class="trouble-item">
+                    <h4>❌ Email not received</h4>
+                    <p><strong>Solution:</strong> Check "Run history", verify email address is correct, check Junk/Spam folder</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section key-concepts">
+        <div class="container">
+            <h2>Key Concepts Recap</h2>
+            <div class="concepts-grid">
+                <div class="concept-card">
+                    <h3>Trigger</h3>
+                    <p>Starts the flow automatically</p>
+                    <code>When item created in SharePoint</code>
+                </div>
+                <div class="concept-card">
+                    <h3>Variables</h3>
+                    <p>Store data for reuse</p>
+                    <code>varRebateAmount, varPartnerName</code>
+                </div>
+                <div class="concept-card">
+                    <h3>Condition</h3>
+                    <p>IF/THEN logic</p>
+                    <code>If amount > €5,000</code>
+                </div>
+                <div class="concept-card">
+                    <h3>Dynamic Content</h3>
+                    <p>Data from previous actions</p>
+                    <code>Rebate Amount, Partner Name</code>
+                </div>
+                <div class="concept-card">
+                    <h3>Expressions</h3>
+                    <p>Formulas and functions</p>
+                    <code>utcNow()</code>
+                </div>
+                <div class="concept-card">
+                    <h3>Approvals</h3>
+                    <p>Human decision point</p>
+                    <code>Approve/Reject rebate</code>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section cta-section">
+        <div class="container">
+            <h2>Ready to Build?</h2>
+            <p>Open Power Automate and follow along with this guide</p>
+            <div class="cta-buttons">
+                <a href="https://make.powerautomate.com" class="btn btn-large btn-primary" target="_blank">Open Power Automate</a>
+                <a href="../" class="btn btn-large btn-outline">Back to Home</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-left">
+                    <p><strong>Power Automate Academy</strong></p>
+                    <p>Center of Excellence - Finance Operations</p>
+                </div>
+                <div class="footer-right">
+                    <p>Questions? <a href="https://github.com/omarriestra/coe-academy-mpa/issues" target="_blank">Open an issue</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../assets/js/main.js"></script>
+    <script src="assets/cheatsheet.js"></script>
+</body>
+</html>
