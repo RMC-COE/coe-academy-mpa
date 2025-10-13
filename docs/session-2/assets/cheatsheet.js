@@ -45,3 +45,55 @@ checklistItems.forEach((checkbox, index) => {
         localStorage.setItem(`checklist-${index}`, checkbox.checked);
     });
 });
+
+// Table of Contents functionality
+const tocLinks = document.querySelectorAll('.toc-link');
+const sections = document.querySelectorAll('section[id], .step-part[id]');
+
+// Smooth scroll on TOC link click
+tocLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute('href').substring(1);
+        const targetSection = document.getElementById(targetId);
+
+        if (targetSection) {
+            const offsetTop = targetSection.offsetTop - 100;
+            window.scrollTo({
+                top: offsetTop,
+                behavior: 'smooth'
+            });
+        }
+    });
+});
+
+// Intersection Observer for active section highlighting
+const tocObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            // Remove active class from all links
+            tocLinks.forEach(link => link.classList.remove('active'));
+
+            // Add active class to corresponding link
+            const sectionId = entry.target.id;
+            const activeLink = document.querySelector(`.toc-link[data-section="${sectionId}"]`);
+            if (activeLink) {
+                activeLink.classList.add('active');
+
+                // Also activate parent link if this is a subsection
+                const parentLi = activeLink.closest('.toc-sublist')?.previousElementSibling;
+                if (parentLi && parentLi.classList.contains('toc-link')) {
+                    parentLi.classList.add('active');
+                }
+            }
+        }
+    });
+}, {
+    rootMargin: '-100px 0px -66%',
+    threshold: 0
+});
+
+// Observe all sections
+sections.forEach(section => {
+    tocObserver.observe(section);
+});

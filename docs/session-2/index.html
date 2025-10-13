@@ -23,6 +23,26 @@
         </div>
     </header>
 
+    <!-- Table of Contents -->
+    <nav class="toc-sidebar" id="tocSidebar">
+        <div class="toc-content">
+            <h3 class="toc-title">Contents</h3>
+            <ul class="toc-list">
+                <li><a href="#prerequisites" class="toc-link" data-section="prerequisites">Prerequisites</a></li>
+                <li><a href="#overview" class="toc-link" data-section="overview">Workflow Overview</a></li>
+                <li>
+                    <a href="#steps" class="toc-link" data-section="steps">Step-by-Step Instructions</a>
+                    <ul class="toc-sublist">
+                        <li><a href="#part-1" class="toc-link toc-sublink" data-section="part-1">Step 1: Create Flow</a></li>
+                        <li><a href="#part-2" class="toc-link toc-sublink" data-section="part-2">Step 2: Initialize Variables</a></li>
+                    </ul>
+                </li>
+                <li><a href="#troubleshooting" class="toc-link" data-section="troubleshooting">Troubleshooting</a></li>
+                <li><a href=".key-concepts" class="toc-link" data-section="key-concepts">Key Concepts Recap</a></li>
+            </ul>
+        </div>
+    </nav>
+
     <section class="hero-content session-hero">
         <div class="container">
             <div class="session-badge">Session 02</div>
@@ -42,17 +62,69 @@
     <section id="prerequisites" class="section">
         <div class="container">
             <h2>Prerequisites</h2>
-            <div class="checklist">
-                <a href="https://make.powerautomate.com" target="_blank" class="checklist-item checklist-link">
-                    <input type="checkbox" onclick="event.stopPropagation();">
-                    <span>Access to Power Automate</span>
-                    <img src="assets/icons/External Link.svg" width="16" height="16" class="link-icon">
-                </a>
-                <a href="https://amadeusworkplace.sharepoint.com/sites/CornerOfExcellence/Lists/COE_Academy_PA_Workshop/AllItems.aspx" target="_blank" class="checklist-item checklist-link">
-                    <input type="checkbox" onclick="event.stopPropagation();">
-                    <span>Access to SharePoint list: <code>COE_Academy_PA_Workshop</code></span>
-                    <img src="assets/icons/External Link.svg" width="16" height="16" class="link-icon">
-                </a>
+            <p class="prerequisites-intro">Before starting this hands-on session, make sure you have the following access and knowledge. This will ensure you can follow along smoothly and get the most out of the workshop.</p>
+
+            <div class="prerequisites-grid">
+                <div class="prerequisite-card">
+                    <div class="prerequisite-header">
+                        <img src="assets/icons/Approved.svg" width="24" height="24" class="prerequisite-icon">
+                        <h3>Required Access</h3>
+                    </div>
+                    <div class="prerequisite-content">
+                        <a href="https://make.powerautomate.com" target="_blank" class="checklist-item checklist-link">
+                            <input type="checkbox" onclick="event.stopPropagation();">
+                            <span>Access to Power Automate</span>
+                            <img src="assets/icons/External Link.svg" width="16" height="16" class="link-icon">
+                        </a>
+                        <a href="https://amadeusworkplace.sharepoint.com/sites/CornerOfExcellence/Lists/COE_Academy_PA_Workshop/AllItems.aspx" target="_blank" class="checklist-item checklist-link">
+                            <input type="checkbox" onclick="event.stopPropagation();">
+                            <span>SharePoint list: <code>COE_Academy_PA_Workshop</code></span>
+                            <img src="assets/icons/External Link.svg" width="16" height="16" class="link-icon">
+                        </a>
+                    </div>
+                </div>
+
+                <div class="prerequisite-card">
+                    <div class="prerequisite-header">
+                        <img src="assets/icons/Light Bulb.svg" width="24" height="24" class="prerequisite-icon">
+                        <h3>Basic Knowledge</h3>
+                    </div>
+                    <div class="prerequisite-content">
+                        <ul class="prerequisite-list">
+                            <li>Completed Session 1 or familiar with Power Automate basics</li>
+                            <li>Understanding of triggers and actions</li>
+                            <li>Basic knowledge of SharePoint lists</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="prerequisite-card">
+                    <div class="prerequisite-header">
+                        <img src="assets/icons/Settings.svg" width="24" height="24" class="prerequisite-icon">
+                        <h3>What You'll Need</h3>
+                    </div>
+                    <div class="prerequisite-content">
+                        <ul class="prerequisite-list">
+                            <li>Laptop with internet connection</li>
+                            <li>Browser: Microsoft Edge or Chrome (recommended)</li>
+                            <li>Notepad or note-taking app for reference</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="prerequisite-card">
+                    <div class="prerequisite-header">
+                        <img src="assets/icons/Clock.svg" width="24" height="24" class="prerequisite-icon">
+                        <h3>Time Commitment</h3>
+                    </div>
+                    <div class="prerequisite-content">
+                        <ul class="prerequisite-list">
+                            <li>Workshop duration: 60 minutes</li>
+                            <li>Hands-on building: ~40 minutes</li>
+                            <li>Q&A and troubleshooting: ~20 minutes</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </section>

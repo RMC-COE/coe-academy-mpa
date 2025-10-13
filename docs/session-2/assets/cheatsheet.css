@@ -1,3 +1,88 @@
+/* Table of Contents Sidebar */
+.toc-sidebar {
+    position: fixed;
+    left: 20px;
+    top: 120px;
+    width: 220px;
+    max-height: calc(100vh - 140px);
+    overflow-y: auto;
+    background: rgba(255, 255, 255, 0.03);
+    border-right: 2px solid rgba(138, 80, 255, 0.3);
+    border-radius: 8px;
+    padding: 1.5rem;
+    z-index: 100;
+}
+
+.toc-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.toc-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.9);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.toc-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.toc-list li {
+    margin-bottom: 0.5rem;
+}
+
+.toc-link {
+    display: block;
+    padding: 0.5rem 0.75rem;
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    font-size: 14px;
+    border-radius: 4px;
+    border-left: 2px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.toc-link:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.05);
+    border-left-color: rgba(138, 80, 255, 0.5);
+}
+
+.toc-link.active {
+    color: #8a50ff;
+    background: rgba(138, 80, 255, 0.15);
+    border-left: 2px solid #8a50ff;
+    font-weight: 600;
+}
+
+.toc-sublist {
+    list-style: none;
+    margin: 0.5rem 0 0 1rem;
+    padding: 0;
+}
+
+.toc-sublink {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.75rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.toc-sublink:hover {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.toc-sublink.active {
+    color: #8a50ff;
+}
+
 /* Session-specific styles */
 .session-hero {
     background: linear-gradient(135deg, #000835 0%, #1e1b4b 50%, #5b21b6 100%);
@@ -72,6 +157,83 @@
 .cta-section p {
     font-size: 16px !important;
     margin-bottom: 24px !important;
+}
+
+/* Prerequisites Section */
+.prerequisites-intro {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 32px;
+    font-size: 16px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.prerequisites-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-top: 32px;
+}
+
+.prerequisite-card {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.prerequisite-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.prerequisite-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.prerequisite-icon {
+    flex-shrink: 0;
+}
+
+.prerequisite-header h3 {
+    font-size: 18px;
+    margin: 0;
+    color: var(--primary-color);
+}
+
+.prerequisite-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.prerequisite-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.prerequisite-list li {
+    padding: 8px 0 8px 24px;
+    position: relative;
+    line-height: 1.5;
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+.prerequisite-list li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--primary-color);
+    font-weight: bold;
 }
 
 /* Checklist */
@@ -451,7 +613,20 @@
     display: inline-block;
 }
 
+/* Main content adjustment when TOC is visible */
+@media (min-width: 1024px) {
+    body {
+        margin-left: 260px;
+    }
+}
+
 /* Responsive */
+@media (max-width: 1023px) {
+    .toc-sidebar {
+        display: none;
+    }
+}
+
 @media (max-width: 768px) {
     .hero-logo img {
         max-width: 80px;
