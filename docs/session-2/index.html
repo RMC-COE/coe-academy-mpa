@@ -153,45 +153,73 @@
                     <div class="step-icon"><img src="assets/icons/Settings.svg" width="32" height="32"></div>
                     <div class="step-content">
                         <h3>Condition</h3>
-                        <p>Amount > €5,000?</p>
+                        <p>Requires approval?</p>
                     </div>
                 </div>
-                <div class="workflow-branches">
-                    <div class="branch branch-yes">
-                        <div class="branch-label">YES</div>
+                <div class="workflow-branches workflow-branches-triple">
+                    <div class="branch branch-approval">
+                        <div class="branch-label">REQUIRES APPROVAL</div>
                         <div class="workflow-arrow">↓</div>
                         <div class="workflow-step">
-                            <div class="step-icon"><img src="assets/icons/Warning.svg" width="32" height="32"></div>
+                            <div class="step-icon"><img src="assets/icons/Warning.svg" width="28" height="28"></div>
                             <div class="step-content">
-                                <h3>Approval Required</h3>
-                                <p>Send approval request</p>
+                                <h3>Start Approval</h3>
+                                <p>Wait for decision</p>
                             </div>
                         </div>
                         <div class="workflow-arrow">↓</div>
                         <div class="workflow-step">
-                            <div class="step-icon"><img src="assets/icons/Email.svg" width="32" height="32"></div>
+                            <div class="step-icon"><img src="assets/icons/Settings.svg" width="28" height="28"></div>
                             <div class="step-content">
-                                <h3>Update & Notify</h3>
-                                <p>SharePoint + Email</p>
+                                <h3>Check Response</h3>
+                                <p>Approved or Rejected?</p>
+                            </div>
+                        </div>
+                        <div class="workflow-subbranches">
+                            <div class="subbranch">
+                                <div class="subbranch-label">APPROVED</div>
+                                <div class="workflow-arrow">↓</div>
+                                <div class="workflow-ministep">
+                                    <img src="assets/icons/Approved.svg" width="20" height="20">
+                                    <span>Update: Approved</span>
+                                </div>
+                                <div class="workflow-arrow">↓</div>
+                                <div class="workflow-ministep">
+                                    <img src="assets/icons/Email.svg" width="20" height="20">
+                                    <span>Send Email</span>
+                                </div>
+                            </div>
+                            <div class="subbranch">
+                                <div class="subbranch-label">REJECTED</div>
+                                <div class="workflow-arrow">↓</div>
+                                <div class="workflow-ministep">
+                                    <img src="assets/icons/Error.svg" width="20" height="20">
+                                    <span>Update: Rejected</span>
+                                </div>
+                                <div class="workflow-arrow">↓</div>
+                                <div class="workflow-ministep">
+                                    <img src="assets/icons/Email.svg" width="20" height="20">
+                                    <span>Send Email</span>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="branch branch-no">
-                        <div class="branch-label">NO</div>
+                    <div class="branch branch-auto">
+                        <div class="branch-label">NO APPROVAL NEEDED</div>
                         <div class="workflow-arrow">↓</div>
                         <div class="workflow-step">
-                            <div class="step-icon"><img src="assets/icons/Approved.svg" width="32" height="32"></div>
+                            <div class="step-icon"><img src="assets/icons/Approved.svg" width="28" height="28"></div>
                             <div class="step-content">
-                                <h3>Auto-Approve</h3>
+                                <h3>Auto-Accept</h3>
                                 <p>Under threshold</p>
                             </div>
                         </div>
                         <div class="workflow-arrow">↓</div>
                         <div class="workflow-step">
-                            <div class="step-icon"><img src="assets/icons/Email.svg" width="32" height="32"></div>
+                            <div class="step-icon"><img src="assets/icons/Email.svg" width="28" height="28"></div>
                             <div class="step-content">
-                                <h3>Update & Notify</h3>
-                                <p>SharePoint + Email</p>
+                                <h3>Send Notification</h3>
+                                <p>Email confirmation</p>
                             </div>
                         </div>
                     </div>

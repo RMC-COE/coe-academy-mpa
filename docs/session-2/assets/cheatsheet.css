@@ -364,38 +364,91 @@
     margin-top: 12px;
 }
 
+.workflow-branches-triple {
+    grid-template-columns: 1.5fr 1fr;
+    gap: 20px;
+}
+
 .branch {
     padding: 14px;
     border: 2px solid var(--border-color);
     border-radius: 8px;
 }
 
-.branch-yes {
-    border-color: #107C10;
+.branch-approval {
+    border-color: #8a50ff;
 }
 
-.branch-no {
-    border-color: var(--primary-color);
+.branch-auto {
+    border-color: #107C10;
 }
 
 .branch-label {
     text-align: center;
     font-weight: bold;
-    font-size: 14px;
-    padding: 4px 12px;
+    font-size: 12px;
+    padding: 4px 10px;
     border-radius: 4px;
     display: inline-block;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
+    width: 100%;
 }
 
-.branch-yes .branch-label {
+.branch-approval .branch-label {
+    background: #8a50ff;
+    color: white;
+}
+
+.branch-auto .branch-label {
     background: #107C10;
     color: white;
 }
 
-.branch-no .branch-label {
-    background: var(--primary-color);
+.workflow-subbranches {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.subbranch {
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.02);
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+}
+
+.subbranch-label {
+    text-align: center;
+    font-weight: 600;
+    font-size: 10px;
+    padding: 3px 8px;
+    border-radius: 3px;
+    display: inline-block;
+    margin-bottom: 8px;
+    width: 100%;
+    background: var(--text-secondary);
     color: white;
+}
+
+.workflow-ministep {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 8px;
+    background: white;
+    border-radius: 4px;
+    font-size: 11px;
+    margin: 4px 0;
+}
+
+.workflow-ministep img {
+    flex-shrink: 0;
+}
+
+.workflow-ministep span {
+    color: var(--text-primary);
+    font-weight: 500;
 }
 
 /* Progress Tracker */
@@ -637,8 +690,14 @@
         gap: 16px;
     }
 
-    .workflow-branches {
+    .workflow-branches,
+    .workflow-branches-triple {
         grid-template-columns: 1fr;
+    }
+
+    .workflow-subbranches {
+        grid-template-columns: 1fr;
+        gap: 8px;
     }
 
     .part-header {
