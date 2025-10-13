@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+
+      .cls-2 {
+        fill: #000835;
+      }
+    </style>
+  </defs>
+  <g id="Pictograms">
+    <g>
+      <g>
+        <path class="cls-2" d="m16,8.25c-3.86,0-7,3.14-7,7,0,2.18,1.02,4.23,2.75,5.56v5.44h1.25v.03c0,1.36,1.11,2.47,2.47,2.47h1.05c1.36,0,2.47-1.11,2.47-2.47v-.03h1.25v-5.44c1.73-1.32,2.75-3.38,2.75-5.56,0-3.86-3.14-7-7-7Zm2,18.03c0,.81-.66,1.47-1.47,1.47h-1.05c-.81,0-1.47-.66-1.47-1.47v-.03h4v.03Zm-5.25-1.03v-1h6.5v1h-6.5Zm6.71-5.1l-.21.15v.96h-2.75v-4.5h-.5c-.83,0-1.5-.67-1.5-1.5s.67-1.5,1.5-1.5,1.5.67,1.5,1.5h1c0-1.38-1.12-2.5-2.5-2.5s-2.5,1.12-2.5,2.5c0,1.21.86,2.22,2,2.45v3.55h-1.5v1h5.25v1h-6.5v-2.96l-.21-.15c-1.59-1.13-2.54-2.96-2.54-4.9,0-3.31,2.69-6,6-6s6,2.69,6,6c0,1.94-.95,3.77-2.54,4.9Z"/>
+        <rect class="cls-2" x="4.5" y="14.25" width="3" height="1"/>
+        <rect class="cls-2" x="6.75" y="8.54" width="1" height="2.92" transform="translate(-5.06 11.07) rotate(-59.04)"/>
+        <rect class="cls-2" x="10.25" y="4.57" width="1" height="3.35" transform="translate(-1.66 5.47) rotate(-26.57)"/>
+        <rect class="cls-2" x="15.5" y="3.25" width="1" height="3"/>
+        <rect class="cls-2" x="19.29" y="5.5" width="2.92" height="1" transform="translate(4.94 20.72) rotate(-59.07)"/>
+        <rect class="cls-2" x="23.29" y="9.5" width="2.92" height="1" transform="translate(-1.62 14.16) rotate(-30.96)"/>
+        <rect class="cls-2" x="24.5" y="14.25" width="3" height="1"/>
+      </g>
+      <rect class="cls-1" width="32" height="32"/>
+    </g>
+  </g>
+</svg>

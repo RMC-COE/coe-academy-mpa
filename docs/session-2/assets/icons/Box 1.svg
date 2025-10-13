@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+
+      .cls-2 {
+        fill: #000835;
+      }
+    </style>
+  </defs>
+  <g id="Pictograms">
+    <g>
+      <g>
+        <path class="cls-2" d="m25.5,6.25H6.5v5h1.5v14.5h16v-14.5h1.5v-5Zm-2.5,18.5h-14v-13.5h14v13.5Zm1.5-14.5H7.5v-3h17v3Z"/>
+        <path class="cls-2" d="m21.75,15.75v-3.5h-11.5v3.5h11.5Zm-10.5-2.5h9.5v1.5h-9.5v-1.5Z"/>
+      </g>
+      <rect class="cls-1" width="32" height="32"/>
+    </g>
+  </g>
+</svg>

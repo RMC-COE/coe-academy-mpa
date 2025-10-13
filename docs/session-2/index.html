@@ -11,11 +11,7 @@
     <header class="hero">
         <div class="container">
             <div class="logo">
-                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="40" height="40" rx="8" fill="#0078D4"/>
-                    <path d="M12 20L18 26L28 14" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-                <span>CoE Academy</span>
+                <img src="../img/amadeus_blue_logo.png" alt="Amadeus" height="32">
             </div>
             <nav>
                 <a href="../">← Back to Home</a>
@@ -33,9 +29,9 @@
             <h1>Building Approval Workflows</h1>
             <p class="subtitle">RMC Rebate Approval System - Step by Step Guide</p>
             <div class="session-info">
-                <span>⏱ Duration: 60 minutes</span>
-                <span>📊 Level: Intermediate</span>
-                <span>🔧 Hands-On Workshop</span>
+                <span><img src="assets/icons/Clock.svg" width="16" height="16" style="vertical-align: middle; margin-right: 4px;"> Duration: 60 minutes</span>
+                <span><img src="assets/icons/Chart.svg" width="16" height="16" style="vertical-align: middle; margin-right: 4px;"> Level: Intermediate</span>
+                <span><img src="assets/icons/Settings.svg" width="16" height="16" style="vertical-align: middle; margin-right: 4px;"> Hands-On Workshop</span>
             </div>
         </div>
     </section>
@@ -66,7 +62,7 @@
             <p class="section-subtitle">This is what we'll build together</p>
             <div class="workflow-diagram">
                 <div class="workflow-step">
-                    <div class="step-icon trigger">▶️</div>
+                    <div class="step-icon trigger"><img src="assets/icons/Play Circle.svg" width="32" height="32"></div>
                     <div class="step-content">
                         <h3>Trigger</h3>
                         <p>New item in SharePoint</p>
@@ -74,7 +70,7 @@
                 </div>
                 <div class="workflow-arrow">↓</div>
                 <div class="workflow-step">
-                    <div class="step-icon">📦</div>
+                    <div class="step-icon"><img src="assets/icons/Box 1.svg" width="32" height="32"></div>
                     <div class="step-content">
                         <h3>Initialize Variables</h3>
                         <p>Amount, Partner, Email, ID</p>
@@ -82,7 +78,7 @@
                 </div>
                 <div class="workflow-arrow">↓</div>
                 <div class="workflow-step">
-                    <div class="step-icon">🔀</div>
+                    <div class="step-icon"><img src="assets/icons/Settings.svg" width="32" height="32"></div>
                     <div class="step-content">
                         <h3>Condition</h3>
                         <p>Amount > €5,000?</p>
@@ -93,7 +89,7 @@
                         <div class="branch-label">YES</div>
                         <div class="workflow-arrow">↓</div>
                         <div class="workflow-step">
-                            <div class="step-icon">✋</div>
+                            <div class="step-icon"><img src="assets/icons/Warning.svg" width="32" height="32"></div>
                             <div class="step-content">
                                 <h3>Approval Required</h3>
                                 <p>Send approval request</p>
@@ -101,7 +97,7 @@
                         </div>
                         <div class="workflow-arrow">↓</div>
                         <div class="workflow-step">
-                            <div class="step-icon">📧</div>
+                            <div class="step-icon"><img src="assets/icons/Email.svg" width="32" height="32"></div>
                             <div class="step-content">
                                 <h3>Update & Notify</h3>
                                 <p>SharePoint + Email</p>
@@ -112,7 +108,7 @@
                         <div class="branch-label">NO</div>
                         <div class="workflow-arrow">↓</div>
                         <div class="workflow-step">
-                            <div class="step-icon">✅</div>
+                            <div class="step-icon"><img src="assets/icons/Approved.svg" width="32" height="32"></div>
                             <div class="step-content">
                                 <h3>Auto-Approve</h3>
                                 <p>Under threshold</p>
@@ -120,7 +116,7 @@
                         </div>
                         <div class="workflow-arrow">↓</div>
                         <div class="workflow-step">
-                            <div class="step-icon">📧</div>
+                            <div class="step-icon"><img src="assets/icons/Email.svg" width="32" height="32"></div>
                             <div class="step-content">
                                 <h3>Update & Notify</h3>
                                 <p>SharePoint + Email</p>
@@ -152,7 +148,7 @@
                     <span class="part-number">01</span>
                     <div class="part-title">
                         <h3>Create New Flow</h3>
-                        <span class="part-duration">⏱ 5 minutes</span>
+                        <span class="part-duration"><img src="assets/icons/Clock.svg" width="14" height="14" style="vertical-align: middle; margin-right: 4px;"> 5 minutes</span>
                     </div>
                 </div>
 
@@ -185,7 +181,7 @@
                 </div>
 
                 <div class="checkpoint">
-                    <strong>✅ Checkpoint:</strong> Trigger shows "When an item is created" with correct SharePoint list
+                    <strong><img src="assets/icons/Approved.svg" width="18" height="18" style="vertical-align: middle; margin-right: 4px;"> Checkpoint:</strong> Trigger shows "When an item is created" with correct SharePoint list
                 </div>
             </div>
 
@@ -195,12 +191,12 @@
                     <span class="part-number">02</span>
                     <div class="part-title">
                         <h3>Initialize Variables</h3>
-                        <span class="part-duration">⏱ 10 minutes</span>
+                        <span class="part-duration"><img src="assets/icons/Clock.svg" width="14" height="14" style="vertical-align: middle; margin-right: 4px;"> 10 minutes</span>
                     </div>
                 </div>
 
                 <div class="info-box">
-                    <strong>💡 Why Variables?</strong>
+                    <strong><img src="assets/icons/Light Bulb.svg" width="18" height="18" style="vertical-align: middle; margin-right: 4px;"> Why Variables?</strong>
                     <p>Variables store data we'll use multiple times in the flow. This avoids repeating complex expressions.</p>
                 </div>
 
@@ -250,7 +246,7 @@
                 </div>
 
                 <div class="warning-box">
-                    <strong>⚠️ IMPORTANT:</strong> Use the Dynamic Content picker (lightning bolt icon), NOT manual typing!
+                    <strong><img src="assets/icons/Warning.svg" width="18" height="18" style="vertical-align: middle; margin-right: 4px;"> IMPORTANT:</strong> Use the Dynamic Content picker (lightning bolt icon), NOT manual typing!
                 </div>
 
                 <div class="substep">
@@ -269,13 +265,13 @@
                 </div>
 
                 <div class="checkpoint">
-                    <strong>✅ Checkpoint:</strong> You should have 4 "Initialize variable" actions in sequence
+                    <strong><img src="assets/icons/Approved.svg" width="18" height="18" style="vertical-align: middle; margin-right: 4px;"> Checkpoint:</strong> You should have 4 "Initialize variable" actions in sequence
                 </div>
             </div>
 
             <!-- Continue with remaining parts... -->
             <div class="download-section">
-                <h3>📥 Download Complete Guide</h3>
+                <h3><img src="assets/icons/Download.svg" width="24" height="24" style="vertical-align: middle; margin-right: 8px;"> Download Complete Guide</h3>
                 <p>Want the full step-by-step guide with all 8 parts, troubleshooting, and examples?</p>
                 <a href="../../CHEAT_SHEET_Workshop_Session_2.md" class="btn btn-primary" download>Download Full Cheat Sheet (Markdown)</a>
             </div>
@@ -287,23 +283,23 @@
             <h2>Troubleshooting Guide</h2>
             <div class="troubleshooting-grid">
                 <div class="trouble-item">
-                    <h4>❌ Variables show error "Unable to process template"</h4>
+                    <h4><img src="assets/icons/Error.svg" width="18" height="18" style="vertical-align: middle; margin-right: 4px;">Variables show error "Unable to process template"</h4>
                     <p><strong>Solution:</strong> Use Dynamic Content picker instead of typing field names manually</p>
                 </div>
                 <div class="trouble-item">
-                    <h4>❌ Link to item doesn't work</h4>
+                    <h4><img src="assets/icons/Error.svg" width="18" height="18" style="vertical-align: middle; margin-right: 4px;">Link to item doesn't work</h4>
                     <p><strong>Solution:</strong> Use <code>triggerBody()?['Link']</code> NOT <code>triggerBody()?['Link'].Value</code></p>
                 </div>
                 <div class="trouble-item">
-                    <h4>❌ SharePoint field names look weird</h4>
+                    <h4><img src="assets/icons/Error.svg" width="18" height="18" style="vertical-align: middle; margin-right: 4px;">SharePoint field names look weird</h4>
                     <p><strong>Solution:</strong> Always use Dynamic Content picker - it handles encoding automatically (e.g., <code>Analyst_x0020_Email</code>)</p>
                 </div>
                 <div class="trouble-item">
-                    <h4>❌ Flow doesn't trigger</h4>
+                    <h4><img src="assets/icons/Error.svg" width="18" height="18" style="vertical-align: middle; margin-right: 4px;">Flow doesn't trigger</h4>
                     <p><strong>Solution:</strong> Check that you created item in correct SharePoint list, verify flow is ON, check "Run history" for errors</p>
                 </div>
                 <div class="trouble-item">
-                    <h4>❌ Email not received</h4>
+                    <h4><img src="assets/icons/Error.svg" width="18" height="18" style="vertical-align: middle; margin-right: 4px;">Email not received</h4>
                     <p><strong>Solution:</strong> Check "Run history", verify email address is correct, check Junk/Spam folder</p>
                 </div>
             </div>
@@ -365,10 +361,15 @@
                 <div class="footer-left">
                     <p><strong>Power Automate Academy</strong></p>
                     <p>Center of Excellence - Finance Operations</p>
+                    <p>Amadeus IT Group</p>
                 </div>
                 <div class="footer-right">
-                    <p>Questions? <a href="https://github.com/omarriestra/coe-academy-mpa/issues" target="_blank">Open an issue</a></p>
+                    <p>Questions or feedback?</p>
+                    <a href="https://github.com/omarriestra/coe-academy-mpa/issues" target="_blank">Open an issue on GitHub</a>
                 </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 CoE Finance Operations. Licensed under MIT.</p>
             </div>
         </div>
     </footer>
