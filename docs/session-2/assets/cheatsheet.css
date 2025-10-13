@@ -1,32 +1,65 @@
 /* Session-specific styles */
 .session-hero {
     background: linear-gradient(135deg, #000835 0%, #1e1b4b 50%, #5b21b6 100%);
+    padding: 48px 0 !important;
 }
 
 .session-badge {
     background: rgba(255, 255, 255, 0.2);
     color: white;
-    padding: 6px 16px;
+    padding: 4px 12px;
     border-radius: 20px;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 600;
     display: inline-block;
-    margin-bottom: 16px;
+    margin-bottom: 12px;
 }
 
 .session-info {
     display: flex;
-    gap: 32px;
+    gap: 24px;
     justify-content: center;
-    margin-top: 24px;
+    margin-top: 16px;
     flex-wrap: wrap;
 }
 
 .session-info span {
     background: rgba(255, 255, 255, 0.15);
-    padding: 8px 16px;
+    padding: 6px 12px;
     border-radius: 20px;
-    font-size: 14px;
+    font-size: 13px;
+}
+
+/* Reduce section spacing for session-2 */
+#prerequisites.section,
+#overview.section,
+#steps.section,
+#troubleshooting.section,
+.key-concepts.section {
+    padding: 40px 0 !important;
+}
+
+.section h2 {
+    font-size: 28px !important;
+    margin-bottom: 20px !important;
+}
+
+.section-subtitle {
+    font-size: 16px !important;
+    margin-bottom: 24px !important;
+}
+
+.cta-section.section {
+    padding: 48px 0 !important;
+}
+
+.cta-section h2 {
+    font-size: 32px !important;
+}
+
+.cta-section p {
+    font-size: 16px !important;
+    margin-bottom: 24px !important;
 }
 
 /* Checklist */
