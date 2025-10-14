@@ -971,17 +971,17 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
+    align-items: stretch;
+    justify-content: flex-start;
+    padding: 0;
 }
 
 .carousel-slide img {
-    max-width: 100%;
-    max-height: 420px;
-    object-fit: contain;
-    border-radius: 4px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0;
+    box-shadow: none;
 }
 
 .screenshot-placeholder {
@@ -1045,7 +1045,7 @@
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
-    display: flex;
+    display: none;
     gap: 8px;
     z-index: 10;
 }
