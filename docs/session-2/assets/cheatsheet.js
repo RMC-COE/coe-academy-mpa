@@ -58,11 +58,27 @@ tocLinks.forEach(link => {
         const targetSection = document.getElementById(targetId);
 
         if (targetSection) {
-            const offsetTop = targetSection.offsetTop - 100;
-            window.scrollTo({
-                top: offsetTop,
-                behavior: 'smooth'
-            });
+            // Check if it's a step part (part-1, part-2, etc.)
+            const isStepPart = targetId.startsWith('part-');
+
+            if (isStepPart) {
+                // For step parts, align the top of the content with the top of the sidebar sticky position
+                // The sidebar sticks at 120px from top, so we scroll to align them
+                const targetTop = targetSection.getBoundingClientRect().top + window.pageYOffset;
+                const scrollTo = targetTop - 120; // 120px is the sticky top position
+
+                window.scrollTo({
+                    top: scrollTo,
+                    behavior: 'smooth'
+                });
+            } else {
+                // For other sections, use standard offset
+                const offsetTop = targetSection.offsetTop - 100;
+                window.scrollTo({
+                    top: offsetTop,
+                    behavior: 'smooth'
+                });
+            }
         }
     });
 });
@@ -71,19 +87,22 @@ tocLinks.forEach(link => {
 const tocObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            // Remove active class from all links
-            tocLinks.forEach(link => link.classList.remove('active'));
-
-            // Add active class to corresponding link
             const sectionId = entry.target.id;
             const activeLink = document.querySelector(`.toc-link[data-section="${sectionId}"]`);
+
             if (activeLink) {
+                // Remove active class from all links
+                tocLinks.forEach(link => link.classList.remove('active'));
+
+                // Add active class to corresponding link
                 activeLink.classList.add('active');
 
-                // Also activate parent link if this is a subsection
-                const parentLi = activeLink.closest('.toc-sublist')?.previousElementSibling;
-                if (parentLi && parentLi.classList.contains('toc-link')) {
-                    parentLi.classList.add('active');
+                // If this is a substep (part-X), also activate parent link
+                if (sectionId.startsWith('part-')) {
+                    const parentLink = document.querySelector(`.toc-link[data-section="steps"]`);
+                    if (parentLink) {
+                        parentLink.classList.add('active');
+                    }
                 }
             }
         }
@@ -208,6 +227,207 @@ document.addEventListener('keydown', (e) => {
 if (slides.length > 0) {
     showSlide(0);
 }
+
+// Screenshot mapping for each step
+const stepScreenshots = {
+    'part-1': [
+        { src: 'assets/screenshots/Screenshot_9-10-2025_123724_make.powerautomate.com.jpeg', caption: 'Create new automated cloud flow' },
+        { src: 'assets/screenshots/Screenshot_9-10-2025_12463_make.powerautomate.com.jpeg', caption: 'Configure SharePoint trigger and list' }
+    ],
+    'part-2': [
+        { src: 'assets/screenshots/Screenshot_9-10-2025_124648_make.powerautomate.com.jpeg', caption: 'Initialize variables for the flow' }
+    ],
+    'part-3': [
+        { src: 'assets/screenshots/Screenshot_9-10-2025_124919_make.powerautomate.com.jpeg', caption: 'Add condition to check rebate amount' }
+    ],
+    'part-4': [
+        { src: 'assets/screenshots/Screenshot_9-10-2025_125510_make.powerautomate.com.jpeg', caption: 'Configure approval action' }
+    ],
+    'part-5': [
+        { src: 'assets/screenshots/Screenshot_9-10-2025_12577_make.powerautomate.com.jpeg', caption: 'Check approval response outcome' }
+    ],
+    'part-6': [
+        { src: 'assets/screenshots/Screenshot_9-10-2025_125850_make.powerautomate.com.jpeg', caption: 'Update when approved' },
+        { src: 'assets/screenshots/Screenshot_9-10-2025_14046_make.powerautomate.com.jpeg', caption: 'Update when rejected' },
+        { src: 'assets/screenshots/Screenshot_9-10-2025_14434_make.powerautomate.com.jpeg', caption: 'Update when auto-accepted' }
+    ],
+    'part-7': [
+        { src: 'assets/screenshots/Screenshot_9-10-2025_1333_make.powerautomate.com.jpeg', caption: 'Email notification - Approved' },
+        { src: 'assets/screenshots/Screenshot_9-10-2025_1412_make.powerautomate.com.jpeg', caption: 'Email notification - Rejected' },
+        { src: 'assets/screenshots/Screenshot_9-10-2025_14446_make.powerautomate.com.jpeg', caption: 'Email notification - Auto-accepted' }
+    ],
+    'part-8': [
+        { src: 'assets/screenshots/Screenshot_9-10-2025_14518_make.powerautomate.com.jpeg', caption: 'Save and test the flow' },
+        { src: 'assets/screenshots/Screenshot_9-10-2025_14621_amadeusworkplace.sharepoint.com.jpeg', caption: 'Create test item in SharePoint' },
+        { src: 'assets/screenshots/Screenshot_9-10-2025_1484_make.powerautomate.com.jpeg', caption: 'Flow run with errors' },
+        { src: 'assets/screenshots/Screenshot_9-10-2025_14847_make.powerautomate.com.jpeg', caption: 'Debugging the errors' },
+        { src: 'assets/screenshots/Screenshot_9-10-2025_14916_make.powerautomate.com.jpeg', caption: 'Fixing configuration issues' },
+        { src: 'assets/screenshots/Screenshot_9-10-2025_141043_make.powerautomate.com.jpeg', caption: 'Complete flow overview' },
+        { src: 'assets/screenshots/Screenshot_9-10-2025_14143_make.powerautomate.com.jpeg', caption: 'Successful test run' },
+        { src: 'assets/screenshots/Screenshot_9-10-2025_141430_make.powerautomate.com.jpeg', caption: 'Approval email received' },
+        { src: 'assets/screenshots/Screenshot_9-10-2025_141445_make.powerautomate.com.jpeg', caption: 'Approval response details' },
+        { src: 'assets/screenshots/Screenshot_9-10-2025_141510_make.powerautomate.com.jpeg', caption: 'Flow continues after approval' },
+        { src: 'assets/screenshots/Screenshot_9-10-2025_141529_make.powerautomate.com.jpeg', caption: 'Update action executes' },
+        { src: 'assets/screenshots/Screenshot_9-10-2025_14161_make.powerautomate.com.jpeg', caption: 'Email sent successfully' },
+        { src: 'assets/screenshots/Screenshot_9-10-2025_141636_make.powerautomate.com.jpeg', caption: 'Complete successful run' }
+    ]
+};
+
+// Sidebar screenshot carousel functionality
+let currentSidebarSlide = 0;
+let currentStepId = null;
+
+function updateSidebarImages(stepId) {
+    const sidebar = document.getElementById('screenshotSidebar');
+    const track = document.getElementById('sidebarCarouselTrack');
+    const indicators = document.getElementById('sidebarIndicators');
+    const prevBtn = document.querySelector('.sidebar-carousel-btn.prev');
+    const nextBtn = document.querySelector('.sidebar-carousel-btn.next');
+
+    if (!sidebar || !track || !indicators) return;
+
+    currentStepId = stepId;
+    const screenshots = stepScreenshots[stepId];
+
+    if (!screenshots || screenshots.length === 0) {
+        sidebar.style.display = 'none';
+        return;
+    }
+
+    sidebar.style.display = 'block';
+    currentSidebarSlide = 0;
+
+    // Build carousel slides
+    track.innerHTML = screenshots.map((img, index) => `
+        <div class="sidebar-slide ${index === 0 ? 'active' : ''}">
+            <img src="${img.src}" alt="${img.caption}">
+            <div class="sidebar-caption">${img.caption}</div>
+        </div>
+    `).join('');
+
+    // Build indicators
+    if (screenshots.length > 1) {
+        indicators.innerHTML = screenshots.map((_, index) => `
+            <span class="sidebar-indicator ${index === 0 ? 'active' : ''}" onclick="goToSidebarSlide(${index})"></span>
+        `).join('');
+        indicators.style.display = 'flex';
+        prevBtn.style.display = 'flex';
+        nextBtn.style.display = 'flex';
+    } else {
+        indicators.style.display = 'none';
+        prevBtn.style.display = 'none';
+        nextBtn.style.display = 'none';
+    }
+
+    // Add click listeners to images
+    setTimeout(() => {
+        addImageClickListeners();
+    }, 100);
+}
+
+function showSidebarSlide(newIndex) {
+    if (!currentStepId) return;
+
+    const screenshots = stepScreenshots[currentStepId];
+    if (!screenshots) return;
+
+    const totalSlides = screenshots.length;
+
+    // Ensure index is within bounds
+    if (newIndex >= totalSlides) {
+        newIndex = 0;
+    } else if (newIndex < 0) {
+        newIndex = totalSlides - 1;
+    }
+
+    currentSidebarSlide = newIndex;
+
+    // Update slides
+    const slides = document.querySelectorAll('.sidebar-slide');
+    const indicators = document.querySelectorAll('.sidebar-indicator');
+
+    slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === currentSidebarSlide);
+    });
+
+    indicators.forEach((indicator, i) => {
+        indicator.classList.toggle('active', i === currentSidebarSlide);
+    });
+
+    // Move track
+    const track = document.getElementById('sidebarCarouselTrack');
+    if (track) {
+        track.style.transform = `translateX(-${currentSidebarSlide * 100}%)`;
+    }
+}
+
+window.moveSidebarCarousel = function(direction) {
+    const newIndex = currentSidebarSlide + direction;
+    showSidebarSlide(newIndex);
+};
+
+window.goToSidebarSlide = function(index) {
+    showSidebarSlide(index);
+};
+
+// Observer for step parts to update sidebar
+const sidebarObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const stepId = entry.target.id;
+            if (stepScreenshots[stepId]) {
+                updateSidebarImages(stepId);
+            }
+        }
+    });
+}, {
+    rootMargin: '-120px 0px -50%',
+    threshold: 0.1
+});
+
+// Observe all step parts
+document.querySelectorAll('.step-part').forEach(part => {
+    sidebarObserver.observe(part);
+});
+
+// Lightbox functionality
+function openLightbox(imageSrc, caption) {
+    const lightbox = document.getElementById('imageLightbox');
+    const lightboxImage = document.getElementById('lightboxImage');
+    const lightboxCaption = document.getElementById('lightboxCaption');
+
+    if (lightbox && lightboxImage && lightboxCaption) {
+        lightboxImage.src = imageSrc;
+        lightboxCaption.textContent = caption;
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+window.closeLightbox = function() {
+    const lightbox = document.getElementById('imageLightbox');
+    if (lightbox) {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+};
+
+// Add click listeners to sidebar images
+function addImageClickListeners() {
+    document.querySelectorAll('.sidebar-slide img').forEach(img => {
+        img.addEventListener('click', function() {
+            const caption = this.closest('.sidebar-slide').querySelector('.sidebar-caption').textContent;
+            openLightbox(this.src, caption);
+        });
+    });
+}
+
+// Close lightbox on Escape key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        closeLightbox();
+    }
+});
 
 // Confetti Animation
 class Confetti {

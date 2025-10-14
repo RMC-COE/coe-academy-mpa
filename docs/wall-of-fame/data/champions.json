@@ -1,0 +1,17 @@
+[
+  {
+    "id": "PA-COE-001",
+    "name": "Example Champion",
+    "flow_name": "AUTTP Billing Automation",
+    "description": "Automated the entire AUTTP billing process, eliminating manual data entry and reducing errors.",
+    "time_saved": "2h → 5min",
+    "frequency": "12x/month",
+    "annual_impact": "24h/year",
+    "badge_level": "gold",
+    "date_completed": "2025-10-14",
+    "credential_id": "PA-COE-20251014001",
+    "avatar_url": "assets/badges/example_badge.png",
+    "screenshot_url": "assets/submissions/example_screenshot.png",
+    "status": "approved"
+  }
+]

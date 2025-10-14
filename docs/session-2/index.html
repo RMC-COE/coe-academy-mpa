@@ -31,7 +31,7 @@
                 <li><a href="#prerequisites" class="toc-link" data-section="prerequisites">Prerequisites</a></li>
                 <li><a href="#overview" class="toc-link" data-section="overview">Workflow Overview</a></li>
                 <li>
-                    <a href="#steps" class="toc-link" data-section="steps">Step-by-Step Instructions</a>
+                    <a href="#steps" class="toc-link" data-section="steps">Build Instructions</a>
                     <ul class="toc-sublist">
                         <li><a href="#part-1" class="toc-link toc-sublink" data-section="part-1">Step 1: Create Flow</a></li>
                         <li><a href="#part-2" class="toc-link toc-sublink" data-section="part-2">Step 2: Initialize Variables</a></li>
@@ -236,8 +236,38 @@
 
     <section id="steps" class="section steps-section">
         <div class="container">
-            <h2>Step-by-Step Instructions</h2>
+            <h2>Build Instructions</h2>
             <p class="section-subtitle">Follow these 8 steps to build your complete approval workflow</p>
+
+            <div class="steps-layout">
+                <!-- Screenshot Sidebar -->
+                <aside id="screenshotSidebar" class="screenshot-sidebar">
+                    <div class="sidebar-header">
+                        <h3>Visual Reference</h3>
+                        <p>Screenshots for this step</p>
+                    </div>
+                    <div class="sidebar-carousel">
+                        <div class="sidebar-carousel-track" id="sidebarCarouselTrack">
+                            <!-- Slides will be injected by JavaScript -->
+                        </div>
+                        <button class="sidebar-carousel-btn prev" onclick="moveSidebarCarousel(-1)" type="button">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M15 18l-6-6 6-6"/>
+                            </svg>
+                        </button>
+                        <button class="sidebar-carousel-btn next" onclick="moveSidebarCarousel(1)" type="button">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 18l6-6-6-6"/>
+                            </svg>
+                        </button>
+                        <div class="sidebar-indicators" id="sidebarIndicators">
+                            <!-- Indicators will be injected by JavaScript -->
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Main Steps Content -->
+                <div class="steps-content">
 
             <!-- Part 1 -->
             <div class="step-part" id="part-1">
@@ -654,14 +684,14 @@ No approval required.</pre>
                 <div class="part-header">
                     <span class="part-number">08</span>
                     <div class="part-title">
-                        <h3>Test the Flow</h3>
-                        <span class="part-duration"><img src="assets/icons/Clock.svg" width="14" height="14" style="vertical-align: middle; margin-right: 4px;"> 10 minutes</span>
+                        <h3>Test and Fix the Flow</h3>
+                        <span class="part-duration"><img src="assets/icons/Clock.svg" width="14" height="14" style="vertical-align: middle; margin-right: 4px;"> 15 minutes</span>
                     </div>
                 </div>
 
                 <div class="info-box">
                     <strong><img src="assets/icons/Light Bulb.svg" width="18" height="18" style="vertical-align: middle; margin-right: 4px;"> Testing is Critical:</strong>
-                    <p>Always test your flow before deploying to production. We'll test all 3 scenarios.</p>
+                    <p>Always test your flow before deploying to production. We'll encounter and fix common errors, then test all 3 scenarios.</p>
                 </div>
 
                 <div class="substep">
@@ -723,7 +753,14 @@ No approval required.</pre>
                 </div>
             </div>
 
-            <!-- Celebration Element -->
+                </div><!-- End steps-content -->
+            </div><!-- End steps-layout -->
+        </div>
+    </section>
+
+    <!-- Outstanding Work Celebration Section -->
+    <section class="section celebration-section">
+        <div class="container">
             <div class="celebration-container" id="celebrationContainer">
                 <canvas id="confettiCanvas"></canvas>
                 <div class="celebration-card">
@@ -735,118 +772,20 @@ No approval required.</pre>
                             </svg>
                         </div>
                     </div>
-                    <h2>Outstanding Work!</h2>
+                    <h2>Congratulations! You Did It!</h2>
                     <p>You've successfully built a complete approval workflow with Power Automate. Your flow handles conditional logic, approvals, and email notifications—ready for production!</p>
                 </div>
             </div>
-
         </div>
     </section>
 
-
-    <div class="mockup-overlay" id="mockupOverlay"></div>
-
-    <section class="section visual-guide-section">
-        <div class="container">
-            <h2>Visual Step-by-Step Guide</h2>
-            <p class="section-subtitle">Follow along with screenshots from the actual build process - click to expand</p>
-
-            <div class="browser-mockup" id="browserMockup">
-                <div class="browser-header">
-                    <div class="browser-dots">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
-                    <div class="browser-address">
-                        <img src="assets/icons/External Link.svg" width="12" height="12">
-                        <span>make.powerautomate.com</span>
-                    </div>
-                    <div class="browser-menu">
-                        <img src="assets/icons/Settings.svg" width="14" height="14">
-                    </div>
-                </div>
-                <div class="browser-content">
-                    <div class="screenshot-carousel">
-                        <div class="carousel-track" id="carouselTrack">
-                            <!-- Screenshots will be added here -->
-                            <div class="carousel-slide active">
-                                <img src="assets/screenshots/Screenshot_9-10-2025_123724_make.powerautomate.com.jpeg" alt="Figure 1: Create Flow">
-                                <div class="slide-caption">Figure 1: Create New Flow - Automated Cloud Flow</div>
-                            </div>
-                            <div class="carousel-slide">
-                                <img src="assets/screenshots/Screenshot_9-10-2025_12463_make.powerautomate.com.jpeg" alt="Figure 2: Configure Trigger">
-                                <div class="slide-caption">Figure 2: Configure SharePoint Trigger</div>
-                            </div>
-                            <div class="carousel-slide">
-                                <img src="assets/screenshots/Screenshot_9-10-2025_124648_make.powerautomate.com.jpeg" alt="Figure 3: Initialize Variables">
-                                <div class="slide-caption">Figure 3: Initialize Variables</div>
-                            </div>
-                            <div class="carousel-slide">
-                                <img src="assets/screenshots/Screenshot_9-10-2025_12480_make.powerautomate.com.jpeg" alt="Figure 4: Add Condition">
-                                <div class="slide-caption">Figure 4: Add Approval Condition</div>
-                            </div>
-                            <div class="carousel-slide">
-                                <img src="assets/screenshots/Screenshot_9-10-2025_125510_make.powerautomate.com.jpeg" alt="Figure 5: Start Approval">
-                                <div class="slide-caption">Figure 5: Configure Approval Action</div>
-                            </div>
-                            <div class="carousel-slide">
-                                <img src="assets/screenshots/Screenshot_9-10-2025_12577_make.powerautomate.com.jpeg" alt="Figure 6: Check Response">
-                                <div class="slide-caption">Figure 6: Check Approval Response</div>
-                            </div>
-                            <div class="carousel-slide">
-                                <img src="assets/screenshots/Screenshot_9-10-2025_1333_make.powerautomate.com.jpeg" alt="Figure 7: Update SharePoint">
-                                <div class="slide-caption">Figure 7: Update SharePoint Status</div>
-                            </div>
-                            <div class="carousel-slide">
-                                <img src="assets/screenshots/Screenshot_9-10-2025_14046_make.powerautomate.com.jpeg" alt="Figure 8: Send Emails">
-                                <div class="slide-caption">Figure 8: Configure Email Notifications</div>
-                            </div>
-                            <div class="carousel-slide">
-                                <img src="assets/screenshots/Screenshot_9-10-2025_141043_make.powerautomate.com.jpeg" alt="Figure 9: Complete Flow">
-                                <div class="slide-caption">Figure 9: Complete Flow Overview</div>
-                            </div>
-                            <div class="carousel-slide">
-                                <img src="assets/screenshots/Screenshot_9-10-2025_141739_amadeusworkplace.sharepoint.com.jpeg" alt="Figure 10: SharePoint List">
-                                <div class="slide-caption">Figure 10: SharePoint List View</div>
-                            </div>
-                        </div>
-                        <button class="carousel-btn prev" onclick="moveCarousel(-1)">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M15 18l-6-6 6-6"/>
-                            </svg>
-                        </button>
-                        <button class="carousel-btn next" onclick="moveCarousel(1)">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M9 18l6-6-6-6"/>
-                            </svg>
-                        </button>
-                        <div class="carousel-indicators" id="carouselIndicators">
-                            <span class="indicator active" onclick="goToSlide(0)"></span>
-                            <span class="indicator" onclick="goToSlide(1)"></span>
-                            <span class="indicator" onclick="goToSlide(2)"></span>
-                            <span class="indicator" onclick="goToSlide(3)"></span>
-                            <span class="indicator" onclick="goToSlide(4)"></span>
-                            <span class="indicator" onclick="goToSlide(5)"></span>
-                            <span class="indicator" onclick="goToSlide(6)"></span>
-                            <span class="indicator" onclick="goToSlide(7)"></span>
-                            <span class="indicator" onclick="goToSlide(8)"></span>
-                            <span class="indicator" onclick="goToSlide(9)"></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <section class="section download-resources-section">
         <div class="container">
             <h2>Download Complete Solution</h2>
-            <p class="section-subtitle">Skip the building process and import the ready-made flow</p>
 
             <div class="download-card">
                 <div class="download-content">
-                    <h3>RMC Rebate Approval System - Complete Flow</h3>
                     <p>This package includes the fully configured approval workflow with all actions, conditions, and email templates. Perfect for importing into your environment or using as a reference.</p>
 
                     <div class="download-actions">
@@ -870,7 +809,7 @@ No approval required.</pre>
     <!-- Troubleshooting Section -->
     <section id="troubleshooting" class="section troubleshooting-modern">
         <div class="container">
-            <h2>Need Help?</h2>
+            <h2>Troubleshooting</h2>
             <p class="section-subtitle">Quick solutions to common issues you might encounter</p>
 
             <div class="troubleshooting-grid">
@@ -1004,17 +943,6 @@ No approval required.</pre>
         </div>
     </section>
 
-    <section class="section cta-section">
-        <div class="container">
-            <h2>Ready to Build?</h2>
-            <p>Open Power Automate and follow along with this guide</p>
-            <div class="cta-buttons">
-                <a href="https://make.powerautomate.com" class="btn btn-large btn-primary" target="_blank">Open Power Automate</a>
-                <a href="../" class="btn btn-large btn-outline">Back to Home</a>
-            </div>
-        </div>
-    </section>
-
     <footer>
         <div class="container">
             <div class="footer-main">
@@ -1071,6 +999,21 @@ No approval required.</pre>
             </div>
         </div>
     </footer>
+
+    <!-- Image Lightbox Modal -->
+    <div class="image-lightbox" id="imageLightbox">
+        <div class="lightbox-overlay" onclick="closeLightbox()"></div>
+        <div class="lightbox-content">
+            <button class="lightbox-close" onclick="closeLightbox()" type="button">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            <img id="lightboxImage" src="" alt="">
+            <div class="lightbox-caption" id="lightboxCaption"></div>
+        </div>
+    </div>
 
     <script src="../assets/js/main.js?v=5"></script>
     <script src="assets/cheatsheet.js?v=5"></script>
