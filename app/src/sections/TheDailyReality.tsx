@@ -10,7 +10,7 @@ import { SourceModal } from '@/components/common/SourceModal';
 import { researchSources } from '@/data/researchSources';
 
 export const TheDailyReality = ({ resetSignal, isPaused }: SectionProps) => {
-  const { stepMode, stepSignal, setIsLastStep, goToNextSection } = usePresentation();
+  const { stepMode, stepSignal, setIsLastStep, goToNext } = usePresentation();
   const [hoveredMetric, setHoveredMetric] = useState<number | null>(null);
   const [openModal, setOpenModal] = useState<'manualBilling' | 'financeRequests' | 'manualTasks' | null>(null);
 
@@ -205,7 +205,7 @@ export const TheDailyReality = ({ resetSignal, isPaused }: SectionProps) => {
               <strong>"Information is not structured or standardized. Manual processes lead to inefficiencies and errors."</strong>
             </p>
             <button
-              onClick={goToNextSection}
+              onClick={goToNext}
               className="inline-flex items-center gap-2 bg-white/20 hover:bg-white/30 backdrop-blur-sm px-5 py-2.5 rounded-full transition-all duration-300 cursor-pointer"
               type="button"
             >
