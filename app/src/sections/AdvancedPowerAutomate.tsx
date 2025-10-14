@@ -40,6 +40,8 @@ export const AdvancedPowerAutomate = ({ resetSignal }: SectionProps) => {
   const { stepMode, stepSignal, setIsLastStep } = usePresentation();
   const [activeTab, setActiveTab] = useState(0);
   const [currentCopilotScreenshot, setCurrentCopilotScreenshot] = useState(0);
+  const [copilotImageLoading, setCopilotImageLoading] = useState(true);
+  const [qrCodeError, setQrCodeError] = useState(false);
 
   // Auto-generate copilot screenshots based on available images
   const generateCopilotScreenshots = () => {
@@ -96,6 +98,11 @@ export const AdvancedPowerAutomate = ({ resetSignal }: SectionProps) => {
       setCurrentCopilotScreenshot(0);
     }
   }, [stepController.currentStep, currentCopilotScreenshot, copilotScreenshots.length]);
+
+  // Reset copilot image loading state when screenshot changes
+  useEffect(() => {
+    setCopilotImageLoading(true);
+  }, [currentCopilotScreenshot]);
 
   const currentStep = stepController.currentStep;
 
@@ -407,11 +414,24 @@ export const AdvancedPowerAutomate = ({ resetSignal }: SectionProps) => {
                       transition={{ duration: 0.5 }}
                       className="relative"
                     >
+                      {/* Loading skeleton */}
+                      {copilotImageLoading && (
+                        <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 min-h-[60vh]">
+                          <div className="text-center p-8">
+                            <div className="w-20 h-20 bg-gradient-to-br from-blue-400 to-purple-400 rounded-2xl mx-auto mb-6 flex items-center justify-center shadow-lg animate-pulse">
+                              <RefreshCw size={32} className="text-white animate-spin" />
+                            </div>
+                            <p className="text-gray-600 text-sm">Loading Copilot demo...</p>
+                          </div>
+                        </div>
+                      )}
                       <img
                         src={copilotScreenshots[currentCopilotScreenshot].url}
                         alt={copilotScreenshots[currentCopilotScreenshot].title}
-                        className="w-full h-auto max-h-[70vh] object-contain"
+                        className={`w-full h-auto max-h-[70vh] object-contain transition-opacity duration-300 ${copilotImageLoading ? 'opacity-0' : 'opacity-100'}`}
+                        onLoad={() => setCopilotImageLoading(false)}
                         onError={(e) => {
+                          setCopilotImageLoading(false);
                           // Fallback to placeholder if image fails to load
                           const target = e.target as HTMLImageElement;
                           target.style.display = 'none';
@@ -782,8 +802,101 @@ export const AdvancedPowerAutomate = ({ resetSignal }: SectionProps) => {
           </motion.div>
         )}
 
-        {/* Step 5: Next Steps */}
+        {/* Step 5: Thank You */}
         {stepController.currentStep === 5 && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="flex flex-col items-center justify-center h-full px-8"
+          >
+            {/* COE branding */}
+            <div className="absolute left-6 top-6 z-10">
+              <img
+                src={logos.coeWhite}
+                alt="Center of Excellence"
+                className="h-16 w-auto"
+              />
+            </div>
+
+            <div className="text-center max-w-3xl w-full space-y-12">
+              {/* Title */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+              >
+                <h2 className="font-amadeus text-6xl font-bold text-white mb-4">
+                  Thank You!
+                </h2>
+                <p className="font-amadeus text-xl text-white/70">
+                  Questions? Ask now or reach out anytime on Teams
+                </p>
+              </motion.div>
+
+              {/* Feedback Section */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2, duration: 0.5 }}
+                className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10"
+              >
+                <h3 className="font-amadeus text-2xl font-bold text-white mb-4">
+                  Help Us Improve
+                </h3>
+                <p className="font-amadeus text-white/80 text-lg mb-6">
+                  After Session 2, please send your feedback
+                </p>
+
+                <div className="flex items-center justify-center gap-12">
+                  {/* QR Code */}
+                  <div className="flex flex-col items-center gap-3">
+                    <div className="bg-white p-4 rounded-lg shadow-lg">
+                      {!qrCodeError ? (
+                        <img
+                          src="/images/qr-feedback.png"
+                          alt="Feedback QR Code"
+                          className="w-40 h-40 object-contain"
+                          onError={() => {
+                            console.error('QR image failed to load');
+                            setQrCodeError(true);
+                          }}
+                        />
+                      ) : (
+                        <div className="w-40 h-40 flex flex-col items-center justify-center bg-gray-100 rounded-lg">
+                          <FileText className="text-gray-400 mb-2" size={32} />
+                          <p className="text-gray-600 text-xs text-center px-2">QR Code unavailable</p>
+                          <p className="text-gray-500 text-xs mt-1">Use link below</p>
+                        </div>
+                      )}
+                    </div>
+                    <p className="font-amadeus text-white/60 text-sm">Scan from mobile</p>
+                  </div>
+
+                  {/* Feedback Link */}
+                  <div className="flex flex-col items-center gap-4">
+                    <a
+                      href="https://forms.office.com/e/thDZJCdetg"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-amadeus font-bold px-6 py-3 rounded-lg transition-all transform hover:scale-105 shadow-lg"
+                    >
+                      <FileText size={20} />
+                      <span>Feedback Form</span>
+                      <ArrowRight size={18} />
+                    </a>
+                    <p className="font-amadeus text-white/50 text-xs max-w-xs">
+                      forms.office.com/e/thDZJCdetg
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+          </motion.div>
+        )}
+
+        {/* Step 6: Next Steps */}
+        {stepController.currentStep === 6 && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -861,91 +974,6 @@ export const AdvancedPowerAutomate = ({ resetSignal }: SectionProps) => {
                 <p className="font-amadeus text-white/70 text-sm mt-4">
                   Launching poll in Teams...
                 </p>
-              </motion.div>
-            </div>
-          </motion.div>
-        )}
-
-        {/* Step 6: Thank You */}
-        {stepController.currentStep === 6 && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="flex flex-col items-center justify-center h-full px-8"
-          >
-            {/* COE branding */}
-            <div className="absolute left-6 top-6 z-10">
-              <img
-                src={logos.coeWhite}
-                alt="Center of Excellence"
-                className="h-16 w-auto"
-              />
-            </div>
-
-            <div className="text-center max-w-3xl w-full space-y-12">
-              {/* Title */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-              >
-                <h2 className="font-amadeus text-6xl font-bold text-white mb-4">
-                  Thank You!
-                </h2>
-                <p className="font-amadeus text-xl text-white/70">
-                  Questions? Ask now or reach out anytime on Teams
-                </p>
-              </motion.div>
-
-              {/* Feedback Section */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2, duration: 0.5 }}
-                className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10"
-              >
-                <h3 className="font-amadeus text-2xl font-bold text-white mb-4">
-                  Help Us Improve
-                </h3>
-                <p className="font-amadeus text-white/80 text-lg mb-6">
-                  After Session 2, please send your feedback
-                </p>
-
-                <div className="flex items-center justify-center gap-12">
-                  {/* QR Code */}
-                  <div className="flex flex-col items-center gap-3">
-                    <div className="bg-white p-4 rounded-lg">
-                      <img
-                        src="/images/qr-feedback.png?v=1"
-                        alt="Feedback QR Code"
-                        className="w-40 h-40 object-contain"
-                        onError={(e) => {
-                          console.error('QR image failed to load');
-                          (e.target as HTMLImageElement).style.border = '2px solid red';
-                        }}
-                      />
-                    </div>
-                    <p className="font-amadeus text-white/60 text-sm">Scan from mobile</p>
-                  </div>
-
-                  {/* Feedback Link */}
-                  <div className="flex flex-col items-center gap-4">
-                    <a
-                      href="https://forms.office.com/e/thDZJCdetg"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-amadeus font-bold px-6 py-3 rounded-lg transition-all transform hover:scale-105 shadow-lg"
-                    >
-                      <FileText size={20} />
-                      <span>Feedback Form</span>
-                      <ArrowRight size={18} />
-                    </a>
-                    <p className="font-amadeus text-white/50 text-xs max-w-xs">
-                      forms.office.com/e/thDZJCdetg
-                    </p>
-                  </div>
-                </div>
               </motion.div>
             </div>
           </motion.div>

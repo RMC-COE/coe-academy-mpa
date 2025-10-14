@@ -94,10 +94,10 @@ export const Agenda = ({ resetSignal }: SectionProps) => {
               direction="up"
             >
               <div className="flex items-start gap-6 group">
-                {/* Number */}
+                {/* Number - Adjusted to match real slide numbers (starting at 3) */}
                 <div className="flex-shrink-0 w-10 h-10 flex items-center justify-center">
                   <span className="font-amadeus text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-br from-purple-400 to-pink-400">
-                    {index + 1}
+                    {index + 3}
                   </span>
                 </div>
 

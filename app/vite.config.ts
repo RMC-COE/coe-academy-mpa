@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
 
 export default defineConfig(({ mode }) => ({
-  base: mode === 'production' ? '/coe-academy-mpa/session-1/' : '/session-1/',
+  base: mode === 'production' ? '/coe-academy-mpa/session-1/' : '/',
   build: {
     outDir: '../docs/session-1',
     emptyOutDir: true

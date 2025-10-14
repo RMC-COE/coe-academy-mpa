@@ -78,7 +78,7 @@ export const sections: SectionConfig[] = [
   },
   {
     id: 'flowbuilder',
-    title: 'Building Your First Flow',
+    title: 'Anatomy of an Automated Solution',
     subtitle: 'Step by step - From idea to automation',
     durationMinutes: 15,
     presenterNotes: [

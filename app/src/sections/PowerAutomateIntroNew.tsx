@@ -780,13 +780,9 @@ export const PowerAutomateIntroNew = ({ resetSignal }: SectionProps) => {
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-blue-600/30 to-purple-600/30 blur-2xl"></div>
                 <div className="relative bg-white/5 backdrop-blur-md rounded-3xl p-12 border border-white/10 text-center h-full flex flex-col">
-                  <motion.div
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                    className="inline-block mb-6"
-                  >
+                  <div className="inline-block mb-6">
                     <Sparkles size={48} className="text-blue-400" />
-                  </motion.div>
+                  </div>
                   <div className="font-amadeus text-6xl font-bold text-white mb-4">500+</div>
                   <div className="font-amadeus text-xl text-white/70 mb-3">Connectors</div>
                   <div className="font-amadeus text-sm text-white/60 leading-relaxed flex-1">

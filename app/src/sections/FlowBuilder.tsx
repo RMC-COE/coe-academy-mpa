@@ -35,6 +35,7 @@ export const FlowBuilder = ({ resetSignal }: SectionProps) => {
   const { stepMode, stepSignal, setIsLastStep } = usePresentation();
   const [blueprintSubStep, setBlueprintSubStep] = useState<number>(0);
   const [currentScreenshot, setCurrentScreenshot] = useState(0);
+  const [imageLoading, setImageLoading] = useState(true);
 
   // Blueprint workflow components
   const blueprintComponents = [
@@ -172,6 +173,11 @@ export const FlowBuilder = ({ resetSignal }: SectionProps) => {
       setCurrentScreenshot(0);
     }
   }, [stepController.currentStep, currentScreenshot, screenshots.length]);
+
+  // Reset image loading state when screenshot changes
+  useEffect(() => {
+    setImageLoading(true);
+  }, [currentScreenshot]);
 
   const currentStep = stepController.currentStep;
 
@@ -534,11 +540,24 @@ export const FlowBuilder = ({ resetSignal }: SectionProps) => {
                       transition={{ duration: 0.5 }}
                       className="relative"
                     >
+                      {/* Loading skeleton */}
+                      {imageLoading && (
+                        <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 min-h-[60vh]">
+                          <div className="text-center p-8">
+                            <div className="w-20 h-20 bg-gradient-to-br from-blue-400 to-purple-400 rounded-2xl mx-auto mb-6 flex items-center justify-center shadow-lg animate-pulse">
+                              <RefreshCw size={32} className="text-white animate-spin" />
+                            </div>
+                            <p className="text-gray-600 text-sm">Loading screenshot...</p>
+                          </div>
+                        </div>
+                      )}
                       <img
                         src={screenshots[currentScreenshot].url}
                         alt={screenshots[currentScreenshot].title}
-                        className="w-full h-auto max-h-[70vh] object-contain"
+                        className={`w-full h-auto max-h-[70vh] object-contain transition-opacity duration-300 ${imageLoading ? 'opacity-0' : 'opacity-100'}`}
+                        onLoad={() => setImageLoading(false)}
                         onError={(e) => {
+                          setImageLoading(false);
                           // Fallback to placeholder if image fails to load
                           const target = e.target as HTMLImageElement;
                           target.style.display = 'none';
