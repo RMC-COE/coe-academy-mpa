@@ -3,9 +3,9 @@ import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
 
 export default defineConfig(({ mode }) => ({
-  base: mode === 'production' ? '/coe-academy-mpa/session-1/' : '/session-1/',
+  base: mode === 'production' ? '/coe-academy-mpa/session-2/' : '/session-2/',
   build: {
-    outDir: '../docs/session-1',
+    outDir: '../docs/session-2',
     emptyOutDir: true
   },
   plugins: [
@@ -14,9 +14,9 @@ export default defineConfig(({ mode }) => ({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.svg', 'robots.txt'],
       manifest: {
-        name: 'FinOps Power Automate Workshop',
-        short_name: 'FinOps PA',
-        description: 'Interactive workshop experience for Amadeus Finance Operations.',
+        name: 'FinOps Power Automate Workshop - Session 2',
+        short_name: 'FinOps PA S2',
+        description: 'Interactive workshop experience for Amadeus Finance Operations - Session 2.',
         theme_color: '#0B3D91',
         background_color: '#ffffff',
         display: 'standalone',
@@ -32,7 +32,7 @@ export default defineConfig(({ mode }) => ({
     })
   ],
   server: {
-    port: 3000
+    port: 3001
   },
   resolve: {
     alias: {

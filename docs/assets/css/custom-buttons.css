@@ -1,0 +1,15 @@
+/* Custom Session Button Styles - Blue background for View Presentation and Start Workshop buttons */
+.session-actions .btn {
+    background: var(--primary-color);
+    color: white;
+    font-weight: 600;
+    padding: 14px 32px;
+    font-size: 16px;
+    box-shadow: 0 4px 12px rgba(0, 8, 53, 0.3);
+}
+
+.session-actions .btn:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 8, 53, 0.4);
+}

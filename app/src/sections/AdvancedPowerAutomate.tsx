@@ -28,8 +28,13 @@ import {
   Wrench,
   ChevronUp,
   ChevronDown,
-  Globe
+  Globe,
+  Calendar,
+  MessageCircle,
+  FileText,
+  TrendingUp
 } from 'lucide-react';
+import { logos } from '@/utils/assets';
 
 export const AdvancedPowerAutomate = ({ resetSignal }: SectionProps) => {
   const { stepMode, stepSignal, setIsLastStep } = usePresentation();
@@ -58,17 +63,17 @@ export const AdvancedPowerAutomate = ({ resetSignal }: SectionProps) => {
       id: `copilot${index + 1}`,
       title: stepTitles[index],
       description: stepDescriptions[index],
-      url: `/assets/screenshots/flow-steps-2/${index + 1}.png`
+      url: `${import.meta.env.BASE_URL}assets/screenshots/flow-steps-2/${index + 1}.png`
     }));
   };
 
   const copilotScreenshots = generateCopilotScreenshots();
 
   const stepController = useStepController({
-    totalSteps: 5,
+    totalSteps: 7,
     resetSignal,
     stepSignal,
-    autoAdvance: !stepMode,
+    autoAdvance: false,
     stepDuration: 12000,
     onLastStepChange: setIsLastStep
   });
@@ -112,7 +117,7 @@ export const AdvancedPowerAutomate = ({ resetSignal }: SectionProps) => {
       {/* Step Progress Indicator */}
       <div className="absolute top-6 left-1/2 transform -translate-x-1/2 z-20">
         <div className="flex items-center gap-2">
-          {[...Array(5)].map((_, index) => (
+          {[...Array(7)].map((_, index) => (
             <motion.div
               key={index}
               animate={{
@@ -138,7 +143,7 @@ export const AdvancedPowerAutomate = ({ resetSignal }: SectionProps) => {
             {/* COE branding */}
             <div className="absolute left-6 top-6 z-10">
               <img
-                src="/images/coe_white_logo.png"
+                src={logos.coeWhite}
                 alt="Center of Excellence"
                 className="h-16 w-auto"
               />
@@ -151,7 +156,7 @@ export const AdvancedPowerAutomate = ({ resetSignal }: SectionProps) => {
                 transition={{ duration: 0.6 }}
               >
                 <h2 className="font-amadeus text-5xl font-bold text-white mb-8">
-                  🚀 Advanced Power Automate
+                  Advanced Power Automate
                 </h2>
                 <h3 className="font-amadeus text-3xl text-purple-400 mb-20">
                   Copilot, Best Practices & Enterprise Readiness
@@ -210,7 +215,7 @@ export const AdvancedPowerAutomate = ({ resetSignal }: SectionProps) => {
             {/* COE branding */}
             <div className="absolute left-6 top-6 z-10">
               <img
-                src="/images/coe_white_logo.png"
+                src={logos.coeWhite}
                 alt="Center of Excellence"
                 className="h-16 w-auto"
               />
@@ -224,7 +229,7 @@ export const AdvancedPowerAutomate = ({ resetSignal }: SectionProps) => {
                 className="mb-12"
               >
                 <h2 className="font-amadeus text-4xl font-bold text-white mb-4">
-                  🤖 Flow Creation with Copilot
+                  Flow Creation with Copilot
                 </h2>
                 <p className="font-amadeus text-xl text-purple-400">
                   From natural language to production-ready automation
@@ -358,7 +363,7 @@ export const AdvancedPowerAutomate = ({ resetSignal }: SectionProps) => {
             {/* COE branding */}
             <div className="absolute left-6 top-6 z-10">
               <img
-                src="/images/coe_white_logo.png"
+                src={logos.coeWhite}
                 alt="Center of Excellence"
                 className="h-16 w-auto"
               />
@@ -496,7 +501,7 @@ export const AdvancedPowerAutomate = ({ resetSignal }: SectionProps) => {
             {/* COE branding */}
             <div className="absolute left-6 top-6 z-10">
               <img
-                src="/images/coe_white_logo.png"
+                src={logos.coeWhite}
                 alt="Center of Excellence"
                 className="h-16 w-auto"
               />
@@ -510,10 +515,10 @@ export const AdvancedPowerAutomate = ({ resetSignal }: SectionProps) => {
                 className="mb-10"
               >
                 <h2 className="font-amadeus text-4xl font-bold text-white mb-4">
-                  🛡️ Production Best Practices
+                  Production Best Practices
                 </h2>
                 <p className="font-amadeus text-xl text-purple-400">
-                  Enterprise-grade patterns for reliable automation
+                  Practical guidelines for building reliable flows
                 </p>
               </motion.div>
 
@@ -617,7 +622,7 @@ export const AdvancedPowerAutomate = ({ resetSignal }: SectionProps) => {
             {/* COE branding */}
             <div className="absolute left-6 top-6 z-10">
               <img
-                src="/images/coe_white_logo.png"
+                src={logos.coeWhite}
                 alt="Center of Excellence"
                 className="h-16 w-auto"
               />
@@ -631,7 +636,7 @@ export const AdvancedPowerAutomate = ({ resetSignal }: SectionProps) => {
                 className="mb-10"
               >
                 <h2 className="font-amadeus text-4xl font-bold text-white mb-4">
-                  🔧 Troubleshooting & Desktop Automation
+                  Troubleshooting & Desktop Automation
                 </h2>
                 <p className="font-amadeus text-xl text-purple-400">
                   Debug flows and extend automation to desktop applications
@@ -773,30 +778,172 @@ export const AdvancedPowerAutomate = ({ resetSignal }: SectionProps) => {
                   </div>
                 </motion.div>
               </div>
+            </div>
+          </motion.div>
+        )}
 
-              {/* Quick Tips */}
+        {/* Step 5: Next Steps */}
+        {stepController.currentStep === 5 && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="flex flex-col items-center justify-center h-full px-8"
+          >
+            {/* COE branding */}
+            <div className="absolute left-6 top-6 z-10">
+              <img
+                src={logos.coeWhite}
+                alt="Center of Excellence"
+                className="h-16 w-auto"
+              />
+            </div>
+
+            <div className="text-center max-w-4xl w-full">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.6, duration: 0.6 }}
-                className="mt-8 bg-gradient-to-r from-cyan-600/20 via-blue-600/20 to-purple-600/20 backdrop-blur-sm rounded-2xl p-6 border border-white/20"
+                transition={{ duration: 0.6 }}
+                className="mb-12"
               >
-                <h4 className="font-amadeus text-lg font-bold text-white mb-4 text-center flex items-center justify-center gap-2">
-                  <Book className="text-cyan-400" size={20} />
-                  Quick Reference
-                </h4>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <div className="text-center">
-                    <div className="text-cyan-400 font-bold mb-1">Debug</div>
-                    <div className="font-amadeus text-white/80 text-sm">Check run history first</div>
+                <h2 className="font-amadeus text-5xl font-bold text-white mb-6">
+                  Next Steps
+                </h2>
+                <p className="font-amadeus text-xl text-purple-400">
+                  Continue your automation journey
+                </p>
+              </motion.div>
+
+              {/* Course Link */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2, duration: 0.6 }}
+                className="bg-gradient-to-r from-blue-600/20 via-purple-600/20 to-pink-600/20 backdrop-blur-sm rounded-2xl p-8 border border-blue-500/30 mb-8"
+              >
+                <div className="flex items-center justify-center gap-3 mb-4">
+                  <ArrowRight className="text-blue-400" size={32} />
+                  <h3 className="font-amadeus text-3xl font-bold text-white">Proceed to Session 2</h3>
+                </div>
+                <p className="font-amadeus text-white/90 text-lg mb-6">
+                  Access the complete course materials and hands-on exercises
+                </p>
+                <a
+                  href="https://rmc-coe.github.io/coe-academy-mpa/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-amadeus font-bold px-8 py-4 rounded-lg transition-all transform hover:scale-105 shadow-lg hover:shadow-xl"
+                >
+                  <Globe size={24} />
+                  <span className="text-lg">Visit Course Page</span>
+                  <ArrowRight size={20} />
+                </a>
+                <p className="font-amadeus text-white/60 text-sm mt-4">
+                  rmc-coe.github.io/coe-academy-mpa
+                </p>
+              </motion.div>
+
+              {/* Challenge (Optional) */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4, duration: 0.6 }}
+                className="bg-gradient-to-r from-yellow-600/20 via-orange-600/20 to-red-600/20 backdrop-blur-sm rounded-2xl p-6 border border-yellow-500/30"
+              >
+                <div className="flex items-center justify-center gap-3 mb-4">
+                  <Lightbulb className="text-yellow-400" size={28} />
+                  <h3 className="font-amadeus text-2xl font-bold text-white">Quick Poll</h3>
+                </div>
+                <p className="font-amadeus text-white/90 text-lg leading-relaxed max-w-3xl mx-auto">
+                  Did you think of <span className="font-bold text-yellow-300">ONE manual process</span> during this presentation that could save you{' '}
+                  <span className="font-bold text-yellow-300">&gt;30 minutes/month</span>?
+                </p>
+                <p className="font-amadeus text-white/70 text-sm mt-4">
+                  Launching poll in Teams...
+                </p>
+              </motion.div>
+            </div>
+          </motion.div>
+        )}
+
+        {/* Step 6: Thank You */}
+        {stepController.currentStep === 6 && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="flex flex-col items-center justify-center h-full px-8"
+          >
+            {/* COE branding */}
+            <div className="absolute left-6 top-6 z-10">
+              <img
+                src={logos.coeWhite}
+                alt="Center of Excellence"
+                className="h-16 w-auto"
+              />
+            </div>
+
+            <div className="text-center max-w-3xl w-full space-y-12">
+              {/* Title */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+              >
+                <h2 className="font-amadeus text-6xl font-bold text-white mb-4">
+                  Thank You!
+                </h2>
+                <p className="font-amadeus text-xl text-white/70">
+                  Questions? Ask now or reach out anytime on Teams
+                </p>
+              </motion.div>
+
+              {/* Feedback Section */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2, duration: 0.5 }}
+                className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10"
+              >
+                <h3 className="font-amadeus text-2xl font-bold text-white mb-4">
+                  Help Us Improve
+                </h3>
+                <p className="font-amadeus text-white/80 text-lg mb-6">
+                  After Session 2, please send your feedback
+                </p>
+
+                <div className="flex items-center justify-center gap-12">
+                  {/* QR Code */}
+                  <div className="flex flex-col items-center gap-3">
+                    <div className="bg-white p-4 rounded-lg">
+                      <img
+                        src="/images/qr-feedback.png?v=1"
+                        alt="Feedback QR Code"
+                        className="w-40 h-40 object-contain"
+                        onError={(e) => {
+                          console.error('QR image failed to load');
+                          (e.target as HTMLImageElement).style.border = '2px solid red';
+                        }}
+                      />
+                    </div>
+                    <p className="font-amadeus text-white/60 text-sm">Scan from mobile</p>
                   </div>
-                  <div className="text-center">
-                    <div className="text-blue-400 font-bold mb-1">Test</div>
-                    <div className="font-amadeus text-white/80 text-sm">Always test with sample data</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-purple-400 font-bold mb-1">Desktop</div>
-                    <div className="font-amadeus text-white/80 text-sm">Bridge cloud and legacy systems</div>
+
+                  {/* Feedback Link */}
+                  <div className="flex flex-col items-center gap-4">
+                    <a
+                      href="https://forms.office.com/e/thDZJCdetg"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-amadeus font-bold px-6 py-3 rounded-lg transition-all transform hover:scale-105 shadow-lg"
+                    >
+                      <FileText size={20} />
+                      <span>Feedback Form</span>
+                      <ArrowRight size={18} />
+                    </a>
+                    <p className="font-amadeus text-white/50 text-xs max-w-xs">
+                      forms.office.com/e/thDZJCdetg
+                    </p>
                   </div>
                 </div>
               </motion.div>

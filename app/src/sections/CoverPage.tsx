@@ -4,6 +4,7 @@ import { usePresentation } from '@/context/PresentationContext';
 import { useStepController } from '@/hooks/useStepController';
 import { Play, Camera, Users } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { logos } from '@/utils/assets';
 
 export const CoverPage = ({ resetSignal }: SectionProps) => {
   const { stepMode, stepSignal, setIsLastStep } = usePresentation();
@@ -12,7 +13,7 @@ export const CoverPage = ({ resetSignal }: SectionProps) => {
     totalSteps: 4,
     resetSignal,
     stepSignal,
-    autoAdvance: !stepMode,
+    autoAdvance: false,
     stepDuration: 3000,
     onLastStepChange: setIsLastStep
   });
@@ -54,9 +55,9 @@ export const CoverPage = ({ resetSignal }: SectionProps) => {
       {/* Step 1: Branding and Confidential - Fixed positions */}
       <StepReveal step={0} isVisible={stepController.isStepVisible(0)} direction="fade">
         <div className="absolute left-6 top-6 z-10">
-          <img 
-            src="/images/coe_white_logo.png" 
-            alt="Center of Excellence" 
+          <img
+            src={logos.coeWhite}
+            alt="Center of Excellence"
             className="h-16 w-auto"
           />
         </div>

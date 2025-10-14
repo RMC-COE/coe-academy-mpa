@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Session 2: Building Approval Workflows | Power Automate Academy</title>
-    <link rel="stylesheet" href="../assets/css/styles.css">
-    <link rel="stylesheet" href="assets/cheatsheet.css">
+    <link rel="stylesheet" href="../assets/css/styles.css?v=5">
+    <link rel="stylesheet" href="assets/cheatsheet.css?v=5">
 </head>
 <body>
     <header class="hero">
@@ -35,6 +35,12 @@
                     <ul class="toc-sublist">
                         <li><a href="#part-1" class="toc-link toc-sublink" data-section="part-1">Step 1: Create Flow</a></li>
                         <li><a href="#part-2" class="toc-link toc-sublink" data-section="part-2">Step 2: Initialize Variables</a></li>
+                        <li><a href="#part-3" class="toc-link toc-sublink" data-section="part-3">Step 3: Add Condition</a></li>
+                        <li><a href="#part-4" class="toc-link toc-sublink" data-section="part-4">Step 4: Start Approval</a></li>
+                        <li><a href="#part-5" class="toc-link toc-sublink" data-section="part-5">Step 5: Check Response</a></li>
+                        <li><a href="#part-6" class="toc-link toc-sublink" data-section="part-6">Step 6: Update SharePoint</a></li>
+                        <li><a href="#part-7" class="toc-link toc-sublink" data-section="part-7">Step 7: Send Emails</a></li>
+                        <li><a href="#part-8" class="toc-link toc-sublink" data-section="part-8">Step 8: Test Flow</a></li>
                     </ul>
                 </li>
                 <li><a href="#troubleshooting" class="toc-link" data-section="troubleshooting">Troubleshooting</a></li>
@@ -231,16 +237,7 @@
     <section id="steps" class="section steps-section">
         <div class="container">
             <h2>Step-by-Step Instructions</h2>
-            <div class="progress-tracker">
-                <div class="progress-step" data-step="1">Part 1</div>
-                <div class="progress-step" data-step="2">Part 2</div>
-                <div class="progress-step" data-step="3">Part 3</div>
-                <div class="progress-step" data-step="4">Part 4</div>
-                <div class="progress-step" data-step="5">Part 5</div>
-                <div class="progress-step" data-step="6">Part 6</div>
-                <div class="progress-step" data-step="7">Part 7</div>
-                <div class="progress-step" data-step="8">Part 8</div>
-            </div>
+            <p class="section-subtitle">Follow these 8 steps to build your complete approval workflow</p>
 
             <!-- Part 1 -->
             <div class="step-part" id="part-1">
@@ -369,76 +366,663 @@
                 </div>
             </div>
 
-            <!-- Continue with remaining parts... -->
-            <div class="download-section">
-                <h3><img src="assets/icons/Download.svg" width="24" height="24" style="vertical-align: middle; margin-right: 8px;"> Download Complete Guide</h3>
-                <p>Want the full step-by-step guide with all 8 parts, troubleshooting, and examples?</p>
-                <a href="../../CHEAT_SHEET_Workshop_Session_2.md" class="btn btn-primary" download>Download Full Cheat Sheet (Markdown)</a>
+            <!-- Part 3 -->
+            <div class="step-part" id="part-3">
+                <div class="part-header">
+                    <span class="part-number">03</span>
+                    <div class="part-title">
+                        <h3>Add Condition (Approval Logic)</h3>
+                        <span class="part-duration"><img src="assets/icons/Clock.svg" width="14" height="14" style="vertical-align: middle; margin-right: 4px;"> 5 minutes</span>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <strong><img src="assets/icons/Light Bulb.svg" width="18" height="18" style="vertical-align: middle; margin-right: 4px;"> What's a Condition?</strong>
+                    <p>Conditions create IF/THEN logic - if rebate amount is greater than €5,000, we need approval. Otherwise, auto-accept.</p>
+                </div>
+
+                <div class="substep">
+                    <h4>Step 3.1: Add Condition Action</h4>
+                    <ol>
+                        <li>Click <strong>"New step"</strong></li>
+                        <li>Search for <strong>"Condition"</strong></li>
+                        <li>Click on the <strong>"Condition"</strong> action (Control connector)</li>
+                    </ol>
+                </div>
+
+                <div class="substep">
+                    <h4>Step 3.2: Configure Condition</h4>
+                    <ol>
+                        <li>Click in the first field (left side)</li>
+                        <li>From Dynamic Content, select <strong>varRebateAmount</strong></li>
+                        <li>Middle dropdown: select <strong>"is greater than"</strong></li>
+                        <li>Right field: type <code>5000</code></li>
+                    </ol>
+                    <p style="margin-top: 12px;"><strong>Result:</strong> <code>varRebateAmount is greater than 5000</code></p>
+                </div>
+
+                <div class="checkpoint">
+                    <strong><img src="assets/icons/Approved.svg" width="18" height="18" style="vertical-align: middle; margin-right: 4px;"> Checkpoint:</strong> Condition shows two branches: "If yes" and "If no"
+                </div>
+            </div>
+
+            <!-- Part 4 -->
+            <div class="step-part" id="part-4">
+                <div class="part-header">
+                    <span class="part-number">04</span>
+                    <div class="part-title">
+                        <h3>Start Approval Process</h3>
+                        <span class="part-duration"><img src="assets/icons/Clock.svg" width="14" height="14" style="vertical-align: middle; margin-right: 4px;"> 8 minutes</span>
+                    </div>
+                </div>
+
+                <div class="warning-box">
+                    <strong><img src="assets/icons/Warning.svg" width="18" height="18" style="vertical-align: middle; margin-right: 4px;"> IMPORTANT:</strong> This action goes INSIDE the "If yes" branch (when approval is required)
+                </div>
+
+                <div class="substep">
+                    <h4>Step 4.1: Add Approval Action</h4>
+                    <ol>
+                        <li>Inside the <strong>"If yes"</strong> branch, click <strong>"Add an action"</strong></li>
+                        <li>Search for <strong>"Start and wait for an approval"</strong></li>
+                        <li>Select <strong>"Start and wait for an approval"</strong> action (Approvals connector)</li>
+                    </ol>
+                </div>
+
+                <div class="substep">
+                    <h4>Step 4.2: Configure Approval</h4>
+                    <ol>
+                        <li><strong>Approval type:</strong> Select <strong>"Approve/Reject - First to respond"</strong></li>
+                        <li><strong>Title:</strong> Type <code>Rebate Approval Required</code></li>
+                        <li><strong>Assigned to:</strong> Click field → Select <strong>varAnalystEmail</strong> from Dynamic Content</li>
+                        <li><strong>Details:</strong> Copy and paste this text:
+                            <pre style="background: #f5f5f5; padding: 12px; border-radius: 4px; margin-top: 8px; font-size: 13px;">Partner: @{variables('varPartnerName')}
+Amount: €@{variables('varRebateAmount')}
+Request ID: @{variables('varRequestID')}
+
+Please review and approve or reject this rebate request.</pre>
+                        </li>
+                    </ol>
+                </div>
+
+                <div class="info-box">
+                    <strong><img src="assets/icons/Light Bulb.svg" width="18" height="18" style="vertical-align: middle; margin-right: 4px;"> Pro Tip:</strong>
+                    <p>The approval will pause the flow until someone clicks "Approve" or "Reject" in the email they receive.</p>
+                </div>
+
+                <div class="checkpoint">
+                    <strong><img src="assets/icons/Approved.svg" width="18" height="18" style="vertical-align: middle; margin-right: 4px;"> Checkpoint:</strong> Approval action configured with dynamic content for Partner, Amount, and Request ID
+                </div>
+            </div>
+
+            <!-- Part 5 -->
+            <div class="step-part" id="part-5">
+                <div class="part-header">
+                    <span class="part-number">05</span>
+                    <div class="part-title">
+                        <h3>Check Approval Response</h3>
+                        <span class="part-duration"><img src="assets/icons/Clock.svg" width="14" height="14" style="vertical-align: middle; margin-right: 4px;"> 5 minutes</span>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <strong><img src="assets/icons/Light Bulb.svg" width="18" height="18" style="vertical-align: middle; margin-right: 4px;"> Nested Conditions:</strong>
+                    <p>We need another condition INSIDE the "If yes" branch to check if the approval was Approved or Rejected.</p>
+                </div>
+
+                <div class="substep">
+                    <h4>Step 5.1: Add Second Condition</h4>
+                    <ol>
+                        <li>Below the approval action (still inside "If yes"), click <strong>"Add an action"</strong></li>
+                        <li>Search for <strong>"Condition"</strong></li>
+                        <li>Click on the <strong>"Condition"</strong> action</li>
+                    </ol>
+                </div>
+
+                <div class="substep">
+                    <h4>Step 5.2: Configure Response Check</h4>
+                    <ol>
+                        <li>Click in the first field (left side)</li>
+                        <li>From Dynamic Content, select <strong>"Outcome"</strong> (from the approval action)</li>
+                        <li>Middle dropdown: select <strong>"is equal to"</strong></li>
+                        <li>Right field: type <code>Approve</code> (case-sensitive!)</li>
+                    </ol>
+                    <p style="margin-top: 12px;"><strong>Result:</strong> <code>Outcome is equal to Approve</code></p>
+                </div>
+
+                <div class="warning-box">
+                    <strong><img src="assets/icons/Warning.svg" width="18" height="18" style="vertical-align: middle; margin-right: 4px;"> CASE SENSITIVE:</strong> Make sure you type "Approve" with capital A, NOT "approve"
+                </div>
+
+                <div class="checkpoint">
+                    <strong><img src="assets/icons/Approved.svg" width="18" height="18" style="vertical-align: middle; margin-right: 4px;"> Checkpoint:</strong> You now have 2 conditions - one for amount threshold, one nested for approval outcome
+                </div>
+            </div>
+
+            <!-- Part 6 -->
+            <div class="step-part" id="part-6">
+                <div class="part-header">
+                    <span class="part-number">06</span>
+                    <div class="part-title">
+                        <h3>Update SharePoint Item</h3>
+                        <span class="part-duration"><img src="assets/icons/Clock.svg" width="14" height="14" style="vertical-align: middle; margin-right: 4px;"> 10 minutes</span>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <strong><img src="assets/icons/Light Bulb.svg" width="18" height="18" style="vertical-align: middle; margin-right: 4px;"> Three Scenarios:</strong>
+                    <p>We need to update the SharePoint item with the correct status in 3 different branches.</p>
+                </div>
+
+                <div class="substep">
+                    <h4>Step 6.1: Update When Approved</h4>
+                    <p><strong>Location:</strong> Inside nested condition → "If yes" branch (Outcome = Approve)</p>
+                    <ol>
+                        <li>Click <strong>"Add an action"</strong></li>
+                        <li>Search for <strong>"Update item"</strong> (SharePoint)</li>
+                        <li>Configure:
+                            <ul>
+                                <li><strong>Site Address:</strong> Select your SharePoint site</li>
+                                <li><strong>List Name:</strong> <code>COE_Academy_PA_Workshop</code></li>
+                                <li><strong>Id:</strong> Select <strong>"ID"</strong> from Dynamic Content (from trigger)</li>
+                                <li><strong>Status:</strong> Type <code>Approved</code></li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+
+                <div class="substep">
+                    <h4>Step 6.2: Update When Rejected</h4>
+                    <p><strong>Location:</strong> Inside nested condition → "If no" branch (Outcome ≠ Approve)</p>
+                    <ol>
+                        <li>Click <strong>"Add an action"</strong></li>
+                        <li>Search for <strong>"Update item"</strong> (SharePoint)</li>
+                        <li>Configure same as above, but:
+                            <ul>
+                                <li><strong>Status:</strong> Type <code>Rejected</code></li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+
+                <div class="substep">
+                    <h4>Step 6.3: Update When Auto-Accepted</h4>
+                    <p><strong>Location:</strong> Inside first condition → "If no" branch (Amount ≤ 5000)</p>
+                    <ol>
+                        <li>Click <strong>"Add an action"</strong></li>
+                        <li>Search for <strong>"Update item"</strong> (SharePoint)</li>
+                        <li>Configure same as above, but:
+                            <ul>
+                                <li><strong>Status:</strong> Type <code>Auto-Accepted</code></li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+
+                <div class="checkpoint">
+                    <strong><img src="assets/icons/Approved.svg" width="18" height="18" style="vertical-align: middle; margin-right: 4px;"> Checkpoint:</strong> You should have 3 "Update item" actions in different branches with different statuses
+                </div>
+            </div>
+
+            <!-- Part 7 -->
+            <div class="step-part" id="part-7">
+                <div class="part-header">
+                    <span class="part-number">07</span>
+                    <div class="part-title">
+                        <h3>Send Email Notifications</h3>
+                        <span class="part-duration"><img src="assets/icons/Clock.svg" width="14" height="14" style="vertical-align: middle; margin-right: 4px;"> 12 minutes</span>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <strong><img src="assets/icons/Light Bulb.svg" width="18" height="18" style="vertical-align: middle; margin-right: 4px;"> Email for Each Branch:</strong>
+                    <p>We'll send a confirmation email in each branch with different content based on the outcome.</p>
+                </div>
+
+                <div class="substep">
+                    <h4>Step 7.1: Email When Approved</h4>
+                    <p><strong>Location:</strong> After "Update item" in Approved branch</p>
+                    <ol>
+                        <li>Click <strong>"Add an action"</strong></li>
+                        <li>Search for <strong>"Send an email (V2)"</strong> (Office 365 Outlook)</li>
+                        <li>Configure:
+                            <ul>
+                                <li><strong>To:</strong> Select <strong>varAnalystEmail</strong></li>
+                                <li><strong>Subject:</strong> <code>✅ Rebate Approved - @{variables('varPartnerName')}</code></li>
+                                <li><strong>Body:</strong>
+                                    <pre style="background: #f5f5f5; padding: 12px; border-radius: 4px; margin-top: 8px; font-size: 13px;">The rebate request has been APPROVED.
+
+Partner: @{variables('varPartnerName')}
+Amount: €@{variables('varRebateAmount')}
+Request ID: @{variables('varRequestID')}
+Status: Approved
+
+Thank you!</pre>
+                                </li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+
+                <div class="substep">
+                    <h4>Step 7.2: Email When Rejected</h4>
+                    <p><strong>Location:</strong> After "Update item" in Rejected branch</p>
+                    <ol>
+                        <li>Click <strong>"Add an action"</strong></li>
+                        <li>Search for <strong>"Send an email (V2)"</strong></li>
+                        <li>Configure same as above, but change:
+                            <ul>
+                                <li><strong>Subject:</strong> <code>❌ Rebate Rejected - @{variables('varPartnerName')}</code></li>
+                                <li><strong>Body:</strong> Change "APPROVED" to "REJECTED" and "Status: Approved" to "Status: Rejected"</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+
+                <div class="substep">
+                    <h4>Step 7.3: Email When Auto-Accepted</h4>
+                    <p><strong>Location:</strong> After "Update item" in Auto-Accept branch</p>
+                    <ol>
+                        <li>Click <strong>"Add an action"</strong></li>
+                        <li>Search for <strong>"Send an email (V2)"</strong></li>
+                        <li>Configure:
+                            <ul>
+                                <li><strong>To:</strong> Select <strong>varAnalystEmail</strong></li>
+                                <li><strong>Subject:</strong> <code>✅ Rebate Auto-Accepted - @{variables('varPartnerName')}</code></li>
+                                <li><strong>Body:</strong>
+                                    <pre style="background: #f5f5f5; padding: 12px; border-radius: 4px; margin-top: 8px; font-size: 13px;">The rebate request has been AUTO-ACCEPTED (under €5,000 threshold).
+
+Partner: @{variables('varPartnerName')}
+Amount: €@{variables('varRebateAmount')}
+Request ID: @{variables('varRequestID')}
+Status: Auto-Accepted
+
+No approval required.</pre>
+                                </li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+
+                <div class="checkpoint">
+                    <strong><img src="assets/icons/Approved.svg" width="18" height="18" style="vertical-align: middle; margin-right: 4px;"> Checkpoint:</strong> You should have 3 "Send an email" actions with different subjects and content
+                </div>
+            </div>
+
+            <!-- Part 8 -->
+            <div class="step-part" id="part-8">
+                <div class="part-header">
+                    <span class="part-number">08</span>
+                    <div class="part-title">
+                        <h3>Test the Flow</h3>
+                        <span class="part-duration"><img src="assets/icons/Clock.svg" width="14" height="14" style="vertical-align: middle; margin-right: 4px;"> 10 minutes</span>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <strong><img src="assets/icons/Light Bulb.svg" width="18" height="18" style="vertical-align: middle; margin-right: 4px;"> Testing is Critical:</strong>
+                    <p>Always test your flow before deploying to production. We'll test all 3 scenarios.</p>
+                </div>
+
+                <div class="substep">
+                    <h4>Step 8.1: Save the Flow</h4>
+                    <ol>
+                        <li>Click <strong>"Save"</strong> button (top right)</li>
+                        <li>Wait for "Your flow is ready to go" message</li>
+                        <li>Click <strong>"Test"</strong> button</li>
+                        <li>Select <strong>"Manually"</strong></li>
+                        <li>Click <strong>"Test"</strong></li>
+                    </ol>
+                </div>
+
+                <div class="substep">
+                    <h4>Step 8.2: Test Scenario 1 - Approval Required</h4>
+                    <ol>
+                        <li>Go to SharePoint list: <a href="https://amadeusworkplace.sharepoint.com/sites/CornerOfExcellence/Lists/COE_Academy_PA_Workshop/AllItems.aspx" target="_blank">COE_Academy_PA_Workshop</a></li>
+                        <li>Click <strong>"+ New"</strong></li>
+                        <li>Fill in:
+                            <ul>
+                                <li><strong>Partner Name:</strong> Test Partner A</li>
+                                <li><strong>Rebate Amount:</strong> 7500 (triggers approval)</li>
+                                <li><strong>Analyst Email:</strong> Your email</li>
+                                <li><strong>Rebate Request ID:</strong> REQ-001</li>
+                            </ul>
+                        </li>
+                        <li>Click <strong>"Save"</strong></li>
+                        <li>Check your email for approval request</li>
+                        <li>Click <strong>"Approve"</strong> or <strong>"Reject"</strong></li>
+                        <li>Verify status updated in SharePoint</li>
+                        <li>Verify confirmation email received</li>
+                    </ol>
+                </div>
+
+                <div class="substep">
+                    <h4>Step 8.3: Test Scenario 2 - Auto-Accept</h4>
+                    <ol>
+                        <li>Create another item in SharePoint</li>
+                        <li>Fill in:
+                            <ul>
+                                <li><strong>Rebate Amount:</strong> 3000 (under threshold)</li>
+                            </ul>
+                        </li>
+                        <li>Flow should auto-accept without approval</li>
+                        <li>Verify status = "Auto-Accepted"</li>
+                        <li>Verify auto-accept email received</li>
+                    </ol>
+                </div>
+
+                <div class="substep">
+                    <h4>Step 8.4: Check Run History</h4>
+                    <ol>
+                        <li>In Power Automate, go to <strong>"My flows"</strong></li>
+                        <li>Click on your flow name</li>
+                        <li>Click <strong>"Run history"</strong> tab</li>
+                        <li>Click on a run to see detailed execution</li>
+                        <li>Check each action - all should have green checkmarks ✓</li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- Celebration Element -->
+            <div class="celebration-container" id="celebrationContainer">
+                <canvas id="confettiCanvas"></canvas>
+                <div class="celebration-card">
+                    <div class="celebration-icon-wrapper">
+                        <div class="celebration-icon">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                            </svg>
+                        </div>
+                    </div>
+                    <h2>Outstanding Work!</h2>
+                    <p>You've successfully built a complete approval workflow with Power Automate. Your flow handles conditional logic, approvals, and email notifications—ready for production!</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <div class="mockup-overlay" id="mockupOverlay"></div>
+
+    <section class="section visual-guide-section">
+        <div class="container">
+            <h2>Visual Step-by-Step Guide</h2>
+            <p class="section-subtitle">Follow along with screenshots from the actual build process - click to expand</p>
+
+            <div class="browser-mockup" id="browserMockup">
+                <div class="browser-header">
+                    <div class="browser-dots">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    <div class="browser-address">
+                        <img src="assets/icons/External Link.svg" width="12" height="12">
+                        <span>make.powerautomate.com</span>
+                    </div>
+                    <div class="browser-menu">
+                        <img src="assets/icons/Settings.svg" width="14" height="14">
+                    </div>
+                </div>
+                <div class="browser-content">
+                    <div class="screenshot-carousel">
+                        <div class="carousel-track" id="carouselTrack">
+                            <!-- Screenshots will be added here -->
+                            <div class="carousel-slide active">
+                                <img src="assets/screenshots/Screenshot_9-10-2025_123724_make.powerautomate.com.jpeg" alt="Step 1: Create Flow">
+                                <div class="slide-caption">Step 1: Create New Flow - Automated Cloud Flow</div>
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="assets/screenshots/Screenshot_9-10-2025_12463_make.powerautomate.com.jpeg" alt="Step 2: Configure Trigger">
+                                <div class="slide-caption">Step 2: Configure SharePoint Trigger</div>
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="assets/screenshots/Screenshot_9-10-2025_124648_make.powerautomate.com.jpeg" alt="Step 3: Initialize Variables">
+                                <div class="slide-caption">Step 3: Initialize Variables</div>
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="assets/screenshots/Screenshot_9-10-2025_12480_make.powerautomate.com.jpeg" alt="Step 4: Add Condition">
+                                <div class="slide-caption">Step 4: Add Approval Condition</div>
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="assets/screenshots/Screenshot_9-10-2025_125510_make.powerautomate.com.jpeg" alt="Step 5: Start Approval">
+                                <div class="slide-caption">Step 5: Configure Approval Action</div>
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="assets/screenshots/Screenshot_9-10-2025_12577_make.powerautomate.com.jpeg" alt="Step 6: Check Response">
+                                <div class="slide-caption">Step 6: Check Approval Response</div>
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="assets/screenshots/Screenshot_9-10-2025_1333_make.powerautomate.com.jpeg" alt="Step 7: Update SharePoint">
+                                <div class="slide-caption">Step 7: Update SharePoint Status</div>
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="assets/screenshots/Screenshot_9-10-2025_14046_make.powerautomate.com.jpeg" alt="Step 8: Send Emails">
+                                <div class="slide-caption">Step 8: Configure Email Notifications</div>
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="assets/screenshots/Screenshot_9-10-2025_141043_make.powerautomate.com.jpeg" alt="Step 9: Complete Flow">
+                                <div class="slide-caption">Step 9: Complete Flow Overview</div>
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="assets/screenshots/Screenshot_9-10-2025_141739_amadeusworkplace.sharepoint.com.jpeg" alt="Step 10: SharePoint List">
+                                <div class="slide-caption">Step 10: SharePoint List View</div>
+                            </div>
+                        </div>
+                        <button class="carousel-btn prev" onclick="moveCarousel(-1)">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M15 18l-6-6 6-6"/>
+                            </svg>
+                        </button>
+                        <button class="carousel-btn next" onclick="moveCarousel(1)">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 18l6-6-6-6"/>
+                            </svg>
+                        </button>
+                        <div class="carousel-indicators" id="carouselIndicators">
+                            <span class="indicator active" onclick="goToSlide(0)"></span>
+                            <span class="indicator" onclick="goToSlide(1)"></span>
+                            <span class="indicator" onclick="goToSlide(2)"></span>
+                            <span class="indicator" onclick="goToSlide(3)"></span>
+                            <span class="indicator" onclick="goToSlide(4)"></span>
+                            <span class="indicator" onclick="goToSlide(5)"></span>
+                            <span class="indicator" onclick="goToSlide(6)"></span>
+                            <span class="indicator" onclick="goToSlide(7)"></span>
+                            <span class="indicator" onclick="goToSlide(8)"></span>
+                            <span class="indicator" onclick="goToSlide(9)"></span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <section id="troubleshooting" class="section troubleshooting-section">
+    <section class="section download-resources-section">
         <div class="container">
-            <h2>Troubleshooting Guide</h2>
+            <h2>Download Complete Solution</h2>
+            <p class="section-subtitle">Skip the building process and import the ready-made flow</p>
+
+            <div class="download-card">
+                <div class="download-icon">
+                    <img src="assets/icons/Settings.svg" width="48" height="48">
+                </div>
+                <div class="download-content">
+                    <h3>RMC Rebate Approval System - Complete Flow</h3>
+                    <p>This package includes the fully configured approval workflow with all actions, conditions, and email templates. Perfect for importing into your environment or using as a reference.</p>
+
+                    <div class="download-features">
+                        <div class="feature-item">
+                            <img src="assets/icons/Approved.svg" width="20" height="20">
+                            <span>Tested & Production-Ready</span>
+                        </div>
+                        <div class="feature-item">
+                            <img src="assets/icons/Settings.svg" width="20" height="20">
+                            <span>All Variables Pre-configured</span>
+                        </div>
+                        <div class="feature-item">
+                            <img src="assets/icons/Email.svg" width="20" height="20">
+                            <span>Email Templates Included</span>
+                        </div>
+                        <div class="feature-item">
+                            <img src="assets/icons/Light Bulb.svg" width="20" height="20">
+                            <span>Easy to Customize</span>
+                        </div>
+                    </div>
+
+                    <div class="download-actions">
+                        <a href="assets/flows/RMC-Rebate-Approval-System.zip" class="btn btn-primary btn-large" download>
+                            <img src="assets/icons/Box 1.svg" width="20" height="20" style="filter: brightness(0) invert(1); margin-right: 8px;">
+                            Download Flow Package
+                        </a>
+                        <a href="https://learn.microsoft.com/en-us/power-automate/import-flow-solution" target="_blank" class="btn btn-outline">
+                            How to Import
+                            <img src="assets/icons/External Link.svg" width="16" height="16" style="margin-left: 8px;">
+                        </a>
+                    </div>
+
+                    <div class="download-note">
+                        <img src="assets/icons/Warning.svg" width="16" height="16">
+                        <span>After importing, remember to update SharePoint connections and email addresses to match your environment.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Troubleshooting Section -->
+    <section id="troubleshooting" class="section troubleshooting-modern">
+        <div class="container">
+            <h2>Need Help?</h2>
+            <p class="section-subtitle">Quick solutions to common issues you might encounter</p>
+
             <div class="troubleshooting-grid">
-                <div class="trouble-item">
-                    <h4><img src="assets/icons/Error.svg" width="18" height="18" style="vertical-align: middle; margin-right: 4px;">Variables show error "Unable to process template"</h4>
-                    <p><strong>Solution:</strong> Use Dynamic Content picker instead of typing field names manually</p>
+                <div class="trouble-card">
+                    <div class="trouble-icon error">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="12" y1="8" x2="12" y2="12"></line>
+                            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                        </svg>
+                    </div>
+                    <h3>Variables Not Working</h3>
+                    <p>If you see "Unable to process template" errors:</p>
+                    <ul>
+                        <li>Use the <strong>Dynamic Content picker</strong> (⚡ icon)</li>
+                        <li>Never manually type field names</li>
+                        <li>Wait for the panel to load completely</li>
+                    </ul>
                 </div>
-                <div class="trouble-item">
-                    <h4><img src="assets/icons/Error.svg" width="18" height="18" style="vertical-align: middle; margin-right: 4px;">Link to item doesn't work</h4>
-                    <p><strong>Solution:</strong> Use <code>triggerBody()?['Link']</code> NOT <code>triggerBody()?['Link'].Value</code></p>
+
+                <div class="trouble-card">
+                    <div class="trouble-icon warning">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                            <line x1="12" y1="9" x2="12" y2="13"></line>
+                            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                        </svg>
+                    </div>
+                    <h3>Flow Not Starting</h3>
+                    <p>Check these common causes:</p>
+                    <ul>
+                        <li>Flow must be <strong>turned ON</strong></li>
+                        <li>Verify correct SharePoint list selected</li>
+                        <li>Wait 1-2 minutes for trigger to fire</li>
+                        <li>Check Run History for errors</li>
+                    </ul>
                 </div>
-                <div class="trouble-item">
-                    <h4><img src="assets/icons/Error.svg" width="18" height="18" style="vertical-align: middle; margin-right: 4px;">SharePoint field names look weird</h4>
-                    <p><strong>Solution:</strong> Always use Dynamic Content picker - it handles encoding automatically (e.g., <code>Analyst_x0020_Email</code>)</p>
+
+                <div class="trouble-card">
+                    <div class="trouble-icon info">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                        </svg>
+                    </div>
+                    <h3>SharePoint Encoding (_x0020_)</h3>
+                    <p>This is <strong>normal</strong>! SharePoint encodes spaces:</p>
+                    <ul>
+                        <li><code>_x0020_</code> = space character</li>
+                        <li>Dynamic Content handles it automatically</li>
+                        <li>Don't try to "fix" these field names</li>
+                    </ul>
                 </div>
-                <div class="trouble-item">
-                    <h4><img src="assets/icons/Error.svg" width="18" height="18" style="vertical-align: middle; margin-right: 4px;">Flow doesn't trigger</h4>
-                    <p><strong>Solution:</strong> Check that you created item in correct SharePoint list, verify flow is ON, check "Run history" for errors</p>
+
+                <div class="trouble-card">
+                    <div class="trouble-icon success">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="16" y1="2" x2="16" y2="6"></line>
+                            <line x1="8" y1="2" x2="8" y2="6"></line>
+                            <line x1="3" y1="10" x2="21" y2="10"></line>
+                        </svg>
+                    </div>
+                    <h3>No Emails Received</h3>
+                    <p>Before panicking, check:</p>
+                    <ul>
+                        <li>Junk/Spam folder first</li>
+                        <li>Focused/Other inbox tabs</li>
+                        <li>Run History shows green ✓ for email action</li>
+                        <li>Email address is correct in SharePoint</li>
+                    </ul>
                 </div>
-                <div class="trouble-item">
-                    <h4><img src="assets/icons/Error.svg" width="18" height="18" style="vertical-align: middle; margin-right: 4px;">Email not received</h4>
-                    <p><strong>Solution:</strong> Check "Run history", verify email address is correct, check Junk/Spam folder</p>
+
+                <div class="trouble-card">
+                    <div class="trouble-icon error">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="15" y1="9" x2="9" y2="15"></line>
+                            <line x1="9" y1="9" x2="15" y2="15"></line>
+                        </svg>
+                    </div>
+                    <h3>Approval Outcome is Null</h3>
+                    <p>Fix approval response issues:</p>
+                    <ul>
+                        <li>Use "Approve/Reject - <strong>First to respond</strong>"</li>
+                        <li>Condition must be <strong>after</strong> approval action</li>
+                        <li>Compare with <code>Approve</code> (capital A)</li>
+                        <li>Actually click the button, don't let it timeout</li>
+                    </ul>
+                </div>
+
+                <div class="trouble-card">
+                    <div class="trouble-icon warning">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                        </svg>
+                    </div>
+                    <h3>SharePoint Links Not Working</h3>
+                    <p>Links showing as objects?</p>
+                    <ul>
+                        <li>Use <code>triggerBody()?['Link']</code></li>
+                        <li><strong>Don't</strong> add <code>.Value</code> at the end</li>
+                        <li>Link field is already a string</li>
+                    </ul>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <section class="section key-concepts">
-        <div class="container">
-            <h2>Key Concepts Recap</h2>
-            <div class="concepts-grid">
-                <div class="concept-card">
-                    <h3>Trigger</h3>
-                    <p>Starts the flow automatically</p>
-                    <code>When item created in SharePoint</code>
-                </div>
-                <div class="concept-card">
-                    <h3>Variables</h3>
-                    <p>Store data for reuse</p>
-                    <code>varRebateAmount, varPartnerName</code>
-                </div>
-                <div class="concept-card">
-                    <h3>Condition</h3>
-                    <p>IF/THEN logic</p>
-                    <code>If amount > €5,000</code>
-                </div>
-                <div class="concept-card">
-                    <h3>Dynamic Content</h3>
-                    <p>Data from previous actions</p>
-                    <code>Rebate Amount, Partner Name</code>
-                </div>
-                <div class="concept-card">
-                    <h3>Expressions</h3>
-                    <p>Formulas and functions</p>
-                    <code>utcNow()</code>
-                </div>
-                <div class="concept-card">
-                    <h3>Approvals</h3>
-                    <p>Human decision point</p>
-                    <code>Approve/Reject rebate</code>
+            <div class="troubleshooting-cta">
+                <p>Still stuck? We're here to help!</p>
+                <div class="cta-buttons">
+                    <a href="mailto:rmc.coe@amadeus.com" class="btn btn-outline">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 8px;">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
+                        Contact CoE Team
+                    </a>
+                    <a href="https://engage.cloud.microsoft/main/org/amadeus.com/groups/eyJfdHlwZSI6Ikdyb3VwIiwiaWQiOiIyMTAyODY5NDQyNTYifQ" class="btn btn-outline" target="_blank">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 8px;">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                        </svg>
+                        Join Community
+                    </a>
                 </div>
             </div>
         </div>
@@ -457,24 +1041,62 @@
 
     <footer>
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-left">
-                    <p><strong>Power Automate Academy</strong></p>
-                    <p>Center of Excellence - Finance Operations</p>
-                    <p>Amadeus IT Group</p>
+            <div class="footer-main">
+                <div class="footer-column">
+                    <div class="footer-logo">
+                        <img src="../img/coe_white_logo.png" alt="CoE" height="48">
+                    </div>
+                    <p class="footer-tagline">
+                        CoE Academy Sessions: <br>
+                        Microsoft Power Automate
+                    </p>
                 </div>
-                <div class="footer-right">
-                    <p>Questions or feedback?</p>
-                    <a href="https://github.com/omarriestra/coe-academy-mpa/issues" target="_blank">Open an issue on GitHub</a>
+
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../#about">About This Course</a></li>
+                        <li><a href="../#sessions">Workshop Sessions</a></li>
+                        <li><a href="../#resources">Resources</a></li>
+                        <li><a href="https://amadeusworkplace.sharepoint.com/sites/CornerOfExcellence/" target="_blank">Corner Of Excellence</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Sessions</h4>
+                    <ul>
+                        <li><a href="../session-1/">Session 1: Fundamentals</a></li>
+                        <li><a href="../session-2/">Session 2: Approval Workflows</a></li>
+                        <li><a href="https://amadeusworkplace.sharepoint.com/:u:/r/sites/CornerOfExcellence/SitePages/Innovation-Academy.aspx?csf=1&web=1&e=PT3Rvb" target="_blank">CoE Academy Docs</a></li>
+                        <li><a href="#troubleshooting">Troubleshooting Guide</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="mailto:rmc.coe@amadeus.com">Contact CoE Team</a></li>
+                        <li><a href="https://engage.cloud.microsoft/main/org/amadeus.com/groups/eyJfdHlwZSI6Ikdyb3VwIiwiaWQiOiIyMTAyODY5NDQyNTYifQ" target="_blank">Power Platform Community</a></li>
+                        <li><a href="https://learn.microsoft.com/en-us/power-automate/" target="_blank">Microsoft Docs</a></li>
+                        <li><a href="https://forms.office.com/e/thDZJCdetg" target="_blank">Share Your Feedback</a></li>
+                    </ul>
                 </div>
             </div>
+
+            <div class="footer-divider"></div>
+
             <div class="footer-bottom">
-                <p>&copy; 2025 CoE Finance Operations. Licensed under MIT.</p>
+                <div class="footer-bottom-left">
+                    <span>&copy; 2025 Corner of Excellence | Service Management and Innovation</span>
+                </div>
+                <div class="footer-bottom-right">
+                    <span>Licensed under MIT</span>
+                </div>
             </div>
         </div>
     </footer>
 
-    <script src="../assets/js/main.js"></script>
-    <script src="assets/cheatsheet.js"></script>
+    <script src="../assets/js/main.js?v=5"></script>
+    <script src="assets/cheatsheet.js?v=5"></script>
 </body>
 </html>

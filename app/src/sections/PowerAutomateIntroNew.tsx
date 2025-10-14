@@ -21,6 +21,7 @@ import {
   MousePointer,
   MessageCircle
 } from 'lucide-react';
+import { logos } from '@/utils/assets';
 
 export const PowerAutomateIntroNew = ({ resetSignal }: SectionProps) => {
   const { stepMode, stepSignal, setIsLastStep } = usePresentation();
@@ -29,7 +30,7 @@ export const PowerAutomateIntroNew = ({ resetSignal }: SectionProps) => {
     totalSteps: 8,
     resetSignal,
     stepSignal,
-    autoAdvance: !stepMode,
+    autoAdvance: false,
     stepDuration: 5000,
     onLastStepChange: setIsLastStep
   });
@@ -38,14 +39,14 @@ export const PowerAutomateIntroNew = ({ resetSignal }: SectionProps) => {
     {
       icon: Users,
       title: "Citizen Development",
-      description: "No coding skills required",
+      description: "You build it, you own it",
       gradient: "from-blue-500 to-indigo-600",
       detail: "Finance professionals can build their own solutions"
     },
     {
       icon: Clock,
       title: "Instant Automation",
-      description: "Deploy in minutes, not months",
+      description: "Build in a day avoiding development backlogs",
       gradient: "from-purple-500 to-pink-600",
       detail: "From idea to production in less than 30 minutes"
     },
@@ -59,7 +60,7 @@ export const PowerAutomateIntroNew = ({ resetSignal }: SectionProps) => {
     {
       icon: Cpu,
       title: "AI-Powered",
-      description: "Smart suggestions & optimization",
+      description: "Copilot as your partner planning flow logics",
       gradient: "from-orange-500 to-red-600",
       detail: "AI helps build better flows faster"
     }
@@ -102,7 +103,7 @@ export const PowerAutomateIntroNew = ({ resetSignal }: SectionProps) => {
       {/* COE branding */}
       <div className="absolute left-6 top-6 z-10">
         <img
-          src="/images/coe_white_logo.png"
+          src={logos.coeWhite}
           alt="Center of Excellence"
           className="h-16 w-auto"
         />
@@ -133,13 +134,13 @@ export const PowerAutomateIntroNew = ({ resetSignal }: SectionProps) => {
                 transition={{ delay: 0.5, duration: 0.8 }}
                 className="font-amadeus text-xl text-white/60 mt-4"
               >
-                Transform your work, automate your future
+                Automate your work, transform your future
               </motion.p>
             </div>
           </motion.div>
         )}
         
-        {/* Step 1: The Goals */}
+        {/* Step 1: Why This Matters to You */}
         {stepController.currentStep === 1 && (
           <motion.div
             initial={{ opacity: 0 }}
@@ -151,8 +152,8 @@ export const PowerAutomateIntroNew = ({ resetSignal }: SectionProps) => {
               <h2 className="font-amadeus text-5xl font-bold text-white mb-6">
                 Introduction to Power Automate
               </h2>
-              <h3 className="font-amadeus text-3xl text-purple-400 mb-20">The goals</h3>
-              
+              <h3 className="font-amadeus text-3xl text-purple-400 mb-20">Why This Matters to You</h3>
+
               <div className="space-y-12">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
@@ -161,13 +162,13 @@ export const PowerAutomateIntroNew = ({ resetSignal }: SectionProps) => {
                   className="flex items-start gap-6 text-left max-w-3xl mx-auto"
                 >
                   <div className="text-purple-400 mt-1">
-                    <div className="w-1 h-12 bg-purple-400 rounded-full"></div>
+                    <ArrowRight size={32} className="text-purple-400" />
                   </div>
                   <p className="font-amadeus text-2xl text-white/80 leading-relaxed">
-                    Explore the basics of Power Automate to simplify process automation.
+                    Reclaim 5-10 hours per week from repetitive tasks
                   </p>
                 </motion.div>
-                
+
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -175,10 +176,10 @@ export const PowerAutomateIntroNew = ({ resetSignal }: SectionProps) => {
                   className="flex items-start gap-6 text-left max-w-3xl mx-auto"
                 >
                   <div className="text-purple-400 mt-1">
-                    <div className="w-1 h-12 bg-purple-400 rounded-full"></div>
+                    <ArrowRight size={32} className="text-purple-400" />
                   </div>
                   <p className="font-amadeus text-2xl text-white/80 leading-relaxed">
-                    Enhance your automation capabilities, making tasks more efficient.
+                    Build solutions without waiting for others to do it for you
                   </p>
                 </motion.div>
               </div>
@@ -249,11 +250,11 @@ export const PowerAutomateIntroNew = ({ resetSignal }: SectionProps) => {
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20 blur-3xl"></div>
                 <div className="relative bg-white/5 backdrop-blur-md rounded-3xl p-12 border border-white/10 text-center">
                   <p className="font-amadeus text-2xl text-white/90 leading-relaxed mb-6">
-                    Power Automate is an <span className="text-blue-400 font-bold">online workflow service</span> that
-                    <span className="text-purple-400 font-bold"> automates actions across the most common apps and services</span>.
+                    A <span className="text-blue-400 font-bold">workflow automation platform</span> that
+                    <span className="text-purple-400 font-bold"> connects your daily tools</span> and eliminates repetitive work.
                   </p>
                   <p className="font-amadeus text-lg text-white/70">
-                    Connect to hundreds of services and manage data in the cloud or on-premises
+                    Built for you to automate the tasks that consume your day
                   </p>
                 </div>
               </motion.div>
@@ -269,15 +270,15 @@ export const PowerAutomateIntroNew = ({ resetSignal }: SectionProps) => {
                   <div className="relative bg-white/5 backdrop-blur-md rounded-2xl p-8 border border-white/10">
                     <div className="flex items-center gap-4 mb-6">
                       <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-teal-600 rounded-2xl flex items-center justify-center">
-                        <MessageCircle size={28} className="text-white" />
+                        <Mail size={28} className="text-white" />
                       </div>
                       <div>
-                        <h3 className="font-amadeus text-xl font-bold text-white">Teams Integration</h3>
-                        <p className="font-amadeus text-sm text-white/60">Jira → Teams notifications</p>
+                        <h3 className="font-amadeus text-xl font-bold text-white">Email Approvals</h3>
+                        <p className="font-amadeus text-sm text-white/60">Outlook → SharePoint → Teams</p>
                       </div>
                     </div>
                     <p className="font-amadeus text-sm text-white/70">
-                      Create a flow that posts a message on Microsoft Teams whenever an issue is created in Jira
+                      Invoice arrives by email → Extract attachment → Save to SharePoint → Request approval → Notify team on Teams
                     </p>
                   </div>
                 </motion.div>
@@ -292,15 +293,15 @@ export const PowerAutomateIntroNew = ({ resetSignal }: SectionProps) => {
                   <div className="relative bg-white/5 backdrop-blur-md rounded-2xl p-8 border border-white/10">
                     <div className="flex items-center gap-4 mb-6">
                       <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-600 rounded-2xl flex items-center justify-center">
-                        <Database size={28} className="text-white" />
+                        <FileSpreadsheet size={28} className="text-white" />
                       </div>
                       <div>
-                        <h3 className="font-amadeus text-xl font-bold text-white">File Sync</h3>
-                        <p className="font-amadeus text-sm text-white/60">Dropbox → SharePoint</p>
+                        <h3 className="font-amadeus text-xl font-bold text-white">Data Consolidation</h3>
+                        <p className="font-amadeus text-sm text-white/60">SAP → Excel → SharePoint</p>
                       </div>
                     </div>
                     <p className="font-amadeus text-sm text-white/70">
-                      Ensure any file added to Dropbox is automatically copied to SharePoint for your team
+                      Extract SAP report daily → Transform data in Excel → Update SharePoint list → Generate summary for management
                     </p>
                   </div>
                 </motion.div>
@@ -313,10 +314,10 @@ export const PowerAutomateIntroNew = ({ resetSignal }: SectionProps) => {
                 className="mt-12 text-center bg-white/5 backdrop-blur-md rounded-2xl p-6 border border-white/10"
               >
                 <p className="font-amadeus text-lg text-white/90 mb-2">
-                  🔗 The list of applications you can use with Power Automate <span className="text-blue-400 font-bold">grows constantly</span>
+                  🔗 Connect the tools <span className="text-blue-400 font-bold">you already use every day</span>
                 </p>
                 <p className="font-amadeus text-sm text-white/70">
-                  SharePoint, SQL Server, Dynamics 365, Salesforce, and hundreds more
+                  SAP, Excel, Outlook, Teams, SharePoint, Workday, Coupa, and 500+ more
                 </p>
               </motion.div>
             </div>
@@ -329,25 +330,25 @@ export const PowerAutomateIntroNew = ({ resetSignal }: SectionProps) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="flex flex-col h-full px-12 py-16"
+            className="flex flex-col items-center justify-center h-full px-12 py-12"
           >
-            <h2 className="font-amadeus text-5xl font-bold text-white text-center mb-8">
+            <h2 className="font-amadeus text-5xl font-bold text-white text-center mb-6">
               What can you do with Power Automate?
             </h2>
 
-            <div className="max-w-6xl mx-auto flex-1 flex flex-col">
+            <div className="max-w-6xl mx-auto w-full">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
-                className="text-center mb-16"
+                className="text-center mb-10"
               >
                 <p className="font-amadeus text-lg text-white/80 max-w-4xl mx-auto leading-relaxed">
-                  Automate workflows between your favorite applications and services, sync files, get notifications, collect data, and much more.
+                  Connect any tool, automate any process, save hours every week
                 </p>
               </motion.div>
 
-              <div className="grid grid-cols-2 gap-12 mb-16 flex-1">
+              <div className="grid grid-cols-2 gap-8">
                 <motion.div
                   initial={{ opacity: 0, x: -30 }}
                   animate={{ opacity: 1, x: 0 }}
@@ -355,21 +356,21 @@ export const PowerAutomateIntroNew = ({ resetSignal }: SectionProps) => {
                   className="relative"
                 >
                   <div className="absolute inset-0 bg-gradient-to-br from-red-600/20 to-pink-600/20 blur-2xl"></div>
-                  <div className="relative bg-white/5 backdrop-blur-md rounded-2xl p-10 border border-white/10 h-full flex flex-col">
-                    <div className="flex items-center gap-4 mb-8">
-                      <div className="w-16 h-16 bg-gradient-to-br from-red-500 to-pink-600 rounded-2xl flex items-center justify-center">
-                        <Zap size={28} className="text-white" />
+                  <div className="relative bg-white/5 backdrop-blur-md rounded-2xl p-6 border border-white/10 h-full flex flex-col">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-14 h-14 bg-gradient-to-br from-red-500 to-pink-600 rounded-2xl flex items-center justify-center">
+                        <Zap size={24} className="text-white" />
                       </div>
                       <div>
-                        <h3 className="font-amadeus text-xl font-bold text-white">Instant Notifications</h3>
-                        <p className="font-amadeus text-sm text-white/60">High-priority alerts</p>
+                        <h3 className="font-amadeus text-lg font-bold text-white">Instant Notifications</h3>
+                        <p className="font-amadeus text-xs text-white/60">High-priority alerts</p>
                       </div>
                     </div>
-                    <p className="font-amadeus text-base text-white/80 mb-6 leading-relaxed flex-1">
-                      Instantly respond to high-priority notifications or emails. Get push notifications when sales leads are added to Dynamics 365.
+                    <p className="font-amadeus text-sm text-white/80 mb-4 leading-relaxed flex-1">
+                      When SAP billing error occurs, automatically send a Teams alert to CF.AIR lead for immediate triage and resolution.
                     </p>
-                    <div className="bg-white/5 rounded-lg p-4">
-                      <p className="font-amadeus text-sm text-white/70">Example: Email → Mobile notification</p>
+                    <div className="bg-white/5 rounded-lg p-3">
+                      <p className="font-amadeus text-xs text-white/70">Example: SAP error → Teams alert to lead</p>
                     </div>
                   </div>
                 </motion.div>
@@ -381,21 +382,21 @@ export const PowerAutomateIntroNew = ({ resetSignal }: SectionProps) => {
                   className="relative"
                 >
                   <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 to-indigo-600/20 blur-2xl"></div>
-                  <div className="relative bg-white/5 backdrop-blur-md rounded-2xl p-10 border border-white/10 h-full flex flex-col">
-                    <div className="flex items-center gap-4 mb-8">
-                      <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center">
-                        <FileSpreadsheet size={28} className="text-white" />
+                  <div className="relative bg-white/5 backdrop-blur-md rounded-2xl p-6 border border-white/10 h-full flex flex-col">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-14 h-14 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center">
+                        <FileSpreadsheet size={24} className="text-white" />
                       </div>
                       <div>
-                        <h3 className="font-amadeus text-xl font-bold text-white">File Management</h3>
-                        <p className="font-amadeus text-sm text-white/60">Sync & organize</p>
+                        <h3 className="font-amadeus text-lg font-bold text-white">Data Collection</h3>
+                        <p className="font-amadeus text-xs text-white/60">Track & analyze</p>
                       </div>
                     </div>
-                    <p className="font-amadeus text-base text-white/80 mb-6 leading-relaxed flex-1">
-                      Copy all email attachments to your OneDrive. Ensure files from Dropbox are automatically copied to SharePoint.
+                    <p className="font-amadeus text-sm text-white/80 mb-4 leading-relaxed flex-1">
+                      Monitor SAP report generation and automatically save to SharePoint, tracking metrics for month-end analysis.
                     </p>
-                    <div className="bg-white/5 rounded-lg p-4">
-                      <p className="font-amadeus text-sm text-white/70">Example: Email attachments → OneDrive</p>
+                    <div className="bg-white/5 rounded-lg p-3">
+                      <p className="font-amadeus text-xs text-white/70">Example: SAP reports → SharePoint tracking</p>
                     </div>
                   </div>
                 </motion.div>
@@ -407,21 +408,21 @@ export const PowerAutomateIntroNew = ({ resetSignal }: SectionProps) => {
                   className="relative"
                 >
                   <div className="absolute inset-0 bg-gradient-to-br from-green-600/20 to-emerald-600/20 blur-2xl"></div>
-                  <div className="relative bg-white/5 backdrop-blur-md rounded-2xl p-10 border border-white/10 h-full flex flex-col">
-                    <div className="flex items-center gap-4 mb-8">
-                      <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center">
-                        <Database size={28} className="text-white" />
+                  <div className="relative bg-white/5 backdrop-blur-md rounded-2xl p-6 border border-white/10 h-full flex flex-col">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-14 h-14 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center">
+                        <Database size={24} className="text-white" />
                       </div>
                       <div>
-                        <h3 className="font-amadeus text-xl font-bold text-white">Data Collection</h3>
-                        <p className="font-amadeus text-sm text-white/60">Track & analyze</p>
+                        <h3 className="font-amadeus text-lg font-bold text-white">File Management</h3>
+                        <p className="font-amadeus text-xs text-white/60">Sync & organize</p>
                       </div>
                     </div>
-                    <p className="font-amadeus text-base text-white/80 mb-6 leading-relaxed flex-1">
-                      Collect data about your business and share with your team. Monitor social media mentions and save to Excel.
+                    <p className="font-amadeus text-sm text-white/80 mb-4 leading-relaxed flex-1">
+                      Invoice arrives by email, automatically extract attachment, save to SharePoint, and log in tracking system.
                     </p>
-                    <div className="bg-white/5 rounded-lg p-4">
-                      <p className="font-amadeus text-sm text-white/70">Example: Twitter mentions → Excel spreadsheet</p>
+                    <div className="bg-white/5 rounded-lg p-3">
+                      <p className="font-amadeus text-xs text-white/70">Example: Email invoice → SharePoint + logging</p>
                     </div>
                   </div>
                 </motion.div>
@@ -433,39 +434,25 @@ export const PowerAutomateIntroNew = ({ resetSignal }: SectionProps) => {
                   className="relative"
                 >
                   <div className="absolute inset-0 bg-gradient-to-br from-purple-600/20 to-violet-600/20 blur-2xl"></div>
-                  <div className="relative bg-white/5 backdrop-blur-md rounded-2xl p-10 border border-white/10 h-full flex flex-col">
-                    <div className="flex items-center gap-4 mb-8">
-                      <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-violet-600 rounded-2xl flex items-center justify-center">
-                        <Users size={28} className="text-white" />
+                  <div className="relative bg-white/5 backdrop-blur-md rounded-2xl p-6 border border-white/10 h-full flex flex-col">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-14 h-14 bg-gradient-to-br from-purple-500 to-violet-600 rounded-2xl flex items-center justify-center">
+                        <Users size={24} className="text-white" />
                       </div>
                       <div>
-                        <h3 className="font-amadeus text-xl font-bold text-white">Approval Workflows</h3>
-                        <p className="font-amadeus text-sm text-white/60">Streamline decisions</p>
+                        <h3 className="font-amadeus text-lg font-bold text-white">Approval Workflows</h3>
+                        <p className="font-amadeus text-xs text-white/60">Streamline decisions</p>
                       </div>
                     </div>
-                    <p className="font-amadeus text-base text-white/80 mb-6 leading-relaxed flex-1">
-                      Automate approval workflows for vacation requests, expense reports, and business processes.
+                    <p className="font-amadeus text-sm text-white/80 mb-4 leading-relaxed flex-1">
+                      Manual billing load request triggers Adaptive Card approval to team lead. 4-eyes validation flow already live!
                     </p>
-                    <div className="bg-white/5 rounded-lg p-4">
-                      <p className="font-amadeus text-sm text-white/70">Example: Vacation request → Manager approval</p>
+                    <div className="bg-white/5 rounded-lg p-3">
+                      <p className="font-amadeus text-xs text-white/70">Example: Manual billing → Adaptive Card approval</p>
                     </div>
                   </div>
                 </motion.div>
               </div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.8 }}
-                className="text-center bg-white/5 backdrop-blur-md rounded-2xl p-8 border border-white/10 mt-auto"
-              >
-                <p className="font-amadeus text-lg text-white/90 mb-3">
-                  💡 A common use of Power Automate is to <span className="text-blue-400 font-bold">receive notifications</span>
-                </p>
-                <p className="font-amadeus text-base text-white/70 leading-relaxed">
-                  Instantly get email or push notifications when important events happen in your business apps
-                </p>
-              </motion.div>
             </div>
           </motion.div>
         )}
@@ -476,13 +463,13 @@ export const PowerAutomateIntroNew = ({ resetSignal }: SectionProps) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="flex flex-col items-center justify-center h-full px-12"
+            className="flex flex-col items-center justify-center h-full px-12 py-8"
           >
-            <h2 className="font-amadeus text-5xl font-bold text-white text-center mb-20">
+            <h2 className="font-amadeus text-4xl font-bold text-white text-center mb-12">
               Every Flow has Two Parts
             </h2>
 
-            <div className="grid grid-cols-2 gap-16 max-w-6xl w-full">
+            <div className="grid grid-cols-2 gap-10 max-w-6xl w-full mb-8">
               {/* Triggers Section */}
               <motion.div
                 initial={{ opacity: 0, x: -50 }}
@@ -491,53 +478,50 @@ export const PowerAutomateIntroNew = ({ resetSignal }: SectionProps) => {
                 className="relative"
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 to-indigo-600/20 blur-3xl"></div>
-                <div className="relative bg-white/5 backdrop-blur-lg rounded-3xl p-12 border border-white/10 h-full">
-                  <div className="text-center mb-8">
-                    <div className="w-24 h-24 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-3xl flex items-center justify-center mx-auto mb-6">
-                      <Zap size={48} className="text-white" />
-                    </div>
-                    <h3 className="font-amadeus text-3xl font-bold text-white mb-4">Triggers</h3>
-                    <p className="font-amadeus text-lg text-white/70">The starting action for your flow</p>
+                <div className="relative bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-white/10 h-full">
+                  <div className="text-center mb-6">
+                    <h3 className="font-amadeus text-2xl font-bold text-white mb-2">Triggers</h3>
+                    <p className="font-amadeus text-sm text-white/70">The starting action for your flow</p>
                   </div>
 
-                  <div className="space-y-4">
+                  <div className="space-y-3">
                     <motion.div
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.3 }}
-                      className="bg-white/5 rounded-xl p-4 border border-white/20"
+                      className="bg-white/5 rounded-xl p-3 border border-white/20"
                     >
-                      <div className="flex items-center gap-3 mb-2">
-                        <Mail size={20} className="text-blue-400" />
-                        <span className="font-amadeus font-bold text-white">When email arrives</span>
+                      <div className="flex items-center gap-2 mb-1">
+                        <Mail size={18} className="text-blue-400" />
+                        <span className="font-amadeus font-bold text-white text-sm">When email arrives</span>
                       </div>
-                      <p className="font-amadeus text-sm text-white/60">New message with specific subject</p>
+                      <p className="font-amadeus text-xs text-white/60">New message with specific subject</p>
                     </motion.div>
 
                     <motion.div
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.5 }}
-                      className="bg-white/5 rounded-xl p-4 border border-white/20"
+                      className="bg-white/5 rounded-xl p-3 border border-white/20"
                     >
-                      <div className="flex items-center gap-3 mb-2">
-                        <FileSpreadsheet size={20} className="text-green-400" />
-                        <span className="font-amadeus font-bold text-white">When file is created</span>
+                      <div className="flex items-center gap-2 mb-1">
+                        <FileSpreadsheet size={18} className="text-green-400" />
+                        <span className="font-amadeus font-bold text-white text-sm">When file is created</span>
                       </div>
-                      <p className="font-amadeus text-sm text-white/60">New item added to SharePoint</p>
+                      <p className="font-amadeus text-xs text-white/60">New item added to SharePoint</p>
                     </motion.div>
 
                     <motion.div
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.7 }}
-                      className="bg-white/5 rounded-xl p-4 border border-white/20"
+                      className="bg-white/5 rounded-xl p-3 border border-white/20"
                     >
-                      <div className="flex items-center gap-3 mb-2">
-                        <Clock size={20} className="text-purple-400" />
-                        <span className="font-amadeus font-bold text-white">On a schedule</span>
+                      <div className="flex items-center gap-2 mb-1">
+                        <Clock size={18} className="text-purple-400" />
+                        <span className="font-amadeus font-bold text-white text-sm">On a schedule</span>
                       </div>
-                      <p className="font-amadeus text-sm text-white/60">Daily, weekly, or monthly</p>
+                      <p className="font-amadeus text-xs text-white/60">Daily, weekly, or monthly</p>
                     </motion.div>
                   </div>
                 </div>
@@ -551,53 +535,50 @@ export const PowerAutomateIntroNew = ({ resetSignal }: SectionProps) => {
                 className="relative"
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-purple-600/20 to-pink-600/20 blur-3xl"></div>
-                <div className="relative bg-white/5 backdrop-blur-lg rounded-3xl p-12 border border-white/10 h-full">
-                  <div className="text-center mb-8">
-                    <div className="w-24 h-24 bg-gradient-to-br from-purple-500 to-pink-600 rounded-3xl flex items-center justify-center mx-auto mb-6">
-                      <Target size={48} className="text-white" />
-                    </div>
-                    <h3 className="font-amadeus text-3xl font-bold text-white mb-4">Actions</h3>
-                    <p className="font-amadeus text-lg text-white/70">What happens when triggered</p>
+                <div className="relative bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-white/10 h-full">
+                  <div className="text-center mb-6">
+                    <h3 className="font-amadeus text-2xl font-bold text-white mb-2">Actions</h3>
+                    <p className="font-amadeus text-sm text-white/70">What happens when triggered</p>
                   </div>
 
-                  <div className="space-y-4">
+                  <div className="space-y-3">
                     <motion.div
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.5 }}
-                      className="bg-white/5 rounded-xl p-4 border border-white/20"
+                      className="bg-white/5 rounded-xl p-3 border border-white/20"
                     >
-                      <div className="flex items-center gap-3 mb-2">
-                        <Send size={20} className="text-blue-400" />
-                        <span className="font-amadeus font-bold text-white">Send notification</span>
+                      <div className="flex items-center gap-2 mb-1">
+                        <Send size={18} className="text-blue-400" />
+                        <span className="font-amadeus font-bold text-white text-sm">Send notification</span>
                       </div>
-                      <p className="font-amadeus text-sm text-white/60">Email, Teams, or mobile alert</p>
+                      <p className="font-amadeus text-xs text-white/60">Email, Teams, or mobile alert</p>
                     </motion.div>
 
                     <motion.div
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.7 }}
-                      className="bg-white/5 rounded-xl p-4 border border-white/20"
+                      className="bg-white/5 rounded-xl p-3 border border-white/20"
                     >
-                      <div className="flex items-center gap-3 mb-2">
-                        <Database size={20} className="text-orange-400" />
-                        <span className="font-amadeus font-bold text-white">Create file</span>
+                      <div className="flex items-center gap-2 mb-1">
+                        <Database size={18} className="text-orange-400" />
+                        <span className="font-amadeus font-bold text-white text-sm">Create file</span>
                       </div>
-                      <p className="font-amadeus text-sm text-white/60">Save to OneDrive or SharePoint</p>
+                      <p className="font-amadeus text-xs text-white/60">Save to OneDrive or SharePoint</p>
                     </motion.div>
 
                     <motion.div
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.9 }}
-                      className="bg-white/5 rounded-xl p-4 border border-white/20"
+                      className="bg-white/5 rounded-xl p-3 border border-white/20"
                     >
-                      <div className="flex items-center gap-3 mb-2">
-                        <Users size={20} className="text-green-400" />
-                        <span className="font-amadeus font-bold text-white">Start approval</span>
+                      <div className="flex items-center gap-2 mb-1">
+                        <Users size={18} className="text-green-400" />
+                        <span className="font-amadeus font-bold text-white text-sm">Start approval</span>
                       </div>
-                      <p className="font-amadeus text-sm text-white/60">Request manager approval</p>
+                      <p className="font-amadeus text-xs text-white/60">Request manager approval</p>
                     </motion.div>
                   </div>
                 </div>
@@ -608,12 +589,65 @@ export const PowerAutomateIntroNew = ({ resetSignal }: SectionProps) => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.2 }}
-              className="mt-12 text-center bg-white/5 backdrop-blur-md rounded-2xl p-6 border border-white/10 max-w-4xl"
+              className="bg-gradient-to-br from-green-600/10 to-teal-600/10 backdrop-blur-md rounded-2xl p-5 border border-green-500/30 max-w-5xl"
             >
-              <p className="font-amadeus text-lg text-white/90 mb-2">
+              <div className="text-center mb-4">
+                <p className="font-amadeus text-lg text-white/90 font-bold">
+                  💡 Example Flow
+                </p>
+              </div>
+
+              <div className="flex items-center justify-between gap-3">
+                <div className="flex-1 bg-white/5 rounded-xl p-3 border border-white/20">
+                  <div className="flex items-center gap-2 mb-1">
+                    <FileSpreadsheet size={16} className="text-blue-400" />
+                    <span className="font-amadeus font-bold text-white text-xs">TRIGGER</span>
+                  </div>
+                  <p className="font-amadeus text-xs text-white/80">When a new manual billing file is uploaded to SharePoint</p>
+                </div>
+
+                <ArrowRight size={20} className="text-white/40 flex-shrink-0" />
+
+                <div className="flex-1 bg-white/5 rounded-xl p-3 border border-white/20">
+                  <div className="flex items-center gap-2 mb-1">
+                    <Users size={16} className="text-purple-400" />
+                    <span className="font-amadeus font-bold text-white text-xs">ACTION 1</span>
+                  </div>
+                  <p className="font-amadeus text-xs text-white/80">Send approval request to team lead via Adaptive Card</p>
+                </div>
+
+                <ArrowRight size={20} className="text-white/40 flex-shrink-0" />
+
+                <div className="flex-1 bg-white/5 rounded-xl p-3 border border-white/20">
+                  <div className="flex items-center gap-2 mb-1">
+                    <Database size={16} className="text-orange-400" />
+                    <span className="font-amadeus font-bold text-white text-xs">ACTION 2</span>
+                  </div>
+                  <p className="font-amadeus text-xs text-white/80">If approved, log entry in Month-End App</p>
+                </div>
+
+                <ArrowRight size={20} className="text-white/40 flex-shrink-0" />
+
+                <div className="flex-1 bg-white/5 rounded-xl p-3 border border-white/20">
+                  <div className="flex items-center gap-2 mb-1">
+                    <Mail size={16} className="text-green-400" />
+                    <span className="font-amadeus font-bold text-white text-xs">ACTION 3</span>
+                  </div>
+                  <p className="font-amadeus text-xs text-white/80">Send confirmation email to uploader</p>
+                </div>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.4 }}
+              className="mt-6 text-center bg-white/5 backdrop-blur-md rounded-2xl p-4 border border-white/10 max-w-4xl"
+            >
+              <p className="font-amadeus text-base text-white/90 mb-1">
                 ⚡ Every flow has <span className="text-blue-400 font-bold">one trigger</span> and <span className="text-purple-400 font-bold">one or more actions</span>
               </p>
-              <p className="font-amadeus text-sm text-white/70">
+              <p className="font-amadeus text-xs text-white/70">
                 Connect any trigger to any action across 500+ services
               </p>
             </motion.div>
@@ -640,17 +674,20 @@ export const PowerAutomateIntroNew = ({ resetSignal }: SectionProps) => {
                 whileHover={{ scale: 1.05 }}
                 className="relative"
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-600/30 to-indigo-600/30 blur-2xl"></div>
-                <div className="relative bg-white/5 backdrop-blur-md rounded-3xl p-8 border border-white/10 text-center h-full">
-                  <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                    <Code size={32} className="text-white" />
+                <div className="absolute inset-0 bg-gradient-to-br from-green-600/30 to-emerald-600/30 blur-2xl"></div>
+                <div className="relative bg-white/5 backdrop-blur-md rounded-3xl p-8 border border-white/10 text-center h-full flex flex-col">
+                  <div className="w-20 h-20 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                    <MousePointer size={32} className="text-white" />
                   </div>
-                  <h3 className="font-amadeus text-xl font-bold text-white mb-4">Power Automate Portal</h3>
-                  <p className="font-amadeus text-sm text-white/70 mb-4">
-                    Full-featured web interface with templates and advanced options
+                  <div className="mb-2">
+                    <span className="font-amadeus text-xs font-bold text-green-400 bg-green-500/20 px-3 py-1 rounded-full">EASIEST</span>
+                  </div>
+                  <h3 className="font-amadeus text-xl font-bold text-white mb-4">Templates</h3>
+                  <p className="font-amadeus text-sm text-white/70 mb-4 flex-1">
+                    Start with 500+ pre-built templates for common Finance scenarios
                   </p>
                   <div className="bg-white/10 rounded-lg p-3">
-                    <p className="font-amadeus text-xs text-white/80">powerautomate.microsoft.com</p>
+                    <p className="font-amadeus text-xs text-white/80">Browse → Customize → Deploy</p>
                   </div>
                 </div>
               </motion.div>
@@ -663,13 +700,16 @@ export const PowerAutomateIntroNew = ({ resetSignal }: SectionProps) => {
                 className="relative"
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-purple-600/30 to-pink-600/30 blur-2xl"></div>
-                <div className="relative bg-white/5 backdrop-blur-md rounded-3xl p-8 border border-white/10 text-center h-full">
+                <div className="relative bg-white/5 backdrop-blur-md rounded-3xl p-8 border border-white/10 text-center h-full flex flex-col">
                   <div className="w-20 h-20 bg-gradient-to-br from-purple-500 to-pink-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
                     <FileSpreadsheet size={32} className="text-white" />
                   </div>
+                  <div className="mb-2">
+                    <span className="font-amadeus text-xs font-bold text-purple-400 bg-purple-500/20 px-3 py-1 rounded-full">MEDIUM</span>
+                  </div>
                   <h3 className="font-amadeus text-xl font-bold text-white mb-4">From Your Apps</h3>
-                  <p className="font-amadeus text-sm text-white/70 mb-4">
-                    Create flows directly from Excel, SharePoint, Teams, and more
+                  <p className="font-amadeus text-sm text-white/70 mb-4 flex-1">
+                    Build flows directly from Excel, SharePoint, Teams—right where you work
                   </p>
                   <div className="bg-white/10 rounded-lg p-3">
                     <p className="font-amadeus text-xs text-white/80">Automate → Create flow</p>
@@ -684,17 +724,20 @@ export const PowerAutomateIntroNew = ({ resetSignal }: SectionProps) => {
                 whileHover={{ scale: 1.05 }}
                 className="relative"
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-green-600/30 to-emerald-600/30 blur-2xl"></div>
-                <div className="relative bg-white/5 backdrop-blur-md rounded-3xl p-8 border border-white/10 text-center h-full">
-                  <div className="w-20 h-20 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                    <MousePointer size={32} className="text-white" />
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-600/30 to-indigo-600/30 blur-2xl"></div>
+                <div className="relative bg-white/5 backdrop-blur-md rounded-3xl p-8 border border-white/10 text-center h-full flex flex-col">
+                  <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                    <Code size={32} className="text-white" />
                   </div>
-                  <h3 className="font-amadeus text-xl font-bold text-white mb-4">Templates</h3>
-                  <p className="font-amadeus text-sm text-white/70 mb-4">
-                    Start with pre-built templates for common scenarios
+                  <div className="mb-2">
+                    <span className="font-amadeus text-xs font-bold text-blue-400 bg-blue-500/20 px-3 py-1 rounded-full">ADVANCED</span>
+                  </div>
+                  <h3 className="font-amadeus text-xl font-bold text-white mb-4">Power Automate Portal</h3>
+                  <p className="font-amadeus text-sm text-white/70 mb-4 flex-1">
+                    Full builder interface for complex multi-step automations
                   </p>
                   <div className="bg-white/10 rounded-lg p-3">
-                    <p className="font-amadeus text-xs text-white/80">Browse → Templates</p>
+                    <p className="font-amadeus text-xs text-white/80">make.powerautomate.com</p>
                   </div>
                 </div>
               </motion.div>
@@ -707,7 +750,7 @@ export const PowerAutomateIntroNew = ({ resetSignal }: SectionProps) => {
               className="mt-12 text-center bg-white/5 backdrop-blur-md rounded-2xl p-6 border border-white/10 max-w-4xl"
             >
               <p className="font-amadeus text-lg text-white/90 mb-2">
-                🚀 Start where you're most comfortable
+                🚀 Start with templates, grow into custom flows
               </p>
               <p className="font-amadeus text-sm text-white/70">
                 All paths lead to the same powerful automation capabilities
@@ -736,7 +779,7 @@ export const PowerAutomateIntroNew = ({ resetSignal }: SectionProps) => {
                 className="relative"
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-blue-600/30 to-purple-600/30 blur-2xl"></div>
-                <div className="relative bg-white/5 backdrop-blur-md rounded-3xl p-12 border border-white/10 text-center h-full">
+                <div className="relative bg-white/5 backdrop-blur-md rounded-3xl p-12 border border-white/10 text-center h-full flex flex-col">
                   <motion.div
                     animate={{ rotate: 360 }}
                     transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
@@ -745,8 +788,11 @@ export const PowerAutomateIntroNew = ({ resetSignal }: SectionProps) => {
                     <Sparkles size={48} className="text-blue-400" />
                   </motion.div>
                   <div className="font-amadeus text-6xl font-bold text-white mb-4">500+</div>
-                  <div className="font-amadeus text-xl text-white/70">Ready Connectors</div>
-                  <div className="font-amadeus text-base text-white/50 mt-3">SAP, Excel, Teams...</div>
+                  <div className="font-amadeus text-xl text-white/70 mb-3">Connectors</div>
+                  <div className="font-amadeus text-sm text-white/60 leading-relaxed flex-1">
+                    Connect the tools you already use daily
+                  </div>
+                  <div className="font-amadeus text-xs text-white/40 mt-3">SAP, Excel, Outlook, SharePoint, Teams...</div>
                 </div>
               </motion.div>
 
@@ -758,13 +804,16 @@ export const PowerAutomateIntroNew = ({ resetSignal }: SectionProps) => {
                 className="relative"
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-purple-600/30 to-pink-600/30 blur-2xl"></div>
-                <div className="relative bg-white/5 backdrop-blur-md rounded-3xl p-12 border border-white/10 text-center h-full">
+                <div className="relative bg-white/5 backdrop-blur-md rounded-3xl p-12 border border-white/10 text-center h-full flex flex-col">
                   <div className="inline-block mb-6">
                     <RefreshCw size={48} className="text-purple-400" />
                   </div>
                   <div className="font-amadeus text-6xl font-bold text-white mb-4">24/7</div>
-                  <div className="font-amadeus text-xl text-white/70">Always Running</div>
-                  <div className="font-amadeus text-base text-white/50 mt-3">Cloud reliability</div>
+                  <div className="font-amadeus text-xl text-white/70 mb-3">Automation</div>
+                  <div className="font-amadeus text-sm text-white/60 leading-relaxed flex-1">
+                    Month-end runs even when you're asleep
+                  </div>
+                  <div className="font-amadeus text-xs text-white/40 mt-3">Never stops, never forgets</div>
                 </div>
               </motion.div>
 
@@ -776,13 +825,16 @@ export const PowerAutomateIntroNew = ({ resetSignal }: SectionProps) => {
                 className="relative"
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-pink-600/30 to-orange-600/30 blur-2xl"></div>
-                <div className="relative bg-white/5 backdrop-blur-md rounded-3xl p-12 border border-white/10 text-center h-full">
+                <div className="relative bg-white/5 backdrop-blur-md rounded-3xl p-12 border border-white/10 text-center h-full flex flex-col">
                   <div className="inline-block mb-6">
                     <Zap size={48} className="text-pink-400" />
                   </div>
                   <div className="font-amadeus text-6xl font-bold text-white mb-4">10x</div>
-                  <div className="font-amadeus text-xl text-white/70">Faster Processing</div>
-                  <div className="font-amadeus text-base text-white/50 mt-3">vs. manual work</div>
+                  <div className="font-amadeus text-xl text-white/70 mb-3">Faster</div>
+                  <div className="font-amadeus text-sm text-white/60 leading-relaxed flex-1">
+                    Reclaim your time for strategic work
+                  </div>
+                  <div className="font-amadeus text-xs text-white/40 mt-3">Tasks that took hours now take minutes</div>
                 </div>
               </motion.div>
             </div>

@@ -5,7 +5,12 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:s1": "vite --config vite.config.ts",
+    "dev:s2": "vite --config vite.config.session2.ts",
     "build": "tsc --noEmit --skipLibCheck && vite build",
+    "build:s1": "tsc --noEmit --skipLibCheck && vite build --config vite.config.ts",
+    "build:s2": "tsc --noEmit --skipLibCheck && vite build --config vite.config.session2.ts",
+    "build:all": "npm run build:s1 && npm run build:s2",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -19,6 +24,7 @@
     "recharts": "^2.8.0"
   },
   "devDependencies": {
+    "@tailwindcss/typography": "^0.5.19",
     "@types/node": "^20.12.7",
     "@types/react": "^18.2.21",
     "@types/react-dom": "^18.2.7",

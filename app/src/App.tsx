@@ -79,24 +79,18 @@ const PresentationContainer = () => {
   const progress = elapsedSeconds / (totalMinutes * 60);
 
   const handleRightArrow = useCallback(() => {
-    if (stepMode) {
-      if (isLastStep) {
-        goToNext(); // Si estamos en el último step, avanza a la siguiente sección
-      } else {
-        nextStep(); // Si no, avanza al siguiente step
-      }
+    // Siempre avanza paso a paso (step by step)
+    if (isLastStep) {
+      goToNext(); // Si estamos en el último step, avanza a la siguiente sección
     } else {
-      goToNext(); // Modo normal, avanza sección
+      nextStep(); // Si no, avanza al siguiente step
     }
-  }, [stepMode, isLastStep, nextStep, goToNext]);
+  }, [isLastStep, nextStep, goToNext]);
 
   const handleLeftArrow = useCallback(() => {
-    if (stepMode) {
-      previousStep();
-    } else {
-      goToPrevious();
-    }
-  }, [stepMode, previousStep, goToPrevious]);
+    // Siempre retrocede paso a paso
+    previousStep();
+  }, [previousStep]);
 
   const shortcuts = useMemo(
     () => [
@@ -110,16 +104,16 @@ const PresentationContainer = () => {
           triggerReset();
         }
       },
-      { keys: ['0'], handler: () => setCurrentSection(0) },
-      { keys: ['1'], handler: () => setCurrentSection(1) },
-      { keys: ['2'], handler: () => setCurrentSection(2) },
-      { keys: ['3'], handler: () => setCurrentSection(3) },
-      { keys: ['4'], handler: () => setCurrentSection(4) },
-      { keys: ['5'], handler: () => setCurrentSection(5) },
-      { keys: ['h'], handler: () => setShowHeader(prev => !prev) },
-      { keys: ['s'], handler: toggleStepMode }
+      { keys: ['1'], handler: () => setCurrentSection(0) },
+      { keys: ['2'], handler: () => setCurrentSection(1) },
+      { keys: ['3'], handler: () => setCurrentSection(2) },
+      { keys: ['4'], handler: () => setCurrentSection(3) },
+      { keys: ['5'], handler: () => setCurrentSection(4) },
+      { keys: ['6'], handler: () => setCurrentSection(5) },
+      { keys: ['7'], handler: () => setCurrentSection(6) },
+      { keys: ['h'], handler: () => setShowHeader(prev => !prev) }
     ],
-    [handleRightArrow, handleLeftArrow, togglePresenterMode, toggle, triggerReset, setCurrentSection, toggleStepMode]
+    [handleRightArrow, handleLeftArrow, togglePresenterMode, toggle, triggerReset, setCurrentSection]
   );
 
   useKeyboardShortcuts(shortcuts);
@@ -162,33 +156,16 @@ const PresentationContainer = () => {
       <AnimatePresence>
         {showHeader && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
+            exit={{ opacity: 0, y: 20 }}
             transition={{ duration: 0.2 }}
-            className="flex-shrink-0"
           >
-            <Header
-              progress={progress}
-              elapsedSeconds={elapsedSeconds}
-              remainingSeconds={remainingSeconds}
-              onToggleTheme={toggleTheme}
-              theme={theme}
-              onTogglePresenter={togglePresenterMode}
-              presenterMode={presenterMode}
-              onToggleTimer={toggle}
-              isRunning={isRunning}
-              onResetSection={() => triggerReset()}
-              onExportResources={handleExportResources}
-              onLoadData={handleLoadData}
-              onClearData={handleClearData}
-              hasCustomData={Boolean(customData)}
-              stepMode={stepMode}
-            />
+            <Header />
           </motion.div>
         )}
       </AnimatePresence>
-      <main className={`relative flex justify-center overflow-hidden ${showHeader ? 'flex-1' : 'h-full'}`}>
+      <main className="relative flex h-full justify-center overflow-hidden">
         <AnimatePresence mode="wait">
           <motion.div
             key={currentSection.id}

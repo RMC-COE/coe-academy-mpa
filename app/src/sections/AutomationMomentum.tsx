@@ -2,9 +2,10 @@ import { SectionProps } from '@/types';
 import { usePresentation } from '@/context/PresentationContext';
 import { useStepController } from '@/hooks/useStepController';
 import { StepReveal } from '@/components/common/StepReveal';
-import { CheckCircle, Zap, TrendingUp, ArrowRight, X, ExternalLink, AlertTriangle } from 'lucide-react';
+import { CheckCircle, Zap, TrendingUp, ArrowRight, X, ExternalLink, AlertTriangle, Shield, Target, Rocket, FileCheck } from 'lucide-react';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import { logos } from '@/utils/assets';
 
 export const AutomationMomentum = ({ resetSignal, isPaused }: SectionProps) => {
   const { stepMode, stepSignal, setIsLastStep } = usePresentation();
@@ -14,7 +15,7 @@ export const AutomationMomentum = ({ resetSignal, isPaused }: SectionProps) => {
     totalSteps: 6,
     resetSignal,
     stepSignal,
-    autoAdvance: !stepMode,
+    autoAdvance: false,
     stepDuration: 4000,
     onLastStepChange: setIsLastStep
   });
@@ -23,10 +24,10 @@ export const AutomationMomentum = ({ resetSignal, isPaused }: SectionProps) => {
 
 
   const automationWins = [
-    { 
-      title: "Manual Billing Validation", 
-      value: "Zero Risk", 
-      icon: "✅", 
+    {
+      title: "Manual Billing Validation",
+      value: "Zero Risk",
+      iconComponent: Shield,
       description: "Power Automate flow validates every manual load",
       impact: "100% compliance achieved",
       details: {
@@ -40,10 +41,10 @@ export const AutomationMomentum = ({ resetSignal, isPaused }: SectionProps) => {
         ]
       }
     },
-    { 
-      title: "Month-End Orchestration", 
-      value: "Full Visibility", 
-      icon: "🎯", 
+    {
+      title: "Month-End Orchestration",
+      value: "Full Visibility",
+      iconComponent: Target,
       description: "Power Apps automates tasks & notifications",
       impact: "Real-time management view",
       details: {
@@ -57,27 +58,27 @@ export const AutomationMomentum = ({ resetSignal, isPaused }: SectionProps) => {
         ]
       }
     },
-    { 
-      title: "ARPA Process Pipeline", 
-      value: "Scaling Fast", 
-      icon: "⚡", 
-      description: "CF&B and AR automation portfolio expanding",
-      impact: "Demand exceeds capacity",
+    {
+      title: "Center of Excellence",
+      value: "Scaling Fast",
+      iconComponent: Rocket,
+      description: "Automation demand growing faster than we can build",
+      impact: "Empowering Finance to build their own solutions",
       details: {
-        challenge: "Critical finance processes in Contract Fulfilment & Billing and Accounts Receivable were entirely manual and error-prone.",
-        solution: "CFA Hyperautomation initiative using ARPA (robotic process automation) to automate key processes across CF&B and AR domains.",
+        challenge: "Automation requests from Finance teams are increasing exponentially. Continuous Improvement teams can't keep up with the demand. We need a new model where Finance professionals build their own solutions.",
+        solution: "Power Automate enables Finance employees to become citizen developers—automating their own processes without waiting for IT queues. Training programs and a Center of Excellence support this transformation.",
         results: [
-          "Multiple processes automated (CFA-P27, CFA-P30)",
-          "Reduced manual intervention",
-          "Improved process consistency",
-          "Capacity constraints highlighting demand"
+          "Reduce the number of small size automation requests",
+          "Shift from 'Technical teams builds for us' to 'we build ourselves'",
+          "More and better documentation and training expanding to 100+ Finance users",
+          "Faster time-to-automation with low-code solutions"
         ]
       }
     },
-    { 
-      title: "RMC Task Management", 
-      value: "Data Integrity", 
-      icon: "📋", 
+    {
+      title: "RMC Task Management",
+      value: "Data Integrity",
+      iconComponent: FileCheck,
       description: "Centralized registry with approval workflows",
       impact: "Structured data for 80 users",
       details: {
@@ -115,26 +116,26 @@ export const AutomationMomentum = ({ resetSignal, isPaused }: SectionProps) => {
       {/* COE branding top left */}
       <div className="absolute left-6 top-6 z-10">
         <img
-          src="/images/coe_color_logo.png"
+          src={logos.coeColor}
           alt="Center of Excellence"
           className="h-16 w-auto dark:hidden"
         />
         <img
-          src="/images/coe_white_logo.png"
+          src={logos.coeWhite}
           alt="Center of Excellence"
           className="h-16 w-auto hidden dark:block"
         />
       </div>
 
-      <div className="flex flex-col justify-center h-full px-8 py-12 max-w-6xl mx-auto">
-        
+      <div className="flex flex-col justify-center h-full px-8 py-12 max-w-5xl mx-auto">
+
         {/* Step 1: Hero Title */}
         <StepReveal step={0} isVisible={stepController.isStepVisible(0)} direction="down">
           <div className="text-center mb-12">
-            <h1 className="font-amadeus text-5xl md:text-6xl font-bold text-slate-900 dark:text-white mb-6">
+            <h1 className="font-amadeus text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-4">
               We're Already Building Momentum
             </h1>
-            <p className="font-amadeus text-xl text-slate-600 dark:text-slate-300 max-w-3xl mx-auto leading-relaxed">
+            <p className="font-amadeus text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto leading-relaxed">
               Our Finance Operations has already begun the automation journey.
               <br />Let's see what we've accomplished and where we're heading.
             </p>
@@ -142,83 +143,83 @@ export const AutomationMomentum = ({ resetSignal, isPaused }: SectionProps) => {
         </StepReveal>
 
         {/* Steps 2-5: Automation Wins Overview */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
-          {automationWins.map((win, index) => (
-            <StepReveal key={win.title} step={index + 1} isVisible={stepController.isStepVisible(index + 1)} direction="up">
-              <div 
-                className="text-center bg-white/60 dark:bg-slate-800/60 backdrop-blur-sm rounded-xl p-6 border border-slate-200 dark:border-slate-700 hover:bg-white/80 dark:hover:bg-slate-800/80 hover:scale-105 transition-all duration-300 cursor-pointer relative group"
-                onClick={() => setSelectedWin(index)}
-              >
-                <div className="text-3xl mb-3">{win.icon}</div>
-                <div className="font-amadeus text-lg font-bold text-slate-900 dark:text-white mb-2">
-                  {win.value}
-                </div>
-                <div className="font-amadeus text-xs text-slate-600 dark:text-slate-400 uppercase tracking-wide mb-2">
-                  {win.title}
-                </div>
-                <div className="font-amadeus text-xs text-slate-500 dark:text-slate-400 leading-relaxed mb-3">
-                  {win.impact}
-                </div>
-                
-                {/* Click indicator */}
-                <div className="absolute bottom-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <div className="w-6 h-6 bg-purple-500 rounded-full flex items-center justify-center">
-                    <ExternalLink size={12} className="text-white" />
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+          {automationWins.map((win, index) => {
+            const IconComponent = win.iconComponent;
+            return (
+              <StepReveal key={win.title} step={index + 1} isVisible={stepController.isStepVisible(index + 1)} direction="up">
+                <div
+                  className="text-center bg-white/60 dark:bg-slate-800/60 backdrop-blur-sm rounded-xl p-4 border border-slate-200 dark:border-slate-700 hover:bg-white/80 dark:hover:bg-slate-800/80 hover:scale-105 transition-all duration-300 cursor-pointer relative group h-[200px] flex flex-col"
+                  onClick={() => setSelectedWin(index)}
+                >
+                  <div className="mb-2 flex justify-center">
+                    <div className="w-12 h-12 bg-gradient-to-br from-[#5b7fdb]/10 to-[#8b5cf6]/10 rounded-lg flex items-center justify-center">
+                      <IconComponent size={24} className="text-[#6a5acd]" />
+                    </div>
+                  </div>
+                  <div className="font-amadeus text-base font-bold text-slate-900 dark:text-white mb-1.5">
+                    {win.value}
+                  </div>
+                  <div className="font-amadeus text-xs text-slate-600 dark:text-slate-400 uppercase tracking-wide mb-1.5">
+                    {win.title}
+                  </div>
+                  <div className="font-amadeus text-xs text-slate-500 dark:text-slate-400 leading-relaxed mb-2 flex-grow">
+                    {win.impact}
+                  </div>
+
+                  {/* Click indicator */}
+                  <div className="absolute bottom-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="w-5 h-5 bg-gradient-to-r from-[#5b7fdb] to-[#8b5cf6] rounded-full flex items-center justify-center">
+                      <ExternalLink size={10} className="text-white" />
+                    </div>
+                  </div>
+
+                  {/* Click hint */}
+                  <div className="font-amadeus text-[10px] text-[#6a5acd] dark:text-purple-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300 absolute bottom-7 left-1/2 transform -translate-x-1/2">
+                    Click for details
                   </div>
                 </div>
-                
-                {/* Click hint */}
-                <div className="font-amadeus text-xs text-purple-600 dark:text-purple-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  Click for details
-                </div>
-              </div>
-            </StepReveal>
-          ))}
+              </StepReveal>
+            );
+          })}
         </div>
 
-        {/* Step 6: Introducing Power Automate */}
+        {/* Step 6: Power Automate Callout */}
         <StepReveal step={5} isVisible={stepController.isStepVisible(5)} direction="fade">
           <div className="text-center">
-            <div className="mb-8">
-              <h3 className="font-amadeus text-3xl font-bold text-slate-900 dark:text-white mb-4">
+            <div className="mb-4">
+              <h3 className="font-amadeus text-2xl font-bold text-slate-900 dark:text-white mb-3">
                 But We Can Do More
               </h3>
             </div>
-            
-            <div className="bg-gradient-to-r from-indigo-600 to-purple-600 rounded-3xl p-6 text-white">
-              <div className="flex items-center justify-center gap-4 mb-4">
-                <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
-                  <Zap size={24} className="text-white" />
-                </div>
-                <h2 className="font-amadeus text-3xl font-bold">
-                  Introducing Power Automate
-                </h2>
-              </div>
-              
-              <p className="font-amadeus text-lg mb-6 opacity-90 max-w-2xl mx-auto">
-                The citizen developer platform that puts automation power directly in your hands.
-                No coding required. No IT bottlenecks. Just solutions.
+
+            <div className="bg-gradient-to-r from-[#1a237e] to-[#6a1b9a] rounded-2xl p-6 text-white shadow-xl">
+              <p className="font-amadeus text-base mb-4 opacity-90">
+                Build automation in minutes, not months. Over 500 pre-built connectors. No coding required.
               </p>
-              
-              <div className="grid grid-cols-3 gap-4 max-w-2xl mx-auto mb-6">
-                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-3">
-                  <div className="font-amadeus text-2xl font-bold mb-1">500+</div>
-                  <div className="font-amadeus text-xs opacity-80">Pre-built Connectors</div>
+
+              <div className="grid grid-cols-3 gap-3 max-w-xl mx-auto mb-5">
+                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-2.5">
+                  <div className="font-amadeus text-xl font-bold mb-0.5">500+</div>
+                  <div className="font-amadeus text-xs opacity-90">Connectors</div>
                 </div>
-                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-3">
-                  <div className="font-amadeus text-2xl font-bold mb-1">Minutes</div>
-                  <div className="font-amadeus text-xs opacity-80">To Build First Flow</div>
+                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-2.5">
+                  <div className="font-amadeus text-xl font-bold mb-0.5">Build in</div>
+                  <div className="font-amadeus text-xs opacity-90">Minutes</div>
                 </div>
-                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-3">
-                  <div className="font-amadeus text-2xl font-bold mb-1">You</div>
-                  <div className="font-amadeus text-xs opacity-80">Are The Developer</div>
+                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-2.5">
+                  <div className="font-amadeus text-xl font-bold mb-0.5">You</div>
+                  <div className="font-amadeus text-xs opacity-90">Own It</div>
                 </div>
               </div>
-              
-              <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm px-5 py-2 rounded-full">
-                <span className="font-amadeus text-sm font-medium">Let's explore what's possible</span>
-                <ArrowRight size={16} />
-              </div>
+
+              <button
+                className="inline-flex items-center gap-2 bg-white/20 hover:bg-white/30 backdrop-blur-sm px-5 py-2.5 rounded-full transition-all duration-300"
+                type="button"
+              >
+                <span className="font-amadeus text-sm font-medium">See What's Possible</span>
+                <ArrowRight size={14} />
+              </button>
             </div>
           </div>
         </StepReveal>
@@ -226,30 +227,35 @@ export const AutomationMomentum = ({ resetSignal, isPaused }: SectionProps) => {
       </div>
 
       {/* Modal for detailed automation information */}
-      {selectedWin !== null && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-slate-800 rounded-2xl max-w-2xl w-full max-h-[80vh] overflow-y-auto">
-            <div className="p-6">
-              {/* Header */}
-              <div className="flex items-start justify-between mb-6">
-                <div className="flex items-center gap-4">
-                  <div className="text-3xl">{automationWins[selectedWin].icon}</div>
-                  <div>
-                    <h3 className="font-amadeus text-2xl font-bold text-slate-900 dark:text-white">
-                      {automationWins[selectedWin].title}
-                    </h3>
-                    <p className="font-amadeus text-lg text-slate-600 dark:text-slate-400">
-                      {automationWins[selectedWin].description}
-                    </p>
+      {selectedWin !== null && (() => {
+        const ModalIcon = automationWins[selectedWin].iconComponent;
+        return (
+          <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+            <div className="bg-white dark:bg-slate-800 rounded-2xl max-w-2xl w-full max-h-[80vh] overflow-y-auto">
+              <div className="p-6">
+                {/* Header */}
+                <div className="flex items-start justify-between mb-6">
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 bg-[#0075C9]/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                      <ModalIcon size={28} className="text-[#0075C9]" />
+                    </div>
+                    <div>
+                      <h3 className="font-amadeus text-2xl font-bold text-slate-900 dark:text-white">
+                        {automationWins[selectedWin].title}
+                      </h3>
+                      <p className="font-amadeus text-lg text-slate-600 dark:text-slate-400">
+                        {automationWins[selectedWin].description}
+                      </p>
+                    </div>
                   </div>
+                  <button
+                    onClick={() => setSelectedWin(null)}
+                    className="w-8 h-8 bg-slate-100 dark:bg-slate-700 rounded-full flex items-center justify-center hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors"
+                    type="button"
+                  >
+                    <X size={16} className="text-slate-600 dark:text-slate-400" />
+                  </button>
                 </div>
-                <button
-                  onClick={() => setSelectedWin(null)}
-                  className="w-8 h-8 bg-slate-100 dark:bg-slate-700 rounded-full flex items-center justify-center hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors"
-                >
-                  <X size={16} className="text-slate-600 dark:text-slate-400" />
-                </button>
-              </div>
 
               {/* Challenge */}
               <div className="mb-6">
@@ -291,10 +297,11 @@ export const AutomationMomentum = ({ resetSignal, isPaused }: SectionProps) => {
                 </ul>
               </div>
 
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        );
+      })()}
     </div>
   );
 };

@@ -24,6 +24,7 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 15px;
     line-height: 1.6;
     color: var(--text-primary);
     background: #FFFFFF;
@@ -86,19 +87,19 @@ nav a:hover {
 }
 
 .hero-content h1 {
-    font-size: 48px;
+    font-size: 40px;
     font-weight: 700;
     margin-bottom: 16px;
 }
 
 .subtitle {
-    font-size: 24px;
+    font-size: 20px;
     margin-bottom: 16px;
     opacity: 0.95;
 }
 
 .description {
-    font-size: 18px;
+    font-size: 16px;
     max-width: 700px;
     margin: 0 auto 32px;
     opacity: 0.9;
@@ -166,7 +167,7 @@ nav a:hover {
 }
 
 .section h2 {
-    font-size: 36px;
+    font-size: 32px;
     text-align: center;
     margin-bottom: 16px;
     color: var(--text-primary);
@@ -174,7 +175,7 @@ nav a:hover {
 
 .section-subtitle {
     text-align: center;
-    font-size: 18px;
+    font-size: 16px;
     color: var(--text-secondary);
     margin-bottom: 48px;
 }
@@ -218,7 +219,7 @@ nav a:hover {
 }
 
 .card h3 {
-    font-size: 20px;
+    font-size: 18px;
     margin-bottom: 12px;
     color: var(--text-primary);
 }
@@ -226,6 +227,7 @@ nav a:hover {
 .card p {
     color: var(--text-secondary);
     line-height: 1.6;
+    font-size: 14px;
 }
 
 /* Sessions Section */
@@ -278,7 +280,7 @@ nav a:hover {
 }
 
 .session-card h3 {
-    font-size: 24px;
+    font-size: 20px;
     margin-bottom: 12px;
     color: var(--text-primary);
 }
@@ -286,7 +288,7 @@ nav a:hover {
 .session-description {
     color: var(--text-secondary);
     margin-bottom: 24px;
-    font-size: 16px;
+    font-size: 15px;
 }
 
 .session-topics {
@@ -414,11 +416,11 @@ nav a:hover {
 
 .cta-section h2 {
     color: white;
-    font-size: 36px;
+    font-size: 32px;
 }
 
 .cta-section p {
-    font-size: 18px;
+    font-size: 16px;
     margin-bottom: 32px;
     opacity: 0.9;
 }
@@ -463,11 +465,11 @@ footer {
 /* Responsive */
 @media (max-width: 768px) {
     .hero-content h1 {
-        font-size: 36px;
+        font-size: 32px;
     }
 
     .subtitle {
-        font-size: 20px;
+        font-size: 18px;
     }
 
     .session-cards {
@@ -487,7 +489,171 @@ footer {
     }
 }
 
+/* Narrower Resource Cards */
+.resource-grid-narrow {
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+}
+
+/* CTA Buttons with Better Contrast */
+.btn-cta-primary {
+    background: white;
+    color: var(--primary-color);
+    font-weight: 700;
+    box-shadow: 0 4px 16px rgba(255, 255, 255, 0.3);
+    border: 2px solid white;
+}
+
+.btn-cta-primary:hover {
+    background: var(--secondary-color);
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 8px 24px rgba(255, 255, 255, 0.4);
+}
+
+.btn-cta-secondary {
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+}
+
+.btn-cta-secondary:hover {
+    background: rgba(255, 255, 255, 0.25);
+    border-color: white;
+    transform: translateY(-4px);
+}
+
+/* New Footer Styles */
+footer {
+    padding: 64px 0 24px !important;
+}
+
+.footer-main {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 48px;
+    margin-bottom: 48px;
+}
+
+.footer-column h4 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: white;
+}
+
+.footer-column ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-column ul li {
+    margin-bottom: 12px;
+}
+
+.footer-column ul li a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.2s;
+}
+
+.footer-column ul li a:hover {
+    color: white;
+    text-decoration: underline;
+}
+
+.footer-logo {
+    margin-bottom: 16px;
+}
+
+.footer-tagline {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.6;
+    max-width: 280px;
+}
+
+.footer-divider {
+    height: 1px;
+    background: rgba(255, 255, 255, 0.1);
+    margin: 32px 0;
+}
+
+.footer-bottom {
+    display: flex !important;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.6);
+    text-align: left !important;
+    padding-top: 0 !important;
+    border-top: none !important;
+    opacity: 1 !important;
+}
+
+.footer-bottom-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.footer-bottom-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.footer-bottom-right a {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+}
+
+.footer-bottom-right a:hover {
+    color: white;
+    text-decoration: underline;
+}
+
+.footer-separator {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+/* Responsive Updates */
+@media (max-width: 768px) {
+    .resource-grid-narrow {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-main {
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        text-align: center !important;
+    }
+
+    .footer-bottom-left {
+        flex-direction: column;
+    }
+}
+
 /* Smooth Scroll */
 html {
     scroll-behavior: smooth;
+}
+
+/* Scroll offset for fixed header */
+section[id] {
+    scroll-margin-top: 80px;
+}
+
+.step-part[id] {
+    scroll-margin-top: 80px;
 }

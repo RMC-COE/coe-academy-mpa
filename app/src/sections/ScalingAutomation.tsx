@@ -29,7 +29,7 @@ export const ScalingAutomation = ({ resetSignal, isPaused }: SectionProps) => {
     totalSteps: 4,
     resetSignal,
     stepSignal,
-    autoAdvance: !stepMode,
+    autoAdvance: false,
     stepDuration: 8000,
     onLastStepChange: setIsLastStep
   });

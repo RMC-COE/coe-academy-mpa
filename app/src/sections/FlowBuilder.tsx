@@ -25,13 +25,14 @@ import {
   Globe,
   Shield,
   Monitor,
-  ArrowLeft
+  ArrowLeft,
+  TrendingDown,
+  Award
 } from 'lucide-react';
+import { logos } from '@/utils/assets';
 
 export const FlowBuilder = ({ resetSignal }: SectionProps) => {
   const { stepMode, stepSignal, setIsLastStep } = usePresentation();
-  const [selectedConnector, setSelectedConnector] = useState<number | null>(null);
-  const [activeStep, setActiveStep] = useState<number | null>(null);
   const [blueprintSubStep, setBlueprintSubStep] = useState<number>(0);
   const [currentScreenshot, setCurrentScreenshot] = useState(0);
 
@@ -87,105 +88,12 @@ export const FlowBuilder = ({ resetSignal }: SectionProps) => {
     totalSteps: 4,
     resetSignal,
     stepSignal,
-    autoAdvance: !stepMode,
+    autoAdvance: false,
     stepDuration: 10000,
     onLastStepChange: setIsLastStep
   });
 
-  // Simplified AUTTP flow steps
-  const flowSteps = [
-    {
-      id: 'trigger',
-      title: 'Email Trigger',
-      connector: 'Outlook',
-      icon: Mail,
-      color: 'from-blue-500 to-blue-600',
-      description: 'When a new email arrives with AUTTP attachment',
-      config: {
-        subject: 'Contains "AUTTP"',
-        hasAttachment: 'Yes',
-        mailbox: 'Shared mailbox'
-      }
-    },
-    {
-      id: 'attachment',
-      title: 'Get Attachment',
-      connector: 'Files',
-      icon: Download,
-      color: 'from-green-500 to-green-600',
-      description: 'Extract the Excel file from email',
-      config: {
-        fileType: '*.xlsx',
-        saveLocation: 'Temp folder',
-        validation: 'Check file format'
-      }
-    },
-    {
-      id: 'process',
-      title: 'Process Data',
-      connector: 'Excel/Script',
-      icon: FileSpreadsheet,
-      color: 'from-purple-500 to-purple-600',
-      description: 'Extract data from regional sheets',
-      config: {
-        sheets: 'Gulf, Egypt, Iraq, Algeria...',
-        extractFields: 'Unit Price, Comments',
-        validation: 'Check for missing values'
-      }
-    },
-    {
-      id: 'save',
-      title: 'Save Results',
-      connector: 'SharePoint',
-      icon: Database,
-      color: 'from-orange-500 to-orange-600',
-      description: 'Create/update the Manual File',
-      config: {
-        location: 'Manual Files folder',
-        filename: 'AUTTP Manual File {YYYY-MM}',
-        append: 'To Sheet1'
-      }
-    },
-    {
-      id: 'notify',
-      title: 'Send Notification',
-      connector: 'Teams/Email',
-      icon: MessageCircle,
-      color: 'from-teal-500 to-teal-600',
-      description: 'Alert user and log activity',
-      config: {
-        recipients: 'SME team',
-        include: 'Summary & file link',
-        log: 'SharePoint audit list'
-      }
-    }
-  ];
-
-  const connectorCategories = [
-    {
-      category: 'Communication',
-      connectors: [
-        { name: 'Outlook', icon: Mail, color: 'from-blue-500 to-blue-600', popular: true },
-        { name: 'Teams', icon: MessageCircle, color: 'from-purple-500 to-purple-600', popular: true }
-      ]
-    },
-    {
-      category: 'Data & Files',
-      connectors: [
-        { name: 'Excel Online', icon: FileSpreadsheet, color: 'from-green-500 to-green-600', popular: true },
-        { name: 'SharePoint', icon: Database, color: 'from-orange-500 to-orange-600', popular: true }
-      ]
-    },
-    {
-      category: 'Automation',
-      connectors: [
-        { name: 'Office Scripts', icon: Code, color: 'from-indigo-500 to-indigo-600', popular: false },
-        { name: 'HTTP', icon: Zap, color: 'from-yellow-500 to-yellow-600', popular: false }
-      ]
-    }
-  ];
-
-  // Screenshots for step 3 - Generate all 10 automatically
+  // Screenshots for step 3 (The Flow) - Generate all 10 automatically
   const generateScreenshots = () => {
     const stepTitles = [
       'Accessing Power Automate',
@@ -217,44 +125,22 @@ export const FlowBuilder = ({ resetSignal }: SectionProps) => {
       id: `step${index + 1}`,
       title: stepTitles[index],
       description: stepDescriptions[index],
-      url: `/images/screenshots/power-automate-${index + 1}.png`
+      url: `${import.meta.env.BASE_URL}images/screenshots/power-automate-${index + 1}.png`
     }));
   };
 
   const screenshots = generateScreenshots();
 
-  // Reset states when step changes
+  // Reset blueprint sub-step when leaving step 2
   useEffect(() => {
-    if (stepController.currentStep === 4) {
-      setActiveStep(null);
+    if (stepController.currentStep !== 2) {
+      setBlueprintSubStep(0);
     }
   }, [stepController.currentStep]);
 
-  // Handle blueprint sub-steps
+  // Handle keyboard navigation for blueprint sub-steps - Always enabled
   useEffect(() => {
     if (stepController.currentStep === 2) {
-      if (!stepMode) {
-        // Auto-advance sub-steps
-        const interval = setInterval(() => {
-          setBlueprintSubStep((prev) => {
-            if (prev < blueprintComponents.length - 1) {
-              return prev + 1;
-            }
-            return prev;
-          });
-        }, 3000);
-
-        return () => clearInterval(interval);
-      }
-    } else {
-      // Reset sub-step when leaving step 2
-      setBlueprintSubStep(0);
-    }
-  }, [stepController.currentStep, stepMode, blueprintComponents.length]);
-
-  // Handle keyboard navigation for blueprint sub-steps
-  useEffect(() => {
-    if (stepController.currentStep === 2 && stepMode) {
       const handleKeyPress = (event: KeyboardEvent) => {
         if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
           setBlueprintSubStep(prev => Math.min(prev + 1, blueprintComponents.length - 1));
@@ -266,7 +152,7 @@ export const FlowBuilder = ({ resetSignal }: SectionProps) => {
       window.addEventListener('keydown', handleKeyPress);
       return () => window.removeEventListener('keydown', handleKeyPress);
     }
-  }, [stepController.currentStep, stepMode, blueprintComponents.length]);
+  }, [stepController.currentStep, blueprintComponents.length]);
 
   // Handle keyboard navigation for screenshots in step 3
   useEffect(() => {
@@ -322,7 +208,7 @@ export const FlowBuilder = ({ resetSignal }: SectionProps) => {
       </div>
 
       <AnimatePresence mode="wait">
-        {/* Step 0: Main Title */}
+        {/* Step 0: Title Slide - Anatomy of an Automated Solution */}
         {stepController.currentStep === 0 && (
           <motion.div
             initial={{ opacity: 0 }}
@@ -333,65 +219,24 @@ export const FlowBuilder = ({ resetSignal }: SectionProps) => {
             {/* COE branding */}
             <div className="absolute left-6 top-6 z-10">
               <img
-                src="/images/coe_white_logo.png"
+                src={logos.coeWhite}
                 alt="Center of Excellence"
                 className="h-16 w-auto"
               />
             </div>
-            <div className="text-center max-w-4xl">
-              <h2 className="font-amadeus text-5xl font-bold text-white mb-6">
-                Designing Our First Flow
-              </h2>
-              <h3 className="font-amadeus text-3xl text-purple-400 mb-20">From problem to automated solution</h3>
 
-              <div className="space-y-12">
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2, duration: 0.6 }}
-                  className="flex items-start gap-6 text-left max-w-3xl mx-auto"
-                >
-                  <div className="text-purple-400 mt-1">
-                    <div className="w-1 h-12 bg-purple-400 rounded-full"></div>
-                  </div>
-                  <p className="font-amadeus text-2xl text-white/80 leading-relaxed">
-                    Learn how to transform manual processes into automated workflows.
-                  </p>
-                </motion.div>
-
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4, duration: 0.6 }}
-                  className="flex items-start gap-6 text-left max-w-3xl mx-auto"
-                >
-                  <div className="text-purple-400 mt-1">
-                    <div className="w-1 h-12 bg-purple-400 rounded-full"></div>
-                  </div>
-                  <p className="font-amadeus text-2xl text-white/80 leading-relaxed">
-                    Explore real case studies and practical implementation steps.
-                  </p>
-                </motion.div>
-
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.6, duration: 0.6 }}
-                  className="flex items-start gap-6 text-left max-w-3xl mx-auto"
-                >
-                  <div className="text-purple-400 mt-1">
-                    <div className="w-1 h-12 bg-purple-400 rounded-full"></div>
-                  </div>
-                  <p className="font-amadeus text-2xl text-white/80 leading-relaxed">
-                    Build your first automation using the AUTTP case study.
-                  </p>
-                </motion.div>
-              </div>
+            <div className="text-center">
+              <h1 className="font-amadeus text-5xl md:text-6xl font-bold text-white mb-6">
+                Anatomy of an Automated Solution
+              </h1>
+              <p className="font-amadeus text-2xl text-purple-300">
+                From manual process to automated flow
+              </p>
             </div>
           </motion.div>
         )}
 
-        {/* Step 1: The Real Problem */}
+        {/* Step 1: The Problem - AUTTP Case Study */}
         {stepController.currentStep === 1 && (
           <motion.div
             initial={{ opacity: 0 }}
@@ -402,100 +247,105 @@ export const FlowBuilder = ({ resetSignal }: SectionProps) => {
             {/* COE branding */}
             <div className="absolute left-6 top-6 z-10">
               <img
-                src="/images/coe_white_logo.png"
+                src={logos.coeWhite}
                 alt="Center of Excellence"
                 className="h-16 w-auto"
               />
             </div>
-            <h2 className="font-amadeus text-5xl font-bold text-white text-center mb-20">
-              The Real Problem
-            </h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl">
+            <div className="text-center mb-10">
+              <h2 className="font-amadeus text-4xl md:text-5xl font-bold text-white mb-3">
+                The Problem
+              </h2>
+              <p className="font-amadeus text-lg text-purple-300">
+                AUTTP case study: Manual vs Automated
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mb-8">
               {/* Current Manual Process */}
-              <div className="bg-red-900/20 backdrop-blur-sm rounded-2xl p-8 border border-red-500/30">
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="w-12 h-12 bg-red-500/20 rounded-xl flex items-center justify-center">
-                    <Clock size={24} className="text-red-400" />
+              <div className="bg-red-900/20 backdrop-blur-sm rounded-xl p-6 border border-red-500/30">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 bg-red-500/20 rounded-lg flex items-center justify-center">
+                    <Clock size={20} className="text-red-400" />
                   </div>
-                  <h3 className="font-amadeus text-2xl font-bold text-white">
-                    Current Manual Process
+                  <h3 className="font-amadeus text-xl font-bold text-white">
+                    The Manual Process
                   </h3>
                 </div>
-                <ul className="space-y-4 text-white/80">
-                  <li className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-red-400 rounded-full mt-2 flex-shrink-0"></div>
+                <ul className="space-y-3 text-white/80 text-sm">
+                  <li className="flex items-start gap-2">
+                    <div className="w-1.5 h-1.5 bg-red-400 rounded-full mt-1.5 flex-shrink-0"></div>
                     <span>Wait for monthly AUTTP file via email</span>
                   </li>
-                  <li className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-red-400 rounded-full mt-2 flex-shrink-0"></div>
+                  <li className="flex items-start gap-2">
+                    <div className="w-1.5 h-1.5 bg-red-400 rounded-full mt-1.5 flex-shrink-0"></div>
                     <span>Download and open Excel file manually</span>
                   </li>
-                  <li className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-red-400 rounded-full mt-2 flex-shrink-0"></div>
+                  <li className="flex items-start gap-2">
+                    <div className="w-1.5 h-1.5 bg-red-400 rounded-full mt-1.5 flex-shrink-0"></div>
                     <span>Extract data from 12+ regional sheets</span>
                   </li>
-                  <li className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-red-400 rounded-full mt-2 flex-shrink-0"></div>
+                  <li className="flex items-start gap-2">
+                    <div className="w-1.5 h-1.5 bg-red-400 rounded-full mt-1.5 flex-shrink-0"></div>
                     <span>Consolidate information manually</span>
                   </li>
-                  <li className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-red-400 rounded-full mt-2 flex-shrink-0"></div>
+                  <li className="flex items-start gap-2">
+                    <div className="w-1.5 h-1.5 bg-red-400 rounded-full mt-1.5 flex-shrink-0"></div>
                     <span>Create file for billing team</span>
                   </li>
                 </ul>
-                <div className="mt-6 p-4 bg-red-800/30 rounded-lg">
-                  <div className="text-red-300 text-lg font-bold">⏱️ 2 hours/month</div>
-                  <div className="text-red-200 text-sm">Total time invested</div>
+                <div className="mt-4 p-3 bg-red-800/30 rounded-lg">
+                  <div className="text-red-300 text-base font-bold">⏱️ 15-20 minutes</div>
+                  <div className="text-red-200 text-xs">Manual processing time</div>
                 </div>
               </div>
 
-              {/* The Automated Vision */}
-              <div className="bg-green-900/20 backdrop-blur-sm rounded-2xl p-8 border border-green-500/30">
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="w-12 h-12 bg-green-500/20 rounded-xl flex items-center justify-center">
-                    <Zap size={24} className="text-green-400" />
+              {/* The Automated Solution */}
+              <div className="bg-green-900/20 backdrop-blur-sm rounded-xl p-6 border border-green-500/30">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 bg-green-500/20 rounded-lg flex items-center justify-center">
+                    <Zap size={20} className="text-green-400" />
                   </div>
-                  <h3 className="font-amadeus text-2xl font-bold text-white">
-                    The Automated Vision
+                  <h3 className="font-amadeus text-xl font-bold text-white">
+                    The Automated Solution
                   </h3>
                 </div>
-                <ul className="space-y-4 text-white/80">
-                  <li className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-green-400 rounded-full mt-2 flex-shrink-0"></div>
+                <ul className="space-y-3 text-white/80 text-sm">
+                  <li className="flex items-start gap-2">
+                    <div className="w-1.5 h-1.5 bg-green-400 rounded-full mt-1.5 flex-shrink-0"></div>
                     <span>Automatic AUTTP email detection</span>
                   </li>
-                  <li className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-green-400 rounded-full mt-2 flex-shrink-0"></div>
+                  <li className="flex items-start gap-2">
+                    <div className="w-1.5 h-1.5 bg-green-400 rounded-full mt-1.5 flex-shrink-0"></div>
                     <span>Data extraction without intervention</span>
                   </li>
-                  <li className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-green-400 rounded-full mt-2 flex-shrink-0"></div>
+                  <li className="flex items-start gap-2">
+                    <div className="w-1.5 h-1.5 bg-green-400 rounded-full mt-1.5 flex-shrink-0"></div>
                     <span>Automatic regional consolidation</span>
                   </li>
-                  <li className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-green-400 rounded-full mt-2 flex-shrink-0"></div>
+                  <li className="flex items-start gap-2">
+                    <div className="w-1.5 h-1.5 bg-green-400 rounded-full mt-1.5 flex-shrink-0"></div>
                     <span>Automatic final file generation</span>
                   </li>
-                  <li className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-green-400 rounded-full mt-2 flex-shrink-0"></div>
+                  <li className="flex items-start gap-2">
+                    <div className="w-1.5 h-1.5 bg-green-400 rounded-full mt-1.5 flex-shrink-0"></div>
                     <span>Automatic delivery to billing team</span>
                   </li>
                 </ul>
-                <div className="mt-6 p-4 bg-green-800/30 rounded-lg">
-                  <div className="text-green-300 text-lg font-bold">⚡ 5 minutes</div>
-                  <div className="text-green-200 text-sm">Flow development time</div>
+                <div className="mt-4 p-3 bg-green-800/30 rounded-lg">
+                  <div className="text-green-300 text-base font-bold">⚡ 30 seconds</div>
+                  <div className="text-green-200 text-xs">Automated processing time</div>
                 </div>
               </div>
             </div>
 
-            <div className="mt-12 text-center">
-              <div className="inline-flex items-center gap-3 bg-blue-600/20 backdrop-blur-sm px-6 py-3 rounded-full border border-blue-500/30">
-                <Target size={20} className="text-blue-400" />
-                <span className="font-amadeus text-white font-medium">
-                  Goal: Transform 2 manual hours into complete automation
-                </span>
-              </div>
+            {/* Impact Badge */}
+            <div className="inline-flex items-center gap-3 bg-gradient-to-r from-blue-600/30 to-purple-600/30 backdrop-blur-sm px-5 py-3 rounded-full border border-blue-500/40">
+              <Award size={18} className="text-yellow-400" />
+              <span className="font-amadeus text-white font-medium text-sm">
+                98% time reduction • From 20 min to 30 sec
+              </span>
             </div>
           </motion.div>
         )}
@@ -511,46 +361,46 @@ export const FlowBuilder = ({ resetSignal }: SectionProps) => {
             {/* COE branding */}
             <div className="absolute left-6 top-6 z-10">
               <img
-                src="/images/coe_white_logo.png"
+                src={logos.coeWhite}
                 alt="Center of Excellence"
                 className="h-16 w-auto"
               />
             </div>
-            <h2 className="font-amadeus text-5xl font-bold text-white text-center mb-8">
-              Designing the Workflow Blueprint
+            <h2 className="font-amadeus text-3xl font-bold text-white text-center mb-4">
+              The Blueprint
             </h2>
-            <p className="font-amadeus text-xl text-white/70 text-center mb-16 max-w-4xl">
+            <p className="font-amadeus text-base text-white/70 text-center mb-8 max-w-3xl">
               Planning our automation schema before implementation • Technical specifications for each component
             </p>
 
-            <div className="relative max-w-6xl w-full">
+            <div className="relative max-w-5xl w-full">
               <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 to-purple-600/10 blur-3xl"></div>
-              <div className="relative bg-white/5 backdrop-blur-lg rounded-3xl p-12 border border-white/10">
+              <div className="relative bg-white/5 backdrop-blur-lg rounded-2xl p-8 border border-white/10">
 
-                <div className="flex items-center justify-between mb-12">
-                  <h3 className="font-amadeus text-2xl text-white/80">AUTTP Automation Schema</h3>
-                  <div className="flex items-center gap-2 text-sm text-white/70">
-                    <Target size={16} />
+                <div className="flex items-center justify-between mb-6">
+                  <h3 className="font-amadeus text-lg text-white/80">AUTTP Automation Schema</h3>
+                  <div className="flex items-center gap-2 text-xs text-white/70">
+                    <Target size={14} />
                     <span>Component {blueprintSubStep + 1} of {blueprintComponents.length}</span>
                   </div>
                 </div>
 
                 {/* Workflow Overview - All components in a row */}
-                <div className="flex items-center justify-center mb-12">
+                <div className="flex items-center justify-center mb-8">
                   {blueprintComponents.map((component, index) => (
                     <div key={component.name} className="flex items-center">
                       <motion.div
                         animate={{
-                          scale: index === blueprintSubStep ? 1.1 : 0.9,
+                          scale: index === blueprintSubStep ? 1.05 : 0.9,
                           opacity: index <= blueprintSubStep ? 1 : 0.4
                         }}
                         transition={{ duration: 0.3 }}
                         className="text-center"
                       >
-                        <div className={`w-16 h-16 rounded-xl flex items-center justify-center text-2xl mx-auto bg-gradient-to-br ${component.color} shadow-lg ${index === blueprintSubStep ? 'ring-4 ring-white/30' : ''}`}>
+                        <div className={`w-14 h-14 rounded-lg flex items-center justify-center text-xl mx-auto bg-gradient-to-br ${component.color} shadow-lg ${index === blueprintSubStep ? 'ring-3 ring-white/30' : ''}`}>
                           {component.icon}
                         </div>
-                        <p className="font-amadeus text-xs font-bold text-white/90 mt-2">{component.name}</p>
+                        <p className="font-amadeus text-[10px] font-bold text-white/90 mt-1.5">{component.name}</p>
                       </motion.div>
 
                       {/* Connection arrow */}
@@ -559,7 +409,7 @@ export const FlowBuilder = ({ resetSignal }: SectionProps) => {
                           animate={{
                             opacity: index < blueprintSubStep ? 1 : 0.3
                           }}
-                          className="w-8 h-0.5 bg-gradient-to-r from-white/60 to-white/30 mx-4"
+                          className="w-6 h-0.5 bg-gradient-to-r from-white/60 to-white/30 mx-3"
                         />
                       )}
                     </div>
@@ -577,31 +427,31 @@ export const FlowBuilder = ({ resetSignal }: SectionProps) => {
                     className="text-center"
                   >
                     {/* Component Name Only */}
-                    <div className="mb-6">
-                      <h3 className="font-amadeus text-3xl font-bold text-white">
+                    <div className="mb-4">
+                      <h3 className="font-amadeus text-2xl font-bold text-white">
                         {blueprintComponents[blueprintSubStep].name}
                       </h3>
                     </div>
 
                     {/* Technical Specifications */}
-                    <div className="max-w-2xl mx-auto">
-                      <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
-                        <h4 className="font-amadeus text-xl font-bold text-white/90 mb-6 flex items-center justify-center gap-3">
-                          <div className="w-3 h-3 bg-purple-400 rounded-full"></div>
+                    <div className="max-w-xl mx-auto">
+                      <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+                        <h4 className="font-amadeus text-base font-bold text-white/90 mb-4 flex items-center justify-center gap-2">
+                          <div className="w-2 h-2 bg-purple-400 rounded-full"></div>
                           Technical Specifications
-                          <div className="w-3 h-3 bg-purple-400 rounded-full"></div>
+                          <div className="w-2 h-2 bg-purple-400 rounded-full"></div>
                         </h4>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                           {blueprintComponents[blueprintSubStep].specs.map((spec, specIndex) => (
                             <motion.div
                               key={specIndex}
                               initial={{ opacity: 0, x: -20 }}
                               animate={{ opacity: 1, x: 0 }}
                               transition={{ delay: specIndex * 0.2, duration: 0.4 }}
-                              className="flex items-center gap-3 bg-white/5 rounded-lg p-4"
+                              className="flex items-center gap-2 bg-white/5 rounded-lg p-3"
                             >
-                              <div className="w-2 h-2 bg-green-400 rounded-full flex-shrink-0"></div>
-                              <span className="font-amadeus text-sm text-white/80 font-medium">{spec}</span>
+                              <div className="w-1.5 h-1.5 bg-green-400 rounded-full flex-shrink-0"></div>
+                              <span className="font-amadeus text-xs text-white/80 font-medium">{spec}</span>
                             </motion.div>
                           ))}
                         </div>
@@ -615,12 +465,12 @@ export const FlowBuilder = ({ resetSignal }: SectionProps) => {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 1 }}
-                  className="mt-12 text-center"
+                  className="mt-8 text-center"
                 >
-                  <div className="inline-flex items-center gap-3 bg-blue-600/20 backdrop-blur-sm px-6 py-3 rounded-full border border-blue-500/30">
-                    <div className="w-3 h-3 bg-blue-400 rounded-full animate-pulse"></div>
-                    <span className="font-amadeus text-white/90 text-sm font-medium">
-                      {stepMode ? 'Use arrow keys to navigate components' : 'Components will advance automatically'}
+                  <div className="inline-flex items-center gap-2 bg-blue-600/20 backdrop-blur-sm px-4 py-2 rounded-full border border-blue-500/30">
+                    <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
+                    <span className="font-amadeus text-white/90 text-xs font-medium">
+                      Use arrow keys to navigate components
                     </span>
                   </div>
                 </motion.div>
@@ -629,7 +479,7 @@ export const FlowBuilder = ({ resetSignal }: SectionProps) => {
           </motion.div>
         )}
 
-        {/* Step 3: Power Automate Flow Creation */}
+        {/* Step 3: The Flow - Real Implementation */}
         {stepController.currentStep === 3 && (
           <motion.div
             initial={{ opacity: 0 }}
@@ -640,7 +490,7 @@ export const FlowBuilder = ({ resetSignal }: SectionProps) => {
             {/* COE branding */}
             <div className="absolute left-6 top-6 z-10">
               <img
-                src="/images/coe_white_logo.png"
+                src={logos.coeWhite}
                 alt="Center of Excellence"
                 className="h-16 w-auto"
               />
@@ -715,7 +565,7 @@ export const FlowBuilder = ({ resetSignal }: SectionProps) => {
                   </AnimatePresence>
                 </div>
 
-                {/* Navigation only */}
+                {/* Navigation only - Session 2 CTA removed */}
                 <div className="bg-gray-900 rounded-b-lg p-3">
                   <div className="flex items-center justify-between">
                     {/* Previous Button */}
@@ -766,7 +616,6 @@ export const FlowBuilder = ({ resetSignal }: SectionProps) => {
             </div>
           </motion.div>
         )}
-
 
       </AnimatePresence>
     </div>
