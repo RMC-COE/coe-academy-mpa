@@ -567,3 +567,57 @@ if (celebrationContainer && confettiCanvas) {
 
     celebrationObserver.observe(celebrationContainer);
 }
+
+// TOC Collapsible functionality
+const tocSidebar = document.querySelector('.toc-sidebar');
+
+if (tocSidebar) {
+    // Create toggle button
+    const tocToggle = document.createElement('button');
+    tocToggle.className = 'toc-toggle';
+    tocToggle.setAttribute('aria-label', 'Toggle Table of Contents');
+
+    // Create chevron SVG icon
+    const chevronSVG = `
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 4L6 10L12 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    `;
+
+    tocToggle.innerHTML = chevronSVG;
+
+    // Insert toggle button after TOC sidebar
+    tocSidebar.parentNode.insertBefore(tocToggle, tocSidebar.nextSibling);
+
+    // Load saved TOC state from localStorage
+    const savedTocState = localStorage.getItem('toc-collapsed');
+    if (savedTocState === 'true') {
+        tocSidebar.classList.add('collapsed');
+        updateChevronDirection(true);
+    }
+
+    // Toggle button click handler
+    tocToggle.addEventListener('click', () => {
+        const isCollapsed = tocSidebar.classList.toggle('collapsed');
+
+        // Save state to localStorage
+        localStorage.setItem('toc-collapsed', isCollapsed);
+
+        // Update chevron direction
+        updateChevronDirection(isCollapsed);
+    });
+
+    // Update chevron icon direction based on collapsed state
+    function updateChevronDirection(isCollapsed) {
+        const chevronPath = tocToggle.querySelector('svg path');
+        if (chevronPath) {
+            if (isCollapsed) {
+                // Point right when collapsed (to indicate "open" action)
+                chevronPath.setAttribute('d', 'M8 4L14 10L8 16');
+            } else {
+                // Point left when open (to indicate "close" action)
+                chevronPath.setAttribute('d', 'M12 4L6 10L12 16');
+            }
+        }
+    }
+}
