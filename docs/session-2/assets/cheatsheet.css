@@ -107,17 +107,23 @@
 }
 
 .toc-link.active {
-    color: var(--primary-color);
-    background: rgba(0, 8, 53, 0.08);
-    border-left: 2px solid var(--primary-color);
+    color: white;
+    background: var(--primary-color);
+    border-left: 3px solid #003d99;
     font-weight: 600;
+    box-shadow: 0 2px 8px rgba(0, 8, 53, 0.2);
 }
 
-/* Keep parent slightly highlighted when child is active */
-.toc-link.active + .toc-sublist .toc-sublink.active {
-    color: var(--primary-color);
-    background: rgba(0, 8, 53, 0.12);
-    font-weight: 600;
+/* Parent link - slightly different style when child is active */
+.toc-link.active:has(+ .toc-sublist .toc-sublink.active) {
+    color: white;
+    background: rgba(0, 8, 53, 0.7);
+    border-left: 3px solid #003d99;
+}
+
+/* Keep both parent and child highlighted */
+.toc-link.active + .toc-sublist {
+    margin-top: 0.5rem;
 }
 
 .toc-sublist {
@@ -137,10 +143,11 @@
 }
 
 .toc-sublink.active {
-    color: var(--primary-color);
-    background: rgba(0, 8, 53, 0.08);
+    color: white;
+    background: linear-gradient(90deg, var(--primary-color) 0%, #0066cc 100%);
     font-weight: 600;
-    border-left: 2px solid var(--primary-color);
+    border-left: 3px solid #003d99;
+    box-shadow: 0 1px 4px rgba(0, 8, 53, 0.15);
 }
 
 /* Session-specific styles */

@@ -94,22 +94,26 @@ const tocObserver = new IntersectionObserver((entries) => {
                 // Remove active class from all links
                 tocLinks.forEach(link => link.classList.remove('active'));
 
-                // Add active class to corresponding link
-                activeLink.classList.add('active');
-
-                // If this is a substep (part-X), also activate parent link
+                // If this is a substep (part-X), activate BOTH parent and child
                 if (sectionId.startsWith('part-')) {
+                    // Activate the parent "Build Instructions" link
                     const parentLink = document.querySelector(`.toc-link[data-section="steps"]`);
-                    if (parentLink) {
+                    if (parentLink && !parentLink.classList.contains('toc-sublink')) {
                         parentLink.classList.add('active');
                     }
+
+                    // Activate the specific step link
+                    activeLink.classList.add('active');
+                } else {
+                    // For non-substeps, just activate the link
+                    activeLink.classList.add('active');
                 }
             }
         }
     });
 }, {
-    rootMargin: '-100px 0px -66%',
-    threshold: 0
+    rootMargin: '-120px 0px -50%',
+    threshold: 0.1
 });
 
 // Observe all sections
@@ -297,32 +301,51 @@ function updateSidebarImages(stepId) {
     sidebar.style.display = 'block';
     currentSidebarSlide = 0;
 
-    // Build carousel slides
-    track.innerHTML = screenshots.map((img, index) => `
-        <div class="sidebar-slide ${index === 0 ? 'active' : ''}">
-            <img src="${img.src}" alt="${img.caption}">
-            <div class="sidebar-caption">${img.caption}</div>
-        </div>
-    `).join('');
+    // Preload all images before displaying them
+    const imagePromises = screenshots.map(img => {
+        return new Promise((resolve, reject) => {
+            const image = new Image();
+            image.onload = () => resolve({ img, element: image });
+            image.onerror = reject;
+            image.src = img.src;
+        });
+    });
 
-    // Build indicators
-    if (screenshots.length > 1) {
-        indicators.innerHTML = screenshots.map((_, index) => `
-            <span class="sidebar-indicator ${index === 0 ? 'active' : ''}" onclick="goToSidebarSlide(${index})"></span>
-        `).join('');
-        indicators.style.display = 'flex';
-        prevBtn.style.display = 'flex';
-        nextBtn.style.display = 'flex';
-    } else {
-        indicators.style.display = 'none';
-        prevBtn.style.display = 'none';
-        nextBtn.style.display = 'none';
-    }
+    // Show loading state while images load
+    track.innerHTML = '<div style="display: flex; align-items: center; justify-content: center; height: 100%; color: #666;">Loading screenshots...</div>';
 
-    // Add click listeners to images
-    setTimeout(() => {
-        addImageClickListeners();
-    }, 100);
+    // Once all images are loaded, display them
+    Promise.all(imagePromises)
+        .then(() => {
+            // Build carousel slides with preloaded images
+            track.innerHTML = screenshots.map((img, index) => `
+                <div class="sidebar-slide ${index === 0 ? 'active' : ''}">
+                    <img src="${img.src}" alt="${img.caption}" loading="eager">
+                    <div class="sidebar-caption">${img.caption}</div>
+                </div>
+            `).join('');
+
+            // Build indicators
+            if (screenshots.length > 1) {
+                indicators.innerHTML = screenshots.map((_, index) => `
+                    <span class="sidebar-indicator ${index === 0 ? 'active' : ''}" onclick="goToSidebarSlide(${index})"></span>
+                `).join('');
+                indicators.style.display = 'flex';
+                prevBtn.style.display = 'flex';
+                nextBtn.style.display = 'flex';
+            } else {
+                indicators.style.display = 'none';
+                prevBtn.style.display = 'none';
+                nextBtn.style.display = 'none';
+            }
+
+            // Add click listeners to images
+            addImageClickListeners();
+        })
+        .catch(error => {
+            console.error('Error loading screenshots:', error);
+            track.innerHTML = '<div style="display: flex; align-items: center; justify-content: center; height: 100%; color: #dc2626;">Error loading screenshots. Please refresh the page.</div>';
+        });
 }
 
 function showSidebarSlide(newIndex) {
