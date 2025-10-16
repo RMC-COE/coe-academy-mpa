@@ -11,9 +11,9 @@
 **[ON SCREEN: Cover slide with Power Automate logo, CoE branding]**
 
 **NARRATOR:**
-> "Hey everyone! Welcome to the CoE Academy's Power Automate workshop. I'm [Your Name] from the Center of Excellence, and today we're diving into something that's going to change how you work.
+> "Hey everyone! Welcome and thank you for joining this Academy session. I'm Omar from the Center of Excellence, and today we're di-ving into something that's going to change how you work.
 >
-> If you've ever found yourself copying data between spreadsheets, sending the same emails over and over, or waiting days for approvals... this session is for you.
+> If you've ever found yourself copying data between spreadsheets, sending the same emails over and over, or waiting days for data validation or approvals... this session is for you.
 >
 > We're not gonna do boring theory slides. Instead, I'll show you real automation, built by finance teams, for finance teams. Let's jump in."
 
@@ -21,8 +21,44 @@
 
 ---
 
-## 📋 SECTION 1: THE DAILY REALITY
-**[Duration: 0:30 - 3:00]**
+## 📋 AGENDA SLIDE
+**[Duration: 0:30 - 1:15]**
+
+**[ON SCREEN: Show "Today's Agenda" title, then reveal items 1-5 one by one]**
+
+**NARRATOR:**
+> "Before we dive in, here's what we're covering today.
+>
+> **[ITEM 1 APPEARS]**
+>
+> First, we'll look at **The Daily Reality** - how Amadeus operates at massive scale, but still relies on manual processes.
+>
+> **[ITEM 2 APPEARS]**
+>
+> Then, **Automation Momentum** - I'll show you what teams have already built and the success they're seeing.
+>
+> **[ITEM 3 APPEARS]**
+>
+> Next up, **Power Automate Introduction** - what it is, how it works, and why you can start using it today without depending on IT.
+>
+> **[ITEM 4 APPEARS]**
+>
+> We'll walk through **Building Your First Flow** - a real example, step by step, from idea to automation.
+>
+> **[ITEM 5 APPEARS]**
+>
+> And finally, **Advanced Power Automate** - Copilot AI, best practices, and troubleshooting tips so you're production-ready.
+>
+> **[PAUSE]**
+>
+> Alright, let's get started!"
+
+**[PRODUCTION NOTE: Smooth transition to The Daily Reality slide]**
+
+---
+
+## 🏢 SECTION 1: THE DAILY REALITY
+**[Duration: 1:15 - 3:45]**
 
 **[ON SCREEN: Show the scale numbers animating in]**
 
@@ -53,19 +89,19 @@
 **[ON SCREEN: Show existing automation examples]**
 
 **NARRATOR:**
-> "Before we build anything new, I want to show you what's already working.
+> "Before we build anything new, I would like to show you what's already working. 
 >
-> **[SHOW: Manual Billing 4-eyes approval flow]**
+> **[SHOW: Manual Billing Validation]**
 >
-> This flow? It's handling approvals automatically. No more email chains. No more 'Did you approve this yet?' messages.
+> This flow is handling approvals automatically. No more email chains. No more bottlenecks and compliance risks.
 >
 > **[SHOW: Month-End App]**
 >
-> This one automates month-end close processes. What used to take days now happens overnight.
+> This application works with Power Automate flows to improve and simplify month-end close processes. Instead using a simple Excel, what used to take days now happens overnight.
 >
-> **[SHOW: ARPA pipeline mention]**
+> **[SHOW: Center Of Excellence pipeline mention]**
 >
-> And ARPA? Our internal automation team? They've got a 6-month backlog. That's not because they're slow... it's because *everyone* wants automation.
+> What about our developers and continuous improvement teams?  We've got a huge backlog. That's not because we're slow... it's because *everyone* wants automation, and it's normal.
 >
 > **[PAUSE]**
 >
