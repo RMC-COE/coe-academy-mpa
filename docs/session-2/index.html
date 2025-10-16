@@ -327,6 +327,16 @@
                     <p>Variables store data we'll use multiple times in the flow. This avoids repeating complex expressions.</p>
                 </div>
 
+                <div class="info-box">
+                    <strong><img src="assets/icons/Light Bulb.svg" width="18" height="18" style="vertical-align: middle; margin-right: 4px;"> Variable Types Explained:</strong>
+                    <ul style="margin: 8px 0 0 0; padding-left: 20px;">
+                        <li><strong>Float:</strong> For decimal numbers (e.g., 7500.50, 3000.00) - Perfect for currency!</li>
+                        <li><strong>String:</strong> For text (names, emails, IDs)</li>
+                        <li><strong>Integer:</strong> For whole numbers only (1, 2, 100)</li>
+                        <li><strong>Boolean:</strong> For true/false values</li>
+                    </ul>
+                </div>
+
                 <div class="substep">
                     <h4>Step 2.1: Initialize Rebate Amount</h4>
                     <ol>
@@ -335,7 +345,7 @@
                         <li>Configure:
                             <ul>
                                 <li><strong>Name:</strong> <code>varRebateAmount</code></li>
-                                <li><strong>Type:</strong> Float</li>
+                                <li><strong>Type:</strong> Float <em>(we use Float because rebate amounts can have decimals like €7,500.50)</em></li>
                                 <li><strong>Value:</strong> Click in field → Select <strong>"Rebate Amount"</strong> from Dynamic Content picker</li>
                             </ul>
                         </li>
@@ -432,7 +442,7 @@
                 </div>
 
                 <div class="checkpoint">
-                    <strong><img src="assets/icons/Approved.svg" width="18" height="18" style="vertical-align: middle; margin-right: 4px;"> Checkpoint:</strong> Condition shows two branches: "If yes" and "If no"
+                    <strong><img src="assets/icons/Approved.svg" width="18" height="18" style="vertical-align: middle; margin-right: 4px;"> Checkpoint:</strong> Condition shows two branches: "True" and "False"
                 </div>
             </div>
 
@@ -457,6 +467,11 @@
                         <li>Search for <strong>"Start and wait for an approval"</strong></li>
                         <li>Select <strong>"Start and wait for an approval"</strong> action (Approvals connector)</li>
                     </ol>
+                </div>
+
+                <div class="info-box">
+                    <strong><img src="assets/icons/Light Bulb.svg" width="18" height="18" style="vertical-align: middle; margin-right: 4px;"> Note:</strong>
+                    <p>When you select the "Start and wait for an approval" action, you'll first see a button that says <strong>"Create new"</strong>. Click it to proceed with configuration.</p>
                 </div>
 
                 <div class="substep">
@@ -555,7 +570,7 @@ Please review and approve or reject this rebate request.</pre>
                                 <li><strong>Site Address:</strong> Select your SharePoint site</li>
                                 <li><strong>List Name:</strong> <code>COE_Academy_PA_Workshop</code></li>
                                 <li><strong>Id:</strong> Select <strong>"ID"</strong> from Dynamic Content (from trigger)</li>
-                                <li><strong>Status:</strong> Type <code>Approved</code></li>
+                                <li><strong>Status Value:</strong> Click <strong>"Show advanced options"</strong> → Find <strong>"Status Value"</strong> → Type <code>Approved</code></li>
                             </ul>
                         </li>
                     </ol>
@@ -569,7 +584,7 @@ Please review and approve or reject this rebate request.</pre>
                         <li>Search for <strong>"Update item"</strong> (SharePoint)</li>
                         <li>Configure same as above, but:
                             <ul>
-                                <li><strong>Status:</strong> Type <code>Rejected</code></li>
+                                <li><strong>Status Value:</strong> Click <strong>"Show advanced options"</strong> → Find <strong>"Status Value"</strong> → Type <code>Rejected</code></li>
                             </ul>
                         </li>
                     </ol>
@@ -583,7 +598,7 @@ Please review and approve or reject this rebate request.</pre>
                         <li>Search for <strong>"Update item"</strong> (SharePoint)</li>
                         <li>Configure same as above, but:
                             <ul>
-                                <li><strong>Status:</strong> Type <code>Auto-Accepted</code></li>
+                                <li><strong>Status Value:</strong> Click <strong>"Show advanced options"</strong> → Find <strong>"Status Value"</strong> → Type <code>Approved</code></li>
                             </ul>
                         </li>
                     </ol>
@@ -640,10 +655,20 @@ Thank you!</pre>
                     <ol>
                         <li>Click <strong>"Add an action"</strong></li>
                         <li>Search for <strong>"Send an email (V2)"</strong></li>
-                        <li>Configure same as above, but change:
+                        <li>Configure:
                             <ul>
+                                <li><strong>To:</strong> Select <strong>varAnalystEmail</strong></li>
                                 <li><strong>Subject:</strong> <code>❌ Rebate Rejected - @{variables('varPartnerName')}</code></li>
-                                <li><strong>Body:</strong> Change "APPROVED" to "REJECTED" and "Status: Approved" to "Status: Rejected"</li>
+                                <li><strong>Body:</strong>
+                                    <pre style="background: #f5f5f5; padding: 12px; border-radius: 4px; margin-top: 8px; font-size: 13px;">The rebate request has been REJECTED.
+
+Partner: @{variables('varPartnerName')}
+Amount: €@{variables('varRebateAmount')}
+Request ID: @{variables('varRequestID')}
+Status: Rejected
+
+Thank you!</pre>
+                                </li>
                             </ul>
                         </li>
                     </ol>
@@ -705,18 +730,25 @@ No approval required.</pre>
                     </ol>
                 </div>
 
+                <div class="info-box">
+                    <strong><img src="assets/icons/Light Bulb.svg" width="18" height="18" style="vertical-align: middle; margin-right: 4px;"> Test Data Ready:</strong>
+                    <p>Use the data below - just copy and paste to save time!</p>
+                </div>
+
                 <div class="substep">
                     <h4>Step 8.2: Test Scenario 1 - Approval Required</h4>
                     <ol>
                         <li>Go to SharePoint list: <a href="https://amadeusworkplace.sharepoint.com/sites/CornerOfExcellence/Lists/COE_Academy_PA_Workshop/AllItems.aspx" target="_blank">COE_Academy_PA_Workshop</a></li>
                         <li>Click <strong>"+ New"</strong></li>
-                        <li>Fill in:
-                            <ul>
-                                <li><strong>Partner Name:</strong> Test Partner A</li>
-                                <li><strong>Rebate Amount:</strong> 7500 (triggers approval)</li>
-                                <li><strong>Analyst Email:</strong> Your email</li>
-                                <li><strong>Rebate Request ID:</strong> REQ-001</li>
-                            </ul>
+                        <li>Fill in (copy and paste these values):
+                            <div style="background: #f5f5f5; padding: 12px; border-radius: 4px; margin-top: 8px;">
+                                <ul style="list-style: none; padding: 0;">
+                                    <li><strong>Rebate Request ID:</strong> <code>REQ-001</code></li>
+                                    <li><strong>Partner Name:</strong> <code>Amadeus Test Partner</code></li>
+                                    <li><strong>Rebate Amount:</strong> <code>7500</code> (triggers approval)</li>
+                                    <li><strong>Analyst Email:</strong> <code>[YOUR_EMAIL@amadeus.com]</code></li>
+                                </ul>
+                            </div>
                         </li>
                         <li>Click <strong>"Save"</strong></li>
                         <li>Check your email for approval request</li>
@@ -730,13 +762,18 @@ No approval required.</pre>
                     <h4>Step 8.3: Test Scenario 2 - Auto-Accept</h4>
                     <ol>
                         <li>Create another item in SharePoint</li>
-                        <li>Fill in:
-                            <ul>
-                                <li><strong>Rebate Amount:</strong> 3000 (under threshold)</li>
-                            </ul>
+                        <li>Fill in (copy and paste these values):
+                            <div style="background: #f5f5f5; padding: 12px; border-radius: 4px; margin-top: 8px;">
+                                <ul style="list-style: none; padding: 0;">
+                                    <li><strong>Rebate Request ID:</strong> <code>REQ-002</code></li>
+                                    <li><strong>Partner Name:</strong> <code>Small Partner Test</code></li>
+                                    <li><strong>Rebate Amount:</strong> <code>3000</code> (under threshold)</li>
+                                    <li><strong>Analyst Email:</strong> <code>[YOUR_EMAIL@amadeus.com]</code></li>
+                                </ul>
+                            </div>
                         </li>
                         <li>Flow should auto-accept without approval</li>
-                        <li>Verify status = "Auto-Accepted"</li>
+                        <li>Verify status = "Approved" (auto-accepted)</li>
                         <li>Verify auto-accept email received</li>
                     </ol>
                 </div>
