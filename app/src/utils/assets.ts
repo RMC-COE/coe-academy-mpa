@@ -10,3 +10,7 @@ export const logos = {
   coeColor: `${BASE_URL}images/coe_color_logo.png`,
   coeWhite: `${BASE_URL}images/coe_white_logo.png`,
 } as const;
+
+export const images = {
+  qrFeedback: `${BASE_URL}images/qr-feedback.png`,
+} as const;

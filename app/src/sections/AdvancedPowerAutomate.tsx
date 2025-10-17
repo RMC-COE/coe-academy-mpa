@@ -34,7 +34,7 @@ import {
   FileText,
   TrendingUp
 } from 'lucide-react';
-import { logos } from '@/utils/assets';
+import { logos, images } from '@/utils/assets';
 
 export const AdvancedPowerAutomate = ({ resetSignal }: SectionProps) => {
   const { stepMode, stepSignal, setIsLastStep } = usePresentation();
@@ -854,7 +854,7 @@ export const AdvancedPowerAutomate = ({ resetSignal }: SectionProps) => {
                     <div className="bg-white p-4 rounded-lg shadow-lg">
                       {!qrCodeError ? (
                         <img
-                          src="/images/qr-feedback.png"
+                          src={images.qrFeedback}
                           alt="Feedback QR Code"
                           className="w-40 h-40 object-contain"
                           onError={() => {
