@@ -27,7 +27,7 @@ export const PowerAutomateIntroNew = ({ resetSignal }: SectionProps) => {
   const { stepMode, stepSignal, setIsLastStep } = usePresentation();
   
   const stepController = useStepController({
-    totalSteps: 8,
+    totalSteps: 7,
     resetSignal,
     stepSignal,
     autoAdvance: false,
@@ -86,7 +86,7 @@ export const PowerAutomateIntroNew = ({ resetSignal }: SectionProps) => {
       {/* Step Progress Indicator */}
       <div className="absolute top-6 left-1/2 transform -translate-x-1/2 z-20">
         <div className="flex items-center gap-2">
-          {[...Array(8)].map((_, index) => (
+          {[...Array(7)].map((_, index) => (
             <motion.div
               key={index}
               animate={{
@@ -228,104 +228,8 @@ export const PowerAutomateIntroNew = ({ resetSignal }: SectionProps) => {
           </motion.div>
         )}
 
-        {/* Step 3: What is Power Automate? */}
+        {/* Step 3: What can you do with Power Automate? */}
         {stepController.currentStep === 3 && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="flex flex-col items-center justify-center h-full px-12"
-          >
-            <h2 className="font-amadeus text-5xl font-bold text-white text-center mb-16">
-              What is Power Automate?
-            </h2>
-
-            <div className="max-w-6xl mx-auto">
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2, duration: 0.6 }}
-                className="relative mb-12"
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20 blur-3xl"></div>
-                <div className="relative bg-white/5 backdrop-blur-md rounded-3xl p-12 border border-white/10 text-center">
-                  <p className="font-amadeus text-2xl text-white/90 leading-relaxed mb-6">
-                    A <span className="text-blue-400 font-bold">workflow automation platform</span> that
-                    <span className="text-purple-400 font-bold"> connects your daily tools</span> and eliminates repetitive work.
-                  </p>
-                  <p className="font-amadeus text-lg text-white/70">
-                    Built for you to automate the tasks that consume your day
-                  </p>
-                </div>
-              </motion.div>
-
-              <div className="grid grid-cols-2 gap-8">
-                <motion.div
-                  initial={{ opacity: 0, x: -50 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.4, duration: 0.6 }}
-                  className="relative"
-                >
-                  <div className="absolute inset-0 bg-gradient-to-br from-green-600/20 to-teal-600/20 blur-2xl"></div>
-                  <div className="relative bg-white/5 backdrop-blur-md rounded-2xl p-8 border border-white/10">
-                    <div className="flex items-center gap-4 mb-6">
-                      <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-teal-600 rounded-2xl flex items-center justify-center">
-                        <Mail size={28} className="text-white" />
-                      </div>
-                      <div>
-                        <h3 className="font-amadeus text-xl font-bold text-white">Email Approvals</h3>
-                        <p className="font-amadeus text-sm text-white/60">Outlook → SharePoint → Teams</p>
-                      </div>
-                    </div>
-                    <p className="font-amadeus text-sm text-white/70">
-                      Invoice arrives by email → Extract attachment → Save to SharePoint → Request approval → Notify team on Teams
-                    </p>
-                  </div>
-                </motion.div>
-
-                <motion.div
-                  initial={{ opacity: 0, x: 50 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.6, duration: 0.6 }}
-                  className="relative"
-                >
-                  <div className="absolute inset-0 bg-gradient-to-br from-orange-600/20 to-red-600/20 blur-2xl"></div>
-                  <div className="relative bg-white/5 backdrop-blur-md rounded-2xl p-8 border border-white/10">
-                    <div className="flex items-center gap-4 mb-6">
-                      <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-600 rounded-2xl flex items-center justify-center">
-                        <FileSpreadsheet size={28} className="text-white" />
-                      </div>
-                      <div>
-                        <h3 className="font-amadeus text-xl font-bold text-white">Data Consolidation</h3>
-                        <p className="font-amadeus text-sm text-white/60">SAP → Excel → SharePoint</p>
-                      </div>
-                    </div>
-                    <p className="font-amadeus text-sm text-white/70">
-                      Extract SAP report daily → Transform data in Excel → Update SharePoint list → Generate summary for management
-                    </p>
-                  </div>
-                </motion.div>
-              </div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.8, duration: 0.6 }}
-                className="mt-12 text-center bg-white/5 backdrop-blur-md rounded-2xl p-6 border border-white/10"
-              >
-                <p className="font-amadeus text-lg text-white/90 mb-2">
-                  🔗 Connect the tools <span className="text-blue-400 font-bold">you already use every day</span>
-                </p>
-                <p className="font-amadeus text-sm text-white/70">
-                  SAP, Excel, Outlook, Teams, SharePoint, Workday, Coupa, and 500+ more
-                </p>
-              </motion.div>
-            </div>
-          </motion.div>
-        )}
-
-        {/* Step 4: What can you do with Power Automate? */}
-        {stepController.currentStep === 4 && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -457,8 +361,8 @@ export const PowerAutomateIntroNew = ({ resetSignal }: SectionProps) => {
           </motion.div>
         )}
 
-        {/* Step 5: Triggers and Actions */}
-        {stepController.currentStep === 5 && (
+        {/* Step 4: Triggers and Actions */}
+        {stepController.currentStep === 4 && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -654,8 +558,8 @@ export const PowerAutomateIntroNew = ({ resetSignal }: SectionProps) => {
           </motion.div>
         )}
 
-        {/* Step 6: Where to Create Flows */}
-        {stepController.currentStep === 6 && (
+        {/* Step 5: Where to Create Flows */}
+        {stepController.currentStep === 5 && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -759,8 +663,8 @@ export const PowerAutomateIntroNew = ({ resetSignal }: SectionProps) => {
           </motion.div>
         )}
 
-        {/* Step 7: The Power of Automation */}
-        {stepController.currentStep === 7 && (
+        {/* Step 6: The Power of Automation */}
+        {stepController.currentStep === 6 && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -837,8 +741,8 @@ export const PowerAutomateIntroNew = ({ resetSignal }: SectionProps) => {
           </motion.div>
         )}
 
-        {/* Step 8: Call to action */}
-        {stepController.currentStep === 8 && (
+        {/* Step 7: Call to action */}
+        {stepController.currentStep === 7 && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
